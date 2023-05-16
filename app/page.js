@@ -1,65 +1,14 @@
-"use client";
+import Login from "./auth/login/page";
 
-import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
-
-const supabase = createClient(
-  "https://YOUR_PROJECT.supabase.co",
-  "YOUR_SUPABASE_ANON_KEY"
-);
-
-export default function Home() {
-  const [session, setSession] = useState(null);
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-  };
-  const getData = async () => {
-    const { data, error } = await supabase.auth.getSession();
-
-    console.log(session.user);
-  };
-
-  if (!session) {
-    return (
-      <Auth
-        supabaseClient={supabase}
-        appearance={{ theme: ThemeSupa }}
-        theme="dark"
-        providers={["twitch", "discord"]}
-      />
-    );
-  } else {
-    return (
-      <div>
-        Logged in!
-        <br />
-        <button onClick={() => signOut()} className="bg-red-500 p-2 rounded-md">
-          Sign Out
-        </button>
-        <button
-          onClick={() => getData()}
-          className="bg-green-500 p-2 rounded-md"
-        >
-          Teste
-        </button>
+const Home = () => {
+  return (
+    <>
+      <div className="bg-gradient-to-br from-neutral-800 to-neutral-950 h-screen items-center flex-col py-20 px-4">
+        <div className="max-w-md mx-auto align-middle bg-neutral-950/50 p-4 backdrop-filter backdrop-blur-m rounded-md"></div>
+        <p className="">DummyLab</p>
       </div>
-    );
-  }
-}
+    </>
+  );
+};
+
+export default Home;
