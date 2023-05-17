@@ -31,8 +31,8 @@ export default function Login() {
 
   if (!session) {
     return (
-      <div className="rounded-md flex-row text-center md:flex">
-        <div className="max-w-sm mx-auto border-4 border-emerald-700 p-10 md:w-96">
+      <div className="rounded-md flex-row text-center md:flex relative z-20">
+        <div className="max-w-sm mx-auto bg-teal-600 rounded-sm p-10 md:w-96 shadow-lg shadow-stone-950">
           <Auth
             supabaseClient={supabase}
             appearance={{ theme: ThemeSupa }}
