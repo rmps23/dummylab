@@ -2,21 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: "Raleway", sans-serif;
+  font-family: "Raleway", sans-serif !important;
   color: #eee;
+  background-color: #222;
 }
 
 .supabase-auth-ui_ui-container {
   font-family: "Raleway", sans-serif;
 }
 
+.supabase-auth-ui_ui-label {
+  color: #111 !important;
+  text-align: left;
+}
+
 .supabase-auth-ui_ui-button {
-  background-color: #23967f !important;
+  background-color: #222 !important;
   border: 0 !important;
   border-radius: 0px !important;
   margin-bottom: 10px;
   font-family: "Raleway", sans-serif !important;
+}
+
+.supabase-auth-ui_ui-button svg {
+  height: 20px !important;
+  width: 20px !important;
 }
 
 .supabase-auth-ui_ui-input {
@@ -30,4 +45,29 @@ body {
 
 .supabase-auth-ui_ui-input:focus {
   border: 1px solid #23967f !important;
+}
+
+.supabase-auth-ui_ui-anchor {
+  color: #111 !important;
+}
+
+.card {
+  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+  animation-name: pulse;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+    clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+  }
+  100% {
+    opacity: 1;
+  }
 }
