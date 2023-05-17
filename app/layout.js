@@ -10,7 +10,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-stone-950 h-screen items-center ">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body className={raleway.className}>{children}</body>
     </html>
   );

@@ -3,6 +3,31 @@
 @tailwind utilities;
 
 body {
-  background-color: #222;
-  color: white;
+  font-family: "Raleway", sans-serif;
+  color: #eee;
+}
+
+.supabase-auth-ui_ui-container {
+  font-family: "Raleway", sans-serif;
+}
+
+.supabase-auth-ui_ui-button {
+  background-color: #23967f !important;
+  border: 0 !important;
+  border-radius: 0px !important;
+  margin-bottom: 10px;
+  font-family: "Raleway", sans-serif !important;
+}
+
+.supabase-auth-ui_ui-input {
+  border-radius: 0px !important;
+  border-color: #222 !important;
+}
+
+.supabase-auth-ui_ui-input::placeholder {
+  opacity: 0.9;
+}
+
+.supabase-auth-ui_ui-input:focus {
+  border: 1px solid #23967f !important;
 }
