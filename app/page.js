@@ -1,13 +1,19 @@
-import Login from "./auth/login/page";
+import Signup from "../components/Signup";
 
 const Home = () => {
   return (
-    <>
-      <div className="bg-gradient-to-br from-neutral-800 to-neutral-950 h-screen items-center flex-col py-20 px-4">
-        <div className="max-w-md mx-auto align-middle bg-neutral-950/50 p-4 backdrop-filter backdrop-blur-m rounded-md"></div>
-        <p className="">DummyLab</p>
+    <div className="items-center justify-center h-screen pt-20">
+      <div className="max-w-screen-xl mx-auto md:flex-row md:flex px-10">
+        <div className="mb-24 md:flex-1 text-left">
+          <img
+            src="assets/dummylab-logo-wt-w.png"
+            className="mx-auto w-60 md:mx-0"
+          />
+        </div>
+
+        <Signup />
       </div>
-    </>
+    </div>
   );
 };
 

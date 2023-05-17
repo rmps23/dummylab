@@ -29,28 +29,20 @@ export default function Login() {
     return () => subscription.unsubscribe();
   }, []);
 
-  const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    router.push("/");
-  };
-
   if (!session) {
     return (
-      <Auth
-        supabaseClient={supabase}
-        appearance={{ theme: ThemeSupa }}
-        theme="dark"
-        providers={["twitch", "discord"]}
-      />
+      <div className="rounded-md flex-row text-center md:flex">
+        <div className="max-w-sm mx-auto border-4 border-emerald-700 p-10 md:w-96">
+          <Auth
+            supabaseClient={supabase}
+            appearance={{ theme: ThemeSupa }}
+            theme="dark"
+            providers={["twitch", "discord"]}
+          />
+        </div>
+      </div>
     );
   } else {
-    return (
-      <button
-        onClick={() => signOut()}
-        className="bg-orange-500 p-2 rounded-md"
-      >
-        Sign Out
-      </button>
-    );
+    router.push("/dashboard");
   }
 }
