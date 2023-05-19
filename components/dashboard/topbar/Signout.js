@@ -27,7 +27,7 @@ const Signout = () => {
   return (
     <button
       onClick={() => signOut()}
-      className="bg-teal-500 text-xs py-2 px-3 text-neutral-800 font-semibold hover:opacity-90"
+      className="text-teal-500 text-xs font-semibold hover:text-neutral-100 transition ease-in-out duration-300"
     >
       SIGN OUT
     </button>
