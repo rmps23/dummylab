@@ -1,27 +1,53 @@
 import React from "react";
-import { RiTeamFill } from "react-icons/ri";
-import { RiCalendarTodoFill } from "react-icons/ri";
-import { RiFundsBoxFill } from "react-icons/ri";
+import { BsTwitter } from "react-icons/bs";
+import { BsDiscord } from "react-icons/bs";
+import { BsFillEnvelopeFill } from "react-icons/bs";
 
 const Footer = () => {
   return (
-    <div className="flex items-center text-left">
-      <div className="mr-10">
-        <img src="/assets/dummylab-logo.png" alt="" width={60} />
-      </div>
-      <div className="mx-10">
-        <p className="text-neutral-700 font-bold text-5xl italic">
-          JOIN THE LAB
-        </p>
-      </div>
-      <div className="ml-10">
-        <a
-          href="#hero"
-          className="bg-teal-500 px-8 py-4 font-semibold hover:bg-teal-600 transition ease-in-out duration-200"
-        >
-          SIGN UP
-        </a>
-      </div>
+    <div className="flex max-w-7xl mx-auto text-neutral-800 font-semibold gap-20 justify-between">
+      <ul>
+        <li className="my-1">
+          <a href="#" className="hover:opacity-80">
+            Privacy Policy
+          </a>
+        </li>
+        <li className="my-1">
+          <a href="#" className="hover:opacity-80">
+            Terms of Service
+          </a>
+        </li>
+        <li className="my-1">
+          <a href="#" className="hover:opacity-80">
+            Help
+          </a>
+        </li>
+        <li className="my-1">
+          <a href="#" className="hover:opacity-80">
+            Contact
+          </a>
+        </li>
+      </ul>
+      <ul className="flex flex-row align-top">
+        <li className="items-center my-1 mx-5">
+          <a href="#" className="text-sm mt-1 flex hover:opacity-80">
+            <BsTwitter className="text-xl mr-1" />
+            Twitter
+          </a>
+        </li>
+        <li className="items-center my-1 mx-5">
+          <a href="#" className="text-sm mt-1 flex hover:opacity-80">
+            <BsDiscord className="text-xl mr-1" />
+            Discord
+          </a>
+        </li>
+        <li className="items-center my-1 mx-5">
+          <a href="#" className="text-sm mt-1 flex hover:opacity-80">
+            <BsFillEnvelopeFill className="text-xl mr-1" />
+            Contact
+          </a>
+        </li>
+      </ul>
     </div>
   );
 };

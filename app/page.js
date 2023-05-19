@@ -2,6 +2,7 @@ import Signup from "../components/Signup";
 import Hero from "../components/homepage/Hero";
 import Section2 from "../components/homepage/Section2";
 import Footer from "../components/homepage/Footer";
+import JoinLab from "../components/homepage/JoinLab";
 
 const Home = () => {
   return (
@@ -25,6 +26,9 @@ const Home = () => {
         <Section2 />
       </section>
       <section className="items-center justify-center h-auto flex bg-neutral-200 py-10">
+        <JoinLab />
+      </section>
+      <section className="h-auto bg-teal-500 py-10">
         <Footer />
       </section>
     </>

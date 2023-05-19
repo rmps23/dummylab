@@ -1,39 +1,14 @@
-"use client";
-
-import { createClient } from "@supabase/supabase-js";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
+import TopBar from "../../components/dashboard/topbar/TopBar";
+import SideBar from "../../components/dashboard/sidebar/SideBar";
 
 const Dashboard = () => {
-  const router = useRouter();
-  const [session, setSession] = useState(null);
-
-  const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    router.push("/");
-  };
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
-  }, []);
-
-  console.log(session);
-
   return (
-    <div>
-      <button
-        onClick={() => signOut()}
-        className="bg-orange-500 p-2 rounded-md"
-      >
-        Sign Out
-      </button>
+    <div className="bg-zinc-800">
+      <TopBar />
+      <div className="flex">
+        <SideBar className="flex" />
+        <div className="flex-1"></div>
+      </div>
     </div>
   );
 };
