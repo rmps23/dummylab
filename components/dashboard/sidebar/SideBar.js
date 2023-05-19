@@ -6,7 +6,7 @@ import { RiUser3Fill } from "react-icons/ri";
 
 const SideBar = () => {
   return (
-    <div className="w-auto bg-neutral-950 h-screen shadow-mr shadow-teal-500">
+    <div className="w-auto bg-neutral-800 border-r-2 border-neutral-900">
       <div className="flex-col p-2">
         <div className="mb-2">
           <SideLink text="Players" icons={<RiUser3Fill />} />

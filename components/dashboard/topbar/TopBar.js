@@ -3,12 +3,14 @@ import Signout from "../topbar/Signout";
 
 const TopBar = () => {
   return (
-    <div className="bg-neutral-950 shadow-md shadow-teal-950 flex justify-between h-14 items-center px-6">
-      <div>
-        <img src="assets/dummylab-logo-w.png" alt="" width={25} />
-      </div>
-      <div>
-        <Signout />
+    <div className="bg-zinc-950">
+      <div className="max-w-7xl mx-auto items-center justify-between flex px-2 py-3">
+        <div>
+          <img src="assets/dummylab-logo-w.png" alt="" width={25} />
+        </div>
+        <div>
+          <Signout />
+        </div>
       </div>
     </div>
   );

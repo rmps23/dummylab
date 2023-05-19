@@ -1,13 +1,14 @@
 import TopBar from "../../components/dashboard/topbar/TopBar";
-import SideBar from "../../components/dashboard/sidebar/SideBar";
+import AddTeam from "../../components/dashboard/AddTeam";
+import ReadTeam from "../../components/dashboard/ReadTeam";
 
 const Dashboard = () => {
   return (
-    <div className="bg-zinc-800">
+    <div className="bg-zinc-900 h-screen">
       <TopBar />
-      <div className="flex">
-        <SideBar className="flex" />
-        <div className="flex-1"></div>
+      <div className="max-w-7xl mx-auto py-10 px-2">
+        <AddTeam />
+        <ReadTeam />
       </div>
     </div>
   );
