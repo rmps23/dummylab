@@ -5,11 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useRouter } from "next/navigation";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
+import { supabase } from "../../supabase";
 
 export default function Login() {
   const [session, setSession] = useState(null);
@@ -43,6 +39,6 @@ export default function Login() {
       </div>
     );
   } else {
-    router.push("/dashboard");
+    router.push("/dashboard/team");
   }
 }

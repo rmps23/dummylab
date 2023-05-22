@@ -1,8 +1,8 @@
-import Signup from "../components/Signup";
-import Hero from "../components/homepage/Hero";
-import Section2 from "../components/homepage/Section2";
-import Footer from "../components/homepage/Footer";
-import JoinLab from "../components/homepage/JoinLab";
+import Signup from "../components/Auth/Signup";
+import Hero from "../components/Homepage/Hero";
+import Section2 from "../components/Homepage/Section2";
+import Footer from "../components/Homepage/Footer";
+import JoinLab from "../components/Homepage/JoinLab";
 
 const Home = () => {
   return (
