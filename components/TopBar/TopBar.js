@@ -1,8 +1,10 @@
 import React from "react";
-import Signout from "../Auth/Signout";
 import Image from "next/image";
-import Link from "next/dist/client/link";
+import Link from "next/link";
 import TopNavBar from "./TopNavBar";
+
+import dynamic from "next/dynamic";
+const Signout = dynamic(() => import("../Auth/Signout"));
 
 const TopBar = () => {
   return (
@@ -10,7 +12,7 @@ const TopBar = () => {
       <div className="bg-zinc-950">
         <div className="max-w-7xl mx-auto items-center justify-between flex px-2 py-3">
           <div>
-            <Link href="/dashboard/team">
+            <Link href="/dashboard/team" prefetch={false}>
               <Image
                 src="/assets/dummylab-logo-w.png"
                 alt=""

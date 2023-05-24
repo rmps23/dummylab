@@ -1,11 +1,12 @@
 import React from "react";
 import Button from "../../Items/Button";
+import Link from "next/link";
 
 const NewTeam = () => {
   return (
-    <a href="/dashboard/team/new">
+    <Link href="/dashboard/team/new" prefetch={false}>
       <Button text="New Team"></Button>
-    </a>
+    </Link>
   );
 };
 
