@@ -7,23 +7,24 @@ import TeamBox from "./TeamBox";
 
 const CheckTeam = () => {
   const [teamData, setTeamData] = useState(null);
-  const [userID, setUserID] = useState(null);
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchTeamData = async () => {
+    const fetchData = async () => {
       try {
         const { data: sessionData, error: sessionError } =
           await supabase.auth.getSession();
         if (sessionError) {
           throw sessionError;
         }
-        setUserID(sessionData.session.user.id);
+
+        const userID = sessionData.session.user.id;
 
         const { data: teamData, error: teamError } = await supabase
           .from("teams")
-          .select("*");
+          .select("*")
+          .eq("user_id", userID);
+
         if (teamError) {
           throw teamError;
         }
@@ -31,15 +32,15 @@ const CheckTeam = () => {
         setTeamData(teamData);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching team data:", error.message);
+        console.error("Error fetching data:", error.message);
       }
     };
 
-    fetchTeamData();
+    fetchData();
   }, []);
 
   return (
-    <div className="my-4">
+    <div className="my-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {loading ? (
         <div>
           <CircularProgress
@@ -48,12 +49,14 @@ const CheckTeam = () => {
             color="inherit"
           />
         </div>
-      ) : teamData && teamData.length ? (
-        <div className="flex w-full gap-2">
-          <TeamBox name={teamData[0].name} />
-          <TeamBox name={teamData[0].name} />
-          <TeamBox name={teamData[0].name} />
-        </div>
+      ) : teamData && teamData.length > 0 ? (
+        teamData.map((item) => {
+          return (
+            <div className="bg-zinc-950 w-full p-6">
+              <p>{item.name}</p>
+            </div>
+          );
+        })
       ) : (
         <p>No team data available</p>
       )}
