@@ -1,5 +1,7 @@
-import TopBar from "../../../../components/TopBar/TopBar";
 import NewTeamForm from "../../../../components/Dashboard/Team/NewTeamForm";
+
+import dynamic from "next/dynamic";
+const TopBar = dynamic(() => import("../../../../components/TopBar/TopBar"));
 
 const NewTeam = () => {
   return (

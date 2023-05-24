@@ -1,8 +1,13 @@
 import React from "react";
-
 import TopBar from "../../../components/TopBar/TopBar";
-import NewTeamButton from "../../../components/Dashboard/Team/NewTeamButton";
-import CheckTeam from "../../../components/Dashboard/Team/CheckTeam";
+
+import dynamic from "next/dynamic";
+const NewTeamButton = dynamic(() =>
+  import("../../../components/Dashboard/Team/NewTeamButton")
+);
+const CheckTeam = dynamic(() =>
+  import("../../../components/Dashboard/Team/CheckTeam")
+);
 
 const Team = () => {
   return (
