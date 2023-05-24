@@ -3,7 +3,6 @@ import React from "react";
 import TopBar from "../../../components/TopBar/TopBar";
 import NewTeamButton from "../../../components/Dashboard/Team/NewTeamButton";
 import CheckTeam from "../../../components/Dashboard/Team/CheckTeam";
-import { Suspense } from "react";
 
 const Team = () => {
   return (
