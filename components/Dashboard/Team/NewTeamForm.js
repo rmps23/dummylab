@@ -2,17 +2,16 @@
 
 import React from "react";
 import { useState, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { supabase } from "../../../supabase";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Button from "../../Items/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const NewTeamForm = () => {
   const [name, setName] = useState("");
-  const [teamID, setTeamID] = useState(null);
-  const [shareCode, setShareCode] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -28,26 +27,22 @@ const NewTeamForm = () => {
       }
     };
 
-    setTeamID(uuidv4());
-    setShareCode(uuidv4());
     fetchSession();
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const { error } = await supabase.from("teams").insert({
-        id: teamID,
         name: name,
-        share_code: shareCode,
       });
 
       if (error) {
         throw error;
       }
     } catch (error) {
-      // console.error("Error inserting team data:", error.message);
       toast.error("Failed to create team. Please try again.", {
         position: "top-right",
         autoClose: 3000,
@@ -69,8 +64,7 @@ const NewTeamForm = () => {
         progress: undefined,
         theme: "dark",
       });
-      setTeamID(uuidv4());
-      setShareCode(uuidv4());
+      setIsLoading(false);
       setTimeout(() => {
         window.location.href = "/dashboard/team";
       }, 1000);
@@ -91,6 +85,15 @@ const NewTeamForm = () => {
           placeholder="Insert team name..."
           required
         />
+        {isLoading && (
+          <p>
+            <CircularProgress
+              size={20}
+              className="text-teal-500 mt-2 ml-2"
+              color="inherit"
+            />
+          </p>
+        )}
       </div>
       <br />
       <Button text="Confirm"></Button>

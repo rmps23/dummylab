@@ -2,12 +2,12 @@
 
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import TopBar from "../../../../../components/TopBar/TopBar";
-import TeamName from "components/Dashboard/Team/TeamName";
 
+import TopBar from "components/TopBar/TopBar";
+import TeamName from "components/Dashboard/Team/TeamName";
 import CircularProgress from "@mui/material/CircularProgress";
 
-export default function Profile() {
+export default function Players() {
   const params = useParams();
   const [teamName, setTeamName] = useState();
   const [teamID, setTeamID] = useState();
