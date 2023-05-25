@@ -1,7 +1,10 @@
 import "./globals.css";
-import { Raleway } from "next/font/google";
+import { Roboto } from "@next/font/google";
 
-const raleway = Raleway({ subsets: ["cyrillic"] });
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "500", "700", "900"],
+});
 
 export const metadata = {
   title: "DummyLab",
@@ -14,7 +17,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className={raleway.className}>{children}</body>
+      <body className={roboto.className}>{children}</body>
     </html>
   );
 }

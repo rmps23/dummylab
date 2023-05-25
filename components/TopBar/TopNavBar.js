@@ -24,7 +24,6 @@ const TopNavBar = () => {
   const closeDrawer = () => {
     setOpen(false);
   };
-  console.log(params.teamId);
   return (
     <div className="bg-teal-700 ">
       <div className="max-w-7xl mx-auto items-center hidden md:flex">
@@ -35,7 +34,10 @@ const TopNavBar = () => {
               text={"Profile"}
               link={`/dashboard/team/${teamName}/${teamID}`}
             />
-            <TopNavBarLink text={"Players"} link="/#" />
+            <TopNavBarLink
+              text={"Players"}
+              link={`/dashboard/team/players/${teamName}/${teamID}`}
+            />
             <TopNavBarLink text={"Champion Pool"} link="/#" />
             <TopNavBarLink text={"Analytics"} link="/#" />
             <TopNavBarLink text={"Schedule"} link="/#" />
