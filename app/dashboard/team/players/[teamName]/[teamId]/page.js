@@ -3,15 +3,29 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import CircularProgress from "@mui/material/CircularProgress";
+import Dialog from "@mui/material/Dialog";
+
 import TopBar from "components/TopBar/TopBar";
 import TeamName from "components/Dashboard/Team/TeamName";
-import CircularProgress from "@mui/material/CircularProgress";
+import Modal from "components/Items/Modal";
+import AddPlayer from "components/Dashboard/Forms/AddPlayer";
 
 export default function Players() {
   const params = useParams();
   const [teamName, setTeamName] = useState();
   const [teamID, setTeamID] = useState();
   const [isLoading, setIsLoading] = useState(true);
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     setTeamName(params.teamName);
@@ -36,10 +50,10 @@ export default function Players() {
               <div className="bg-zinc-950 rounded-md p-4">
                 <h1 className="font-semibold text-teal-500 mb-4">Players</h1>
                 <div>
-                  <p>teste1</p>
-                  <p>teste1</p>
-                  <p>teste1</p>
-                  <p>teste1</p>
+                  <span onClick={handleClickOpen}>Open modal</span>
+                  <Dialog open={open} onClose={handleClose}>
+                    <Modal form={<AddPlayer />} handleClose={handleClose} />
+                  </Dialog>
                 </div>
               </div>
             </>
