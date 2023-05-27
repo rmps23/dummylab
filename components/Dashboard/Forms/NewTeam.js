@@ -57,7 +57,7 @@ const NewTeamForm = () => {
       toast.success("Team created successfully!", {
         position: "top-right",
         autoClose: 3000,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
@@ -73,15 +73,15 @@ const NewTeamForm = () => {
 
   return (
     <form className="text-lg" onSubmit={handleSubmit}>
-      <p className="text-2xl font-semibold text-teal-500 mb-4">
-        CREATE NEW TEAM
+      <p className="text-lg text-teal-500 mb-4 w-full text-center">
+        Create New Team
       </p>
       <div className="flex items-center">
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="bg-zinc-800 border border-teal-500/20 outline-none h-10 px-2 text-sm focus:border-teal-500 transition ease-in-out duration-200"
+          className="bg-zinc-950 border-b-2 border-teal-500/20 outline-none h-10 px-2 text-sm focus:border-teal-500 transition ease-in-out duration-200 text-zinc-200"
           placeholder="Insert team name..."
           required
         />
@@ -96,7 +96,9 @@ const NewTeamForm = () => {
         )}
       </div>
       <br />
-      <Button text="Confirm"></Button>
+      <div className="w-full text-center">
+        <Button text="Confirm"></Button>
+      </div>
       <ToastContainer />
     </form>
   );
