@@ -2,14 +2,17 @@
 
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Dialog from "@mui/material/Dialog";
+import ButtonModal from "components/Items/ButtonModal";
 
 import TopBar from "components/TopBar/TopBar";
 import TeamName from "components/Dashboard/Team/TeamName";
 import Modal from "components/Items/Modal";
-import AddPlayer from "components/Dashboard/Forms/AddPlayer";
+import CheckTeamPlayers from "components/Dashboard/Players/CheckTeamPlayers";
+const AddPlayer = dynamic(() => import("components/Dashboard/Forms/AddPlayer"));
 
 export default function Players() {
   const params = useParams();
@@ -48,13 +51,23 @@ export default function Players() {
             <>
               <TeamName teamName={teamName} />
               <div className="bg-zinc-950 rounded-md p-4">
-                <h1 className="font-semibold text-teal-500 mb-4">Players</h1>
-                <div>
-                  <span onClick={handleClickOpen}>Open modal</span>
-                  <Dialog open={open} onClose={handleClose}>
-                    <Modal form={<AddPlayer />} handleClose={handleClose} />
+                <div className="mb-5">
+                  <ButtonModal click={handleClickOpen} text={"Create Player"} />
+                  <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    PaperProps={{
+                      style: { backgroundColor: "#18181b", borderRadius: "0" },
+                    }}
+                  >
+                    <Modal
+                      form={<AddPlayer teamID={teamID} />}
+                      handleClose={handleClose}
+                    />
                   </Dialog>
                 </div>
+
+                <CheckTeamPlayers teamID={teamID} />
               </div>
             </>
           )}
