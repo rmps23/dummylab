@@ -4,7 +4,7 @@ const ButtonModal = ({ text, click }) => {
   return (
     <button
       onClick={click}
-      className="text-sm bg-teal-600 text-neutral-100  px-3 py-1 hover:bg-teal-500 hover:shadow-lg hover:shadow-teal-500/20 transition ease-in-out duration-300"
+      className="text-sm bg-teal-600 text-neutral-100  px-3 py-1 hover:bg-teal-500 hover:shadow-lg hover:shadow-teal-500/20 transition ease-in-out duration-300 rounded-sm"
     >
       {text}
     </button>

@@ -1,13 +1,37 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { supabase } from "../../../supabase";
+import dynamic from "next/dynamic";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import CheckPlayerRole from "./CheckPlayerRole";
+import Dialog from "@mui/material/Dialog";
+import Modal from "components/Items/Modal";
+import ButtonModal from "components/Items/ButtonModal";
 
-const CheckTeamPlayers = ({ teamID }) => {
+const RemovePlayer = dynamic(() => import("../Forms/RemovePlayer"));
+const EditPlayer = dynamic(() => import("../Forms/EditPlayer"));
+
+const CheckTeamPlayers = ({ teamID, teamName }) => {
   const [playerData, setPlayerData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const [editPlayerId, setEditPlayerId] = useState(null);
+  const [removePlayerId, setRemovePlayerId] = useState(null);
+
+  const handleEditModal = (playerId) => {
+    setEditPlayerId(playerId);
+  };
+  const handleCloseEditModal = () => {
+    setEditPlayerId(null);
+  };
+
+  const handleRemoveModal = (playerId) => () => {
+    setRemovePlayerId(playerId);
+  };
+  const handleCloseRemoveModal = () => {
+    setRemovePlayerId(null);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,12 +47,24 @@ const CheckTeamPlayers = ({ teamID }) => {
 
         if (playerData) {
           playerData.sort((a, b) => {
-            if (a.role_state === "Main" && b.role_state === "Sub") {
+            if (a.role_state === "Main" && b.role_state !== "Main") {
               return -1;
-            } else if (a.role_state === "Sub" && b.role_state === "Main") {
+            } else if (a.role_state !== "Main" && b.role_state === "Main") {
               return 1;
             } else {
-              return 0;
+              const rolesOrder = ["Top", "Jungler", "Mid", "Bottom", "Support"];
+              const roleA = a.role;
+              const roleB = b.role;
+              const indexA = rolesOrder.indexOf(roleA);
+              const indexB = rolesOrder.indexOf(roleB);
+
+              if (indexA < indexB) {
+                return -1;
+              } else if (indexA > indexB) {
+                return 1;
+              } else {
+                return 0;
+              }
             }
           });
         }
@@ -70,13 +106,55 @@ const CheckTeamPlayers = ({ teamID }) => {
               <p className="text-lg text-teal-500 my-4 font-light">
                 {player.name}
               </p>
-              <div className="flex-row flex">
-                <button className="bg-teal-600 flex items-center px-4 py-1 mr-4">
-                  <span className="text-xs">Edit</span>
-                </button>
-                <button className="bg-teal-600 flex items-center px-4 py-1">
-                  <span className="text-xs">Remove</span>
-                </button>
+              <div className="flex-row flex gap-3">
+                <ButtonModal
+                  click={() => handleEditModal(player.id)}
+                  text={"Edit"}
+                />
+                <Dialog
+                  open={editPlayerId === player.id}
+                  onClose={handleCloseEditModal}
+                  PaperProps={{
+                    style: { backgroundColor: "#18181b", borderRadius: "0" },
+                  }}
+                >
+                  <Modal
+                    form={
+                      <EditPlayer
+                        playerID={player.id}
+                        playerName={player.name}
+                        playerRole={player.role}
+                        playerRoleState={player.role_state}
+                        teamID={teamID}
+                        teamName={teamName}
+                      />
+                    }
+                    handleClose={handleCloseEditModal}
+                  />
+                </Dialog>
+                <ButtonModal
+                  click={handleRemoveModal(player.id)}
+                  text={"Remove"}
+                />
+                <Dialog
+                  open={removePlayerId === player.id}
+                  onClose={handleCloseRemoveModal}
+                  PaperProps={{
+                    style: { backgroundColor: "#18181b", borderRadius: "0" },
+                  }}
+                >
+                  <Modal
+                    form={
+                      <RemovePlayer
+                        playerName={player.name}
+                        playerID={player.id}
+                        teamName={teamName}
+                        handleCloseRemoveModal={handleCloseRemoveModal}
+                      />
+                    }
+                    handleClose={handleCloseRemoveModal}
+                  />
+                </Dialog>
               </div>
             </div>
           );

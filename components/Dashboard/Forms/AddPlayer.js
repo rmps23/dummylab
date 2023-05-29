@@ -6,32 +6,9 @@ import Button from "components/Items/Button";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import CircularProgress from "@mui/material/CircularProgress";
 
 const AddPlayer = ({ teamID, teamName }) => {
-  const [name, setName] = useState("");
-  const [role, setRole] = useState("Top");
-  const [roleState, setRoleState] = useState("Main");
-
   const [isLoading, setIsLoading] = useState(false);
-  console.log(teamName);
-
-  useEffect(() => {
-    const fetchSession = async () => {
-      try {
-        const { data: sessionData, error: sessionError } =
-          await supabase.auth.getSession();
-
-        if (sessionError) {
-          throw sessionError;
-        }
-      } catch (error) {
-        console.error("Error fetching team data:", error.message);
-      }
-    };
-
-    fetchSession();
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
