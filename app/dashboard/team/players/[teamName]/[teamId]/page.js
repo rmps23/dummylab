@@ -61,7 +61,7 @@ export default function Players() {
                     }}
                   >
                     <Modal
-                      form={<AddPlayer teamID={teamID} />}
+                      form={<AddPlayer teamID={teamID} teamName={teamName} />}
                       handleClose={handleClose}
                     />
                   </Dialog>
