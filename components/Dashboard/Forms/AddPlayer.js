@@ -8,12 +8,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CircularProgress from "@mui/material/CircularProgress";
 
-const AddPlayer = ({ teamID }) => {
+const AddPlayer = ({ teamID, teamName }) => {
   const [name, setName] = useState("");
   const [role, setRole] = useState("Top");
   const [roleState, setRoleState] = useState("Main");
 
   const [isLoading, setIsLoading] = useState(false);
+  console.log(teamName);
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -61,9 +62,10 @@ const AddPlayer = ({ teamID }) => {
         theme: "dark",
       });
       setIsLoading(false);
-      // setTimeout(() => {
-      //   window.location.href = "/dashboard/team";
-      // }, 1000);
+      setTimeout(() => {
+        window.location.href =
+          `/dashboard/team/players/` + teamName + "/" + teamID;
+      }, 1000);
     }
   };
 
@@ -72,7 +74,7 @@ const AddPlayer = ({ teamID }) => {
       <p className="text-lg text-teal-500 mb-4 w-full text-center">
         Add New Player
       </p>
-      <div className="flex items-center">
+      <div className="flex flex-col gap-5">
         <input
           type="text"
           value={name}
