@@ -149,6 +149,7 @@ const CheckTeamPlayers = ({ teamID, teamName }) => {
                         playerName={player.name}
                         playerID={player.id}
                         teamName={teamName}
+                        teamID={teamID}
                         handleCloseRemoveModal={handleCloseRemoveModal}
                       />
                     }

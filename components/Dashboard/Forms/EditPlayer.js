@@ -3,9 +3,6 @@ import { useState, useEffect } from "react";
 import { supabase } from "../../../supabase";
 
 import Button from "components/Items/Button";
-import { toast } from "react-toastify";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const EditPlayer = ({
@@ -120,7 +117,6 @@ const EditPlayer = ({
           <div className="w-full text-right">
             <Button text="Confirm"></Button>
           </div>
-          <ToastContainer />
         </form>
       )}
     </>
