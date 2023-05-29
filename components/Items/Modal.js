@@ -2,7 +2,7 @@ import React from "react";
 
 const AddPlayer = ({ form, handleClose }) => {
   return (
-    <div className="p-14">
+    <div className="py-14 px-10 pt-20 md:min-w-[400px]">
       {form}
       <p
         onClick={handleClose}

@@ -67,7 +67,7 @@ export default function Players() {
                   </Dialog>
                 </div>
 
-                <CheckTeamPlayers teamID={teamID} />
+                <CheckTeamPlayers teamID={teamID} teamName={teamName} />
               </div>
             </>
           )}
