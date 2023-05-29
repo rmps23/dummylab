@@ -6,6 +6,7 @@ import TopBar from "../../../../../components/TopBar/TopBar";
 import TeamName from "components/Dashboard/Team/TeamName";
 
 import CircularProgress from "@mui/material/CircularProgress";
+import Players from "components/Dashboard/Profile/Players";
 
 export default function Profile() {
   const params = useParams();
@@ -33,14 +34,8 @@ export default function Profile() {
           ) : (
             <>
               <TeamName teamName={teamName} />
-              <div className="bg-zinc-950 rounded-md p-4">
-                <h1 className="font-semibold text-teal-500 mb-4">Players</h1>
-                <div>
-                  <p>teste1</p>
-                  <p>teste1</p>
-                  <p>teste1</p>
-                  <p>teste1</p>
-                </div>
+              <div className="rounded-md p-4 grid-cols-3 grid">
+                <Players teamID={teamID} />
               </div>
             </>
           )}
