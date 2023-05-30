@@ -34,7 +34,7 @@ export default function Profile() {
           ) : (
             <>
               <TeamName teamName={teamName} />
-              <div className="rounded-md p-4 grid-cols-3 grid">
+              <div className="rounded-md grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid">
                 <Players teamID={teamID} />
               </div>
             </>

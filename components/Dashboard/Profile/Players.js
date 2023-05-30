@@ -32,9 +32,9 @@ const Players = ({ teamID }) => {
   }, []);
 
   return (
-    <div className="relative group">
-      <FaUsers className="absolute text-teal-500/50 text-[200px] right-10 group-hover:text-teal-500/80 group-hover:scale-110 transition ease-in-out duration-300" />
-      <div className="backdrop-filter backdrop-blur-md backdrop-opacity-95 bg-opacity-60 shadow-md shadow-zinc-950 bg-zinc-950 rounded-md pb-0 h-[200px]">
+    <div className="relative overflow-hidden">
+      <FaUsers className="absolute text-zinc-300/20 text-[200px] -right-6 group-hover:text-teal-500/80 transition ease-in-out duration-300" />
+      <div className="backdrop-filter backdrop-blur-sm backdrop-opacity-50 bg-opacity-60 shadow-md shadow-zinc-950 bg-zinc-950 rounded-md pb-0 h-[200px]">
         {isLoading ? (
           <div>
             <CircularProgress
@@ -45,7 +45,7 @@ const Players = ({ teamID }) => {
           </div>
         ) : countPlayers ? (
           <div className="h-[200px] flex items-center justify-start px-14">
-            <p className="text-8xl font-bold mr-10 text-teal-500">
+            <p className="text-8xl font-bold mr-10 text-teal-500/50">
               {countPlayers.length}
             </p>
             <span className="text-sm font-light uppercase">Players</span>
