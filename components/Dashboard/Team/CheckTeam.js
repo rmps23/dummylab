@@ -52,10 +52,14 @@ const CheckTeam = () => {
       ) : teamData && teamData.length > 0 ? (
         teamData.map((item) => {
           return (
-            <a href={`/dashboard/team/${item.name}/${item.id}`} key={item.id}>
-              <div className="bg-zinc-950 w-full p-6 flex items-center border border-zinc-700 hover:shadow-lg hover:shadow-teal-600/20 hover:border hover:border-teal-600/40 transition ease-in-out duration-500">
-                <RiShieldFlashFill className="mr-4 bg-zinc-600 border border-teal-600 rounded-full p-2 h-10 w-10" />
-                <p>{item.name}</p>
+            <a
+              href={`/dashboard/team/${item.name}/${item.id}`}
+              key={item.id}
+              className="group relative overflow-hidden"
+            >
+              <RiShieldFlashFill className="text-zinc-950 absolute text-9xl group-hover:text-teal-500/40 left-2/4 group-hover:scale-105  transition duration-200 " />
+              <div className="backdrop-filter backdrop-blur-sm backdrop-opacity-50 bg-opacity-60 shadow-md shadow-zinc-950 bg-zinc-950 rounded-md min-h-[120px] flex items-center px-10">
+                <p className="uppercase text-teal-500 max-w-xs">{item.name}</p>
               </div>
             </a>
           );
