@@ -1,7 +1,6 @@
 "use client";
 
 import CircularProgress from "@mui/material/CircularProgress";
-import Backdrop from "@mui/material/Backdrop";
 
 export default function Loading() {
   return (

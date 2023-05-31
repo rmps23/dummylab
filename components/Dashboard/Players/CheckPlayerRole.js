@@ -44,10 +44,15 @@ const CheckPlayerRole = ({ role }) => {
           />
         </div>
       ) : (
-        <div className="flex gap-2 items-center">
-          <Image src={roleData} alt="" width={16} height={16}></Image>
-          <span className="text-xs uppercase font-thin ">{role}</span>
-        </div>
+        <>
+          <Image
+            src={roleData}
+            alt=""
+            width={80}
+            height={80}
+            className="absolute right-1 bottom-3"
+          ></Image>
+        </>
       )}
     </div>
   );

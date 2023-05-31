@@ -38,7 +38,10 @@ const TopNavBar = () => {
               text={"Players"}
               link={`/dashboard/team/players/${teamName}/${teamID}`}
             />
-            <TopNavBarLink text={"Champion Pool"} link="/#" />
+            <TopNavBarLink
+              text={"Champion Pool"}
+              link={`/dashboard/team/champion_pool/${teamName}/${teamID}`}
+            />
             <TopNavBarLink text={"Analytics"} link="/#" />
             <TopNavBarLink text={"Schedule"} link="/#" />
           </>

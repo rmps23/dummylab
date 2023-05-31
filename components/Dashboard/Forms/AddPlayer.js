@@ -18,14 +18,27 @@ const AddPlayer = ({ teamID, teamName }) => {
     setIsLoading(true);
 
     try {
-      const { error } = await supabase.from("players").insert({
-        name: name,
-        role: role,
-        role_state: roleState,
-        teamId: teamID,
-      });
+      const { data: playerData, error: insertError } = await supabase
+        .from("players")
+        .insert({
+          name: name,
+          role: role,
+          role_state: roleState,
+          teamId: teamID,
+        })
+        .select();
 
-      if (error) {
+      if (insertError) {
+        throw error;
+      }
+
+      const { error: lastInserError } = await supabase
+        .from("champion_pool")
+        .insert({
+          id: playerData[0].id,
+        });
+
+      if (lastInserError) {
         throw error;
       }
     } catch (error) {

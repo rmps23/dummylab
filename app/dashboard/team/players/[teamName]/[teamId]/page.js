@@ -50,7 +50,7 @@ export default function Players() {
           ) : (
             <>
               <TeamName teamName={teamName} />
-              <div className="bg-zinc-950 rounded-md p-4">
+              <div>
                 <div className="mb-5">
                   <ButtonModal click={handleClickOpen} text={"Create Player"} />
                   <Dialog
