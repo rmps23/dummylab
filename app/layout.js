@@ -13,7 +13,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="bg-stone-950 h-screen items-center ">
+    <html lang="en" className="bg-zinc-900 h-screen items-center ">
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>

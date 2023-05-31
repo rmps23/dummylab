@@ -48,7 +48,15 @@ const Players = ({ teamID }) => {
             <p className="text-8xl font-bold mr-10 text-teal-500/50">
               {countPlayers.length}
             </p>
-            <span className="text-sm font-light uppercase">Players</span>
+            <span className="text-sm font-light uppercase">
+              {countPlayers.length > 1 ? (
+                <p>Players</p>
+              ) : countPlayers.length === 1 ? (
+                <p>Player</p>
+              ) : (
+                <p>Players</p>
+              )}
+            </span>
           </div>
         ) : null}
       </div>

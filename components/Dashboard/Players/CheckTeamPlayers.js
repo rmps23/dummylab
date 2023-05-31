@@ -92,70 +92,69 @@ const CheckTeamPlayers = ({ teamID, teamName }) => {
       ) : playerData && playerData.length > 0 ? (
         playerData.map((player) => {
           return (
-            <div
-              key={player.id}
-              className="bg-zinc-800 w-full flex-col px-6 py-4 items-center border border-zinc-800 hover:shadow-lg hover:shadow-teal-600/20 hover:border hover:border-teal-600/40 transition ease-in-out duration-200 rounded-md"
-            >
-              <div className="justify-between flex">
-                <CheckPlayerRole role={player.role} />
+            <div key={player.id} className="relative overflow-hidden">
+              <CheckPlayerRole role={player.role} />
 
-                <p className="text-zinc-300 font-thin text-xs">
-                  {player.role_state}
+              <div className="backdrop-filter backdrop-blur-sm backdrop-opacity-50 bg-opacity-60 shadow-md shadow-zinc-950 bg-zinc-950 rounded-md pb-0 h-[140px] p-4">
+                <div className="text-xs font-light uppercase text-zinc-400 justify-between flex">
+                  <span>{player.role_state}</span>
+                  <span>{player.role}</span>
+                </div>
+
+                <p className="text-lg text-teal-500 my-4 font-light">
+                  {player.name}
                 </p>
-              </div>
-              <p className="text-lg text-teal-500 my-4 font-light">
-                {player.name}
-              </p>
-              <div className="flex-row flex gap-3">
-                <ButtonModal
-                  click={() => handleEditModal(player.id)}
-                  text={"Edit"}
-                />
-                <Dialog
-                  open={editPlayerId === player.id}
-                  onClose={handleCloseEditModal}
-                  PaperProps={{
-                    style: { backgroundColor: "#18181b", borderRadius: "0" },
-                  }}
-                >
-                  <Modal
-                    form={
-                      <EditPlayer
-                        playerID={player.id}
-                        playerName={player.name}
-                        playerRole={player.role}
-                        playerRoleState={player.role_state}
-                        teamID={teamID}
-                        teamName={teamName}
-                      />
-                    }
-                    handleClose={handleCloseEditModal}
+                <div className="flex-row flex gap-3">
+                  <ButtonModal
+                    click={() => handleEditModal(player.id)}
+                    text={"Edit"}
                   />
-                </Dialog>
-                <ButtonModal
-                  click={handleRemoveModal(player.id)}
-                  text={"Remove"}
-                />
-                <Dialog
-                  open={removePlayerId === player.id}
-                  onClose={handleCloseRemoveModal}
-                  PaperProps={{
-                    style: { backgroundColor: "#18181b", borderRadius: "0" },
-                  }}
-                >
-                  <Modal
-                    form={
-                      <RemovePlayer
-                        playerName={player.name}
-                        playerID={player.id}
-                        teamName={teamName}
-                        teamID={teamID}
-                        handleCloseRemoveModal={handleCloseRemoveModal}
-                      />
-                    }
-                    handleClose={handleCloseRemoveModal}
+                  <Dialog
+                    open={editPlayerId === player.id}
+                    onClose={handleCloseEditModal}
+                    PaperProps={{
+                      style: { backgroundColor: "#18181b", borderRadius: "0" },
+                    }}
+                  >
+                    <Modal
+                      form={
+                        <EditPlayer
+                          playerID={player.id}
+                          playerName={player.name}
+                          playerRole={player.role}
+                          playerRoleState={player.role_state}
+                          teamID={teamID}
+                          teamName={teamName}
+                        />
+                      }
+                      handleClose={handleCloseEditModal}
+                    />
+                  </Dialog>
+                  <ButtonModal
+                    click={handleRemoveModal(player.id)}
+                    text={"Remove"}
                   />
-                </Dialog>
+                  <Dialog
+                    open={removePlayerId === player.id}
+                    onClose={handleCloseRemoveModal}
+                    PaperProps={{
+                      style: { backgroundColor: "#18181b", borderRadius: "0" },
+                    }}
+                  >
+                    <Modal
+                      form={
+                        <RemovePlayer
+                          playerName={player.name}
+                          playerID={player.id}
+                          teamName={teamName}
+                          teamID={teamID}
+                          handleCloseRemoveModal={handleCloseRemoveModal}
+                        />
+                      }
+                      handleClose={handleCloseRemoveModal}
+                    />
+                  </Dialog>
+                </div>
               </div>
             </div>
           );
