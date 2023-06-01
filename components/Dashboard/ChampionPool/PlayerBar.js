@@ -1,19 +1,17 @@
 import React from "react";
 import { supabase } from "../../../supabase";
 import { useEffect, useState, useRef } from "react";
+import { useParams } from "next/navigation";
+
 import CircularProgress from "@mui/material/CircularProgress";
-import Button from "components/Items/Button";
 import PlayerPool from "./PlayerPool";
-import Dialog from "@mui/material/Dialog";
-import Modal from "components/Items/Modal";
-import ButtonModal from "components/Items/ButtonModal";
-import EditPool from "../Forms/EditPool";
+import Link from "next/link";
+import Button from "../../Items/Button";
 
 const PlayerBar = ({ teamID }) => {
+  const params = useParams();
   const [playerData, setPlayerData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [editPool, setEditPool] = useState(null);
-  const [viewPool, setViewPool] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,13 +59,8 @@ const PlayerBar = ({ teamID }) => {
     fetchData();
   }, []);
 
-  const handleViewPool = (playerId) => {
-    setSelectedPlayerId(playerId);
-  };
-
   return (
     <div>
-      {" "}
       {loading ? (
         <div>
           <CircularProgress
@@ -77,24 +70,23 @@ const PlayerBar = ({ teamID }) => {
           />
         </div>
       ) : playerData && playerData.length > 0 ? (
-        playerData.map((player) => {
+        playerData.map((player, index) => {
           return (
-            <div key={player.id} className="relative overflow-hidden mb-4">
-              <div className="backdrop-filter backdrop-blur-sm backdrop-opacity-50 bg-opacity-60 shadow-md shadow-zinc-950 bg-zinc-950 rounded-md pb-0 p-4">
-                <div className="text-sm font-light uppercase text-zinc-400 justify-between flex mb-2">
-                  <span>
-                    {player.role} /{" "}
-                    <span className="text-teal-500">{player.name}</span>
-                  </span>
-                  <ButtonModal
-                    text={"Edit Pool"}
-                    click={() => handleViewPool(player.id)}
-                  />
-                </div>
-                <div className="flex-row">
-                  <PlayerPool playerID={player.id} />
-                  {viewPool === true && <EditPool ref={editpool} />}
-                </div>
+            <div key={player.id} className="relative mb-5">
+              <div className="backdrop-filter backdrop-blur-sm backdrop-opacity-50 bg-opacity-60 shadow-md shadow-zinc-950 bg-zinc-950 rounded-md p-4">
+                <span className="uppercase font-light text-sm">
+                  {player.role}
+                </span>{" "}
+                /{" "}
+                <span className="uppercase font-light text-sm text-teal-500">
+                  {player.name}
+                </span>
+                <PlayerPool playerID={player.id} />
+                <Link
+                  href={`/dashboard/team/champion_pool/${params.teamName}/${teamID}/edit/${player.id}`}
+                >
+                  <Button text={"Edit Pool"}></Button>
+                </Link>
               </div>
             </div>
           );
