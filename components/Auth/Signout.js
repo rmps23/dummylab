@@ -55,7 +55,7 @@ const Signout = ({ icon }) => {
       </button>
       <button
         onClick={() => signOut()}
-        className="text-teal-500 h-10 w-14 bg-zinc-900 rounded-md flex items-center"
+        className="text-teal-500 h-10 w-14 bg-zinc-900 rounded-md flex items-center md:hidden"
       >
         {loading ? (
           <span className="flex">
