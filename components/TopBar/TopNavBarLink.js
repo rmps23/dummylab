@@ -1,22 +1,19 @@
 import React from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const TopNavBarLink = ({ text, link, disabled }) => {
+const TopNavBarLink = ({ text, link }) => {
   const pathname = usePathname();
 
   return (
-    <Link
+    <a
       href={link}
-      className={`flex items-center justify-center px-3 h-10 hover:bg-teal-800 transition ease-in-out duration-300 ${
-        pathname === link
-          ? "bg-zinc-900 hover:bg-zinc-900 shadow-lg shadow-teal-500/10"
-          : ""
+      className={`bg-teal-700 flex items-center px-4 py-2 rounded-sm transition ease-in-out duration-300 mr-2 hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/10 ${
+        pathname === link &&
+        "bg-zinc-950 text-zinc-300 hover:bg-zinc-950 border border-teal-700 hover:shadow-none"
       }`}
-      prefetch={false}
     >
-      <span className="text-xs ">{text}</span>
-    </Link>
+      <span className="text-xs">{text}</span>
+    </a>
   );
 };
 

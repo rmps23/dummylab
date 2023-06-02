@@ -2,11 +2,11 @@
 
 import React from "react";
 import { useState, useEffect } from "react";
-import { supabase } from "../../../supabase";
+import { supabase } from "../../../../supabase";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Button from "../../Items/Button";
+import Button from "../../../Items/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const NewTeamForm = () => {

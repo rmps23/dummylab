@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
+import TopNavBar from "./TopNavBar";
+import TopNavBarMobile from "./Mobile/TopNavBarMobile";
 const Signout = dynamic(() => import("../Auth/Signout"));
-const TopNavBar = dynamic(() => import("./TopNavBar"));
-const TopNavBarMobile = dynamic(() => import("./Mobile/TopNavBarMobile"));
 
 const TopBar = () => {
   return (
     <>
-      <div className="bg-zinc-950">
+      <div className="bg-zinc-950 fixed w-full z-40">
         <div className="max-w-7xl mx-auto items-center justify-between flex px-4 py-2 md:py-4">
           <div>
             <Link href="/dashboard/team" prefetch={false}>
@@ -29,7 +29,7 @@ const TopBar = () => {
           </div>
         </div>
       </div>
-      <div className="hidden md:block">
+      <div className="pt-14 hidden md:block">
         <TopNavBar />
       </div>
     </>

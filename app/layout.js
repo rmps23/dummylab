@@ -16,6 +16,10 @@ export default function RootLayout({ children }) {
     <html lang="en" className="bg-zinc-900 h-screen items-center ">
       <head>
         <link rel="icon" href="/favicon.ico" />
+        <script
+          type="text/javascript"
+          src="../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"
+        ></script>
       </head>
       <body className={roboto.className}>{children}</body>
     </html>

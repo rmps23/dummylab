@@ -7,7 +7,7 @@ import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import { useParams } from "next/navigation";
 
-import ListItem from "./ListItemLink";
+import ListItemLink from "./ListItemLink";
 import Signout from "../../Auth/Signout";
 
 const TopNavBar = () => {
@@ -34,7 +34,7 @@ const TopNavBar = () => {
       <p onClick={toggleDrawer} className="text-3xl">
         <HiMenuAlt3 />
       </p>
-      <Drawer open={open} onClose={toggleDrawer}>
+      <Drawer open={open} onClose={toggleDrawer} className="border">
         <List className="bg-zinc-950 h-screen text-teal-500 box-border p-4">
           <div className="flex justify-between">
             <div
@@ -50,25 +50,25 @@ const TopNavBar = () => {
 
           {params.teamId ? (
             <div className="grid grid-cols-2 gap-4">
-              <ListItem link="/dashboard/team" primary="Teams" />
-              <ListItem
+              <ListItemLink link="/dashboard/team" primary="Teams" />
+              <ListItemLink
                 link={`/dashboard/team/${teamName}/${teamID}`}
                 primary="Profile"
               />
-              <ListItem
+              <ListItemLink
                 link={`/dashboard/team/players/${teamName}/${teamID}`}
                 primary="Players"
               />
-              <ListItem
+              <ListItemLink
                 link={`/dashboard/team/champion_pool/${teamName}/${teamID}`}
                 primary="Champion Pool"
               />
-              <ListItem link="#" primary="Schedule" />
-              <ListItem link="#" primary="Analytics" />
+              <ListItemLink link="#" primary="Schedule" />
+              <ListItemLink link="#" primary="Analytics" />
             </div>
           ) : (
             <div className="grid grid-cols-2 gap-4">
-              <ListItem link="/dashboard/team" primary="Teams" />
+              <ListItemLink link="/dashboard/team" primary="Teams" />
             </div>
           )}
         </List>
