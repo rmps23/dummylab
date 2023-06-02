@@ -1,16 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import { supabase } from "../../../supabase";
 
-//Components
 import TopBar from "components/TopBar/TopBar";
 import Modal from "components/Items/Modal";
 import ButtonModal from "components/Items/ButtonModal";
 const CheckTeam = dynamic(() => import("components/Dashboard/Team/CheckTeam"));
 const NewTeam = dynamic(() => import("components/Dashboard/Forms/NewTeam"));
 
-//UI Components
 import Dialog from "@mui/material/Dialog";
 
 const Team = () => {
@@ -23,10 +22,12 @@ const Team = () => {
     setOpen(false);
   };
 
+  useEffect(() => {}, []);
+
   return (
     <>
       <TopBar />
-      <div className="bg-zinc-900 h-screen py-5 px-2">
+      {/* <div className="bg-zinc-900 h-auto py-5 px-2">
         <div className="max-w-7xl mx-auto py-4 px-2">
           <ButtonModal click={handleClickOpen} text={"Create Team"} />
           <Dialog
@@ -40,7 +41,7 @@ const Team = () => {
           </Dialog>
           <CheckTeam />
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const TopNavBarLink = ({ text, link }) => {
+const TopNavBarLink = ({ text, link, disabled }) => {
   const pathname = usePathname();
 
   return (

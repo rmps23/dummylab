@@ -83,7 +83,7 @@ const PlayerBar = ({ teamID }) => {
                 </span>
                 <PlayerPool playerID={player.id} />
                 <Link
-                  href={`/dashboard/team/champion_pool/${params.teamName}/${teamID}/edit/${player.id}`}
+                  href={`/dashboard/team/champion_pool/${params.teamName}/${teamID}/edit/${player.name}/${player.id}`}
                 >
                   <Button text={"Edit Pool"}></Button>
                 </Link>
