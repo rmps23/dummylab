@@ -2,44 +2,58 @@
 
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 
-import CircularProgress from "@mui/material/CircularProgress";
-import Dialog from "@mui/material/Dialog";
-import ButtonModal from "components/Items/ButtonModal";
+// import CircularProgress from "@mui/material/CircularProgress";
+// import Dialog from "@mui/material/Dialog";
+// import ButtonModal from "components/Items/ButtonModal";
 
-import TopBar from "components/TopBar/TopBar";
-import TeamName from "components/Dashboard/Team/TeamName";
-import Modal from "components/Items/Modal";
-import CheckTeamPlayers from "components/Dashboard/Players/CheckTeamPlayers";
-const AddPlayer = dynamic(() => import("components/Dashboard/Forms/AddPlayer"));
+// import TopBar from "components/TopBar/TopBar";
+// import TeamName from "components/Dashboard/Team/TeamName";
+// import Modal from "components/Items/Modal";
+// import CheckTeamPlayers from "components/Dashboard/Players/CheckTeamPlayers";
+// const AddPlayer = dynamic(() => import("components/Dashboard/Forms/AddPlayer"));
 
 export default function Players() {
-  const params = useParams();
-  const [teamName, setTeamName] = useState();
-  const [teamID, setTeamID] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  // const params = useParams();
+  // const [teamName, setTeamName] = useState();
+  // const [teamID, setTeamID] = useState();
+  // const [isLoading, setIsLoading] = useState(true);
 
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   useEffect(() => {
-    setTeamName(params.teamName);
-    setTeamID(params.teamId);
-    setIsLoading(false);
+    async function getChampions() {
+      try {
+        const response = await fetch(
+          "http://ddragon.leagueoflegends.com/cdn/13.11.1/data/en_US/champion.json"
+        );
+        const data = await response.json();
+
+        console.log(data);
+      } catch (error) {
+        console.error("Error:", error);
+        throw error;
+      }
+    }
+
+    // setTeamName(params.teamName);
+    // setTeamID(params.teamId);
+    // setIsLoading(false);
   }, []);
 
   return (
     <>
-      <TopBar />
-      <div className="bg-zinc-900 h-screen py-5 px-2">
+      {/* <TopBar />
+      <div className="bg-zinc-900 h-auto py-5 px-2">
         <div className="max-w-7xl mx-auto py-4 px-2">
           {isLoading ? (
             <CircularProgress
@@ -72,7 +86,7 @@ export default function Players() {
             </>
           )}
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

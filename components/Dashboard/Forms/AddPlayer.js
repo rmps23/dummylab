@@ -35,7 +35,7 @@ const AddPlayer = ({ teamID, teamName }) => {
       const { error: lastInserError } = await supabase
         .from("champion_pool")
         .insert({
-          id: playerData[0].id,
+          userID: playerData[0].id,
         });
 
       if (lastInserError) {

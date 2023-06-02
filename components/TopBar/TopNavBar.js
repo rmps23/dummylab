@@ -25,7 +25,7 @@ const TopNavBar = () => {
     setOpen(false);
   };
   return (
-    <div className="bg-teal-700 ">
+    <div className="bg-teal-700">
       <div className="max-w-7xl mx-auto items-center hidden md:flex">
         {params.teamId ? (
           <>
@@ -42,8 +42,8 @@ const TopNavBar = () => {
               text={"Champion Pool"}
               link={`/dashboard/team/champion_pool/${teamName}/${teamID}`}
             />
-            <TopNavBarLink text={"Analytics"} link="/#" />
             <TopNavBarLink text={"Schedule"} link="/#" />
+            <TopNavBarLink text={"Analytics"} link="/#" disabled={true} />
           </>
         ) : (
           <TopNavBarLink text={"Teams"} link="/dashboard/team" />
