@@ -3,6 +3,7 @@
 import TopBar from "components/TopBar/TopBar";
 import NewTeam from "components/Dashboard/Forms/Team/NewTeam";
 import ModalUI from "@components/UI/ModalUI";
+import DisplayTeams from "@components/Dashboard/Forms/Team/DisplayTeams";
 
 const Team = () => {
   return (
@@ -15,6 +16,9 @@ const Team = () => {
             classes="bg-teal-700 py-2 px-4 text-xs uppercase rounded-sm hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/20 transition ease-in-out duration-300"
             form={<NewTeam />}
           />
+          <div>
+            <DisplayTeams />
+          </div>
         </div>
       </div>
     </>

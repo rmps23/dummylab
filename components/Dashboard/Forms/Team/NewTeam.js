@@ -1,7 +1,6 @@
 "use client";
 
 import { supabase } from "@supabase";
-//testetetetetetete
 
 import { useState } from "react";
 import { FetchSession } from "components/Functions/FetchSession";
