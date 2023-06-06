@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Button from "../components/Items/Button";
+// import Button from "../components/Items/Button";
 import Image from "next/image";
 
 const NotFoundPage = () => {

@@ -12,16 +12,19 @@ const style = {
   top: "30%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: "320px",
   bgcolor: "#18181b",
   border: "2px solid #18181b",
   boxShadow: 10,
   p: 4,
   borderRadius: "4px",
   paddingTop: 10,
+  "@media (min-width: 768px)": {
+    width: "450px",
+  },
 };
 
-export default function ModalUI({ btn, classes, form }) {
+export default function ModalUI({ btn, classes, form, title }) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -47,6 +50,9 @@ export default function ModalUI({ btn, classes, form }) {
       >
         <Fade in={open}>
           <Box sx={style} className="egClass">
+            <p className="text-sm text-teal-500 text-center absolute left-5 top-6 font-light uppercase">
+              {title}
+            </p>
             <span
               onClick={handleClose}
               className="absolute text-zinc-300 top-5 right-5 cursor-pointer"
