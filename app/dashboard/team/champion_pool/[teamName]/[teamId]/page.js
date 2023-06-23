@@ -1,42 +1,28 @@
 "use client";
 
+import { useState } from "react";
+import TopBar from "@components/TopBar/TopBar";
+import CircularLoading from "@components/UI/CircularLoading";
+import TeamName from "@components/Dashboard/Team/TeamName";
+import PlayerPoolBar from "@components/Dashboard/ChampionPool/PlayerPoolBar";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
 
-import CircularProgress from "@mui/material/CircularProgress";
-import TopBar from "components/TopBar/TopBar";
-import TeamName from "components/Dashboard/Team/TeamName";
-import PlayerBar from "components/Dashboard/ChampionPool/PlayerBar";
-
-export default function ChampionPool() {
+export default function Players() {
+  const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
-  const [teamName, setTeamName] = useState();
-  const [teamID, setTeamID] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setTeamName(params.teamName);
-    setTeamID(params.teamId);
-    setIsLoading(false);
-  }, []);
+  const teamID = params.teamId;
 
   return (
     <>
       <TopBar />
-      <div className="bg-zinc-900 h-auto py-5 px-2">
-        <div className="max-w-7xl mx-auto py-4 px-2">
+      <div className="bg-zinc-900 h-auto pt-20">
+        <div className="max-w-7xl mx-auto p-3">
           {isLoading ? (
-            <CircularProgress
-              size={20}
-              className="text-teal-500"
-              color="inherit"
-            />
+            <CircularLoading />
           ) : (
             <>
-              <TeamName teamName={teamName} />
-              <div>
-                <PlayerBar teamID={teamID} />
-              </div>
+              <TeamName />
+              <PlayerPoolBar teamID={teamID} />
             </>
           )}
         </div>

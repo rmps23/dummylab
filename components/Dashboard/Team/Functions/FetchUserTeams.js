@@ -4,7 +4,6 @@ import { FetchSession } from "@components/Functions/FetchSession";
 export const FetchUserTeams = async () => {
   try {
     const userID = await FetchSession();
-
     const { data: teamData, error: teamError } = await supabase
       .from("team")
       .select("*")

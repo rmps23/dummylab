@@ -3,7 +3,7 @@
 import TopBar from "components/TopBar/TopBar";
 import NewTeam from "components/Dashboard/Forms/Team/NewTeam";
 import ModalUI from "@components/UI/ModalUI";
-import DisplayTeams from "@components/Dashboard/Forms/Team/DisplayTeams";
+import DisplayTeams from "@components/Dashboard/Team/DisplayTeams";
 
 const Team = () => {
   return (
