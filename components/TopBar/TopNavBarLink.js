@@ -7,9 +7,10 @@ const TopNavBarLink = ({ text, link }) => {
   return (
     <a
       href={link}
-      className={`bg-teal-700 flex items-center px-4 py-2 rounded-sm transition ease-in-out duration-300 mr-2 hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/10 ${
-        pathname === link &&
-        "bg-zinc-950 text-zinc-300 hover:bg-zinc-950 border border-teal-700 hover:shadow-none"
+      className={`px-4 py-2 items-center text-center ${
+        link === pathname
+          ? "bg-zinc-950 text-teal-600 border-b border-teal-500/50"
+          : "hover:bg-teal-600 transition ease-in-out duration-100"
       }`}
     >
       <span className="text-xs">{text}</span>

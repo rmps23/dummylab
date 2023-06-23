@@ -1,9 +1,10 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { supabase } from "../../../supabase";
-
-import Button from "components/Items/Button";
-import CircularProgress from "@mui/material/CircularProgress";
+import { useState, useEffect, useRef } from "react";
+import { supabase } from "../../../../supabase";
+import { FetchRoles } from "@components/Functions/FetchRoles";
+import { FetchRoleState } from "@components/Functions/FetchRoleState";
+import Button from "@components/UI/Button";
+import CircularLoading from "@components/UI/CircularLoading";
 
 const EditPlayer = ({
   playerID,
@@ -13,20 +14,44 @@ const EditPlayer = ({
   teamID,
   teamName,
 }) => {
-  const [name, setName] = useState(playerName);
-  const [role, setRole] = useState(playerRole);
-  const [roleState, setRoleState] = useState(playerRoleState);
+  const [roles, setRoles] = useState([]);
+  const [roleState, setRoleState] = useState([]);
+  const nameRef = useRef(null);
+  const roleRef = useRef(null);
+  const stateRef = useRef(null);
 
-  const [isLoading, setIsLoading] = useState(false);
   const [complete, setComplete] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    FetchRoles()
+      .then((value) => {
+        setRoles(value);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    FetchRoleState()
+      .then((value) => {
+        setRoleState(value);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    const name = nameRef.current.value;
+    const role = roleRef.current.value;
+    const roleState = stateRef.current.value;
+
+    setLoading(true);
 
     try {
       const { error } = await supabase
-        .from("players")
+        .from("player")
         .update({
           name: name,
           role: role,
@@ -41,22 +66,19 @@ const EditPlayer = ({
       console.error("Error: " + error);
     } finally {
       setComplete(true);
-      setIsLoading(false);
+      setLoading(false);
       setTimeout(() => {
         window.location.href =
           `/dashboard/team/players/` + teamName + "/" + teamID;
       }, 1000);
     }
   };
+
   return (
     <>
-      {isLoading ? (
-        <div className="w-full items-center text-center">
-          <CircularProgress
-            size={20}
-            className="text-teal-500"
-            color="inherit"
-          />
+      {loading ? (
+        <div className="w-full text-center">
+          <CircularLoading />
         </div>
       ) : complete ? (
         <div className="text-center">
@@ -68,16 +90,13 @@ const EditPlayer = ({
         </div>
       ) : (
         <form className="text-lg" onSubmit={handleSubmit}>
-          <p className="text-sm text-teal-500 text-center absolute left-5 top-6 font-light uppercase">
-            Edit Player
-          </p>
           <div className="flex flex-col gap-4">
             <div className="flex-col flex">
               <label className="text-zinc-500 text-sm mb-1">Name</label>
               <input
                 type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                defaultValue={playerName}
+                ref={nameRef}
                 className="bg-zinc-950 border-b-2 border-teal-500/20 outline-none h-10 px-2 text-sm focus:border-teal-500 transition ease-in-out duration-200 text-zinc-200 rounded-md"
                 placeholder="Insert team name..."
                 required
@@ -86,36 +105,51 @@ const EditPlayer = ({
             <div className="flex-col flex">
               <label className="text-zinc-500 text-sm mb-1">Role</label>
               <select
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
                 className="bg-zinc-950 border-b-2 border-teal-500/20 outline-none h-10 px-2 text-sm focus:border-teal-500 transition ease-in-out duration-200 text-zinc-200 rounded-md cursor-pointer"
                 placeholder="Player role..."
+                ref={roleRef}
                 required
               >
-                <option value="Top">Top</option>
-                <option value="Jungler">Jungler</option>
-                <option value="Mid">Mid</option>
-                <option value="Bottom">Bottom</option>
-                <option value="Support">Support</option>
+                {roles.length > 0 &&
+                  roles.map((role, index) => {
+                    return (
+                      <option
+                        key={index}
+                        selected={role.id === playerRole}
+                        value={role.id}
+                      >
+                        {role.name}
+                      </option>
+                    );
+                  })}
               </select>
             </div>
             <div className="flex-col flex">
               <label className="text-zinc-500 text-sm mb-1">Main/Sub</label>
               <select
-                value={roleState}
-                onChange={(e) => setRoleState(e.target.value)}
                 className="bg-zinc-950 border-b-2 border-teal-500/20 outline-none h-10 px-2 text-sm focus:border-teal-500 transition ease-in-out duration-200 text-zinc-200 rounded-md cursor-pointer"
                 placeholder="Main/Sub"
+                ref={stateRef}
                 required
               >
-                <option value="Main">Main</option>
-                <option value="Sub">Sub</option>
+                {roleState.length > 0 &&
+                  roleState.map((roleState) => {
+                    return (
+                      <option
+                        key={roleState.id}
+                        value={roleState.id}
+                        selected={roleState.id === playerRoleState}
+                      >
+                        {roleState.name}
+                      </option>
+                    );
+                  })}
               </select>
             </div>
           </div>
           <br />
           <div className="w-full text-right">
-            <Button text="Confirm"></Button>
+            <Button text="Confirm" />
           </div>
         </form>
       )}

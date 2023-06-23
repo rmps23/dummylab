@@ -1,26 +1,19 @@
 import React, { useState } from "react";
-import Button from "components/Items/Button";
-import CancelButton from "../../Items/CancelButton";
-import { supabase } from "../../../supabase";
-import CircularProgress from "@mui/material/CircularProgress";
+import { supabase } from "../../../../supabase";
+import Button from "@components/UI/Button";
+import CircularLoading from "@components/UI/CircularLoading";
 
-const RemovePlayer = ({
-  playerName,
-  playerID,
-  teamName,
-  teamID,
-  handleCloseRemoveModal,
-}) => {
-  const [isLoading, setIsLoading] = useState(false);
+const RemovePlayer = ({ playerName, playerID, teamName, teamID }) => {
   const [complete, setComplete] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    setLoading(true);
 
     try {
       const { error } = await supabase
-        .from("players")
+        .from("player")
         .delete()
         .eq("id", playerID);
 
@@ -31,7 +24,7 @@ const RemovePlayer = ({
       console.error("Error: " + error);
     } finally {
       setComplete(true);
-      setIsLoading(false);
+      setLoading(false);
       setTimeout(() => {
         window.location.href =
           `/dashboard/team/players/` + teamName + "/" + teamID;
@@ -41,13 +34,9 @@ const RemovePlayer = ({
 
   return (
     <>
-      {isLoading ? (
-        <div className="w-full items-center text-center">
-          <CircularProgress
-            size={20}
-            className="text-teal-500"
-            color="inherit"
-          />
+      {loading ? (
+        <div className="w-full text-center">
+          <CircularLoading />
         </div>
       ) : complete ? (
         <div className="text-center">
@@ -59,21 +48,14 @@ const RemovePlayer = ({
         </div>
       ) : (
         <div>
-          <p className="text-sm text-teal-500 text-center absolute left-5 top-6 font-light uppercase">
-            Remove Player
-          </p>
           <p className="text-zinc-200">
             Do you confirm to remove{" "}
-            <span className="text-teal-500">{playerName}</span> from{" "}
-            <span className="text-teal-500">{teamName}</span>?
+            <span className="text-teal-500">{playerName} </span> from{" "}
+            <span className="text-teal-500">{teamName} </span>?
           </p>
           <form className="text-lg" onSubmit={handleSubmit}>
-            <div className="w-full mt-4 gap-2 flex flex-row-reverse items-center">
+            <div className="w-full mt-8 gap-2 flex flex-row-reverse items-center">
               <Button text="Confirm"></Button>
-              <CancelButton
-                text="Cancel"
-                handleCloseRemoveModal={handleCloseRemoveModal}
-              ></CancelButton>
             </div>
           </form>
         </div>

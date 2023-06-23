@@ -61,8 +61,6 @@ const NewTeamForm = () => {
         throw teamError;
       }
 
-      console.log(teamData);
-
       const team_id = teamData[0].id;
 
       const filePath = `${team_id}`;
