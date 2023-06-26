@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { FetchPlayers } from "@components/Dashboard/Players/Functions/FetchPlayers";
 import CircularLoading from "@components/UI/CircularLoading";
-import ModalUI from "@components/UI/ModalUI";
 import CheckPool from "./CheckPool";
 import EditPool from "../Forms/ChampionPool/EditPool";
+import ModalUI from "@components/UI/ModalUIChampPool";
 
 const PlayerPoolBar = ({ teamID }) => {
   const [players, setPlayers] = useState([]);
+  const [updatePool, setUpdatePool] = useState();
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -53,12 +55,18 @@ const PlayerPoolBar = ({ teamID }) => {
                         <ModalUI
                           btn="Edit Pool"
                           classes="bg-teal-700 px-4 py-2 leading-none text-[11px] uppercase rounded-sm hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/20 transition ease-in-out duration-300"
-                          form={<EditPool playerID={player.id} />}
+                          form={
+                            <EditPool
+                              playerID={player.id}
+                              updatePool={updatePool}
+                              setUpdatePool={setUpdatePool}
+                            />
+                          }
                           title={`Edit ${player.name} Champion Pool`}
                         />
                       </div>
                     </div>
-                    <CheckPool playerID={player.id} />
+                    <CheckPool playerID={player.id} updatePool={updatePool} />
                   </div>
                 );
               })}

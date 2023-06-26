@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-import CircularLoading from "@components/UI/CircularLoading";
 
-const DisplayPool = ({ champID, name, image, champions }) => {
-  const [champion, setChampion] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  console.log(champions);
+const DisplayPool = ({ image, name }) => {
   return (
     <>
-      <div className="overflow-hidden rounded-md border border-teal-500/60 m-auto">
+      <div className="overflow-hidden border border-teal-500/60 m-auto relative">
         <img
           src={`http://ddragon.leagueoflegends.com/cdn/13.12.1/img/champion/${image}`}
           alt=""

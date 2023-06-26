@@ -4,13 +4,13 @@ import { FetchPool } from "./Functions/FetchPool";
 import CircularLoading from "@components/UI/CircularLoading";
 import DisplayPool from "./DisplayPool";
 
-const CheckPool = (playerID) => {
+const CheckPool = ({ playerID, updatePool }) => {
   const [pool, setPool] = useState([]);
   const [champions, setChampions] = useState();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    FetchPool(playerID.playerID)
+    FetchPool(playerID)
       .then((value) => {
         setPool(value);
         setLoading(false);
@@ -19,7 +19,7 @@ const CheckPool = (playerID) => {
         console.error(error);
         setLoading(false);
       });
-  }, []);
+  }, [updatePool]);
 
   useEffect(() => {
     let champions = pool.map((obj) => obj.champion);
