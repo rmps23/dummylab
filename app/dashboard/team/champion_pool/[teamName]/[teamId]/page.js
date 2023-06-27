@@ -15,7 +15,7 @@ export default function Players() {
   return (
     <>
       <TopBar />
-      <div className="bg-zinc-900 h-auto pt-20">
+      <div className="bg-zinc-900 h-auto pt-16">
         <div className="max-w-7xl mx-auto p-3">
           {isLoading ? (
             <CircularLoading />

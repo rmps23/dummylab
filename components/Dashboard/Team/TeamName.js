@@ -24,13 +24,13 @@ const TeamName = () => {
   return (
     <>
       {loading ? (
-        <div className="relative overflow-hidden rounded-md mb-6">
+        <div className="relative overflow-hidden">
           <div className="bg-zinc-950 opacity-90 bg-opacity-90 backdrop-filter backdrop-blur-lg p-4 px-6 relative h-14 text-right items-center flex">
             <CircularLoading />
           </div>
         </div>
       ) : (
-        <div className="relative overflow-hidden rounded-md mb-6">
+        <div className="relative overflow-hidden rounded-md mb-4">
           <img
             src={`https://fpwrnfdqzvztmakmrdnc.supabase.co/storage/v1/object/public/team_logos/${params.teamId}`}
             width={150}

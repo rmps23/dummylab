@@ -21,7 +21,7 @@ export default function Profile() {
   return (
     <>
       <TopBar />
-      <div className="bg-zinc-900 h-auto pt-20">
+      <div className="bg-zinc-900 h-auto pt-16">
         <div className="max-w-7xl mx-auto p-4">
           {isLoading ? (
             <CircularLoading />

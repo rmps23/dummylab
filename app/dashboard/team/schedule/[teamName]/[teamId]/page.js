@@ -4,10 +4,13 @@ import { useState } from "react";
 import TopBar from "@components/TopBar/TopBar";
 import CircularLoading from "@components/UI/CircularLoading";
 import TeamName from "@components/Dashboard/Team/TeamName";
-import TeamPlayers from "@components/Dashboard/Players/TeamPlayers";
+import { useParams } from "next/navigation";
+import Schedule from "@components/Dashboard/Schedule/Schedule";
 
 export default function Players() {
   const [isLoading, setIsLoading] = useState(false);
+  const params = useParams();
+  const teamID = params.teamId;
 
   return (
     <>
@@ -19,7 +22,7 @@ export default function Players() {
           ) : (
             <>
               <TeamName />
-              <TeamPlayers />
+              <Schedule />
             </>
           )}
         </div>
