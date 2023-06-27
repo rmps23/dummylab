@@ -63,7 +63,10 @@ const TopNavBar = () => {
                 link={`/dashboard/team/champion_pool/${teamName}/${teamID}`}
                 primary="Champion Pool"
               />
-              <ListItemLink link="#" primary="Schedule" />
+              <ListItemLink
+                link={`/dashboard/team/schedule/${teamName}/${teamID}`}
+                primary="Schedule"
+              />
               <ListItemLink link="#" primary="Analytics" />
             </div>
           ) : (
