@@ -32,9 +32,9 @@ export default function ModalUI({ btn, classes, form, title }) {
 
   return (
     <div>
-      <button onClick={handleOpen} className={classes}>
+      <span onClick={handleOpen} className={classes}>
         {btn}
-      </button>
+      </span>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

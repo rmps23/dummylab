@@ -22,7 +22,7 @@ export default function Players() {
           ) : (
             <>
               <TeamName />
-              <Schedule />
+              <Schedule teamID={teamID} />
             </>
           )}
         </div>
