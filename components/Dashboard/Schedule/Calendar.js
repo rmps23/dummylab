@@ -2,11 +2,23 @@ import React from "react";
 import { useState, useEffect } from "react";
 import moment from "moment";
 import CircularLoading from "@components/UI/CircularLoading";
+import { BsChevronRight } from "react-icons/bs";
+import { BsChevronLeft } from "react-icons/bs";
+import ModalUI from "@components/UI/ModalUI";
+import AddEvent from "../Forms/Schedule/AddEvent";
 
-const Calendar = ({ monthNum, yearNum }) => {
+const Calendar = ({
+  monthNum,
+  yearNum,
+  prevMonth,
+  nextMonth,
+  teamID,
+  teamName,
+}) => {
   const [monthName, setMonthName] = useState();
   const [daysArray, setDaysArray] = useState([]);
   const [loading, setLoading] = useState(true);
+  const today = moment().format("YYYY-M-D");
 
   useEffect(() => {
     const monthName = moment()
@@ -20,37 +32,63 @@ const Calendar = ({ monthNum, yearNum }) => {
     ).daysInMonth();
 
     let totalDaysPrevMonth = moment(
-      `${yearNum}-${monthNum - 1}`,
+      `${yearNum}-${monthNum == 1 ? 12 : monthNum - 1}`,
       "YYYY-M"
     ).daysInMonth();
 
-    const specificDate = yearNum + "-" + monthNum + "-" + "1";
-    const weekDayNumber = moment(specificDate).format("d");
+    const firstDay = yearNum + "-" + monthNum + "-" + "1";
+    const firstDayWeekNum = moment(firstDay).format("d");
 
-    const daysArray = Array.from({ length: totalDaysMonth }, (_, index) => {
-      const date = moment({
+    const daysArray = [];
+
+    for (let index = 1; index <= totalDaysMonth; index++) {
+      daysArray.push({
         year: yearNum,
-        month: monthNum - 1,
-        day: index + 1,
+        month: monthNum,
+        day: index,
+        fill: yearNum + "-" + monthNum + "-" + index,
+        selected: true,
       });
-      return {
-        day: date.date(),
-        month: date.month() + 1,
-        year: date.year(),
-      };
-    });
+    }
 
-    for (let i = 0; i < weekDayNumber; i++) {
+    for (let i = 0; i < firstDayWeekNum; i++) {
       daysArray.unshift({
+        year: monthNum === 1 ? yearNum - 1 : yearNum,
+        month: monthNum === 1 ? 12 : monthNum - 1,
         day: totalDaysPrevMonth,
-        month: monthNum - 1,
-        year: yearNum,
+        fill:
+          (monthNum === 1 ? yearNum - 1 : yearNum) +
+          "-" +
+          (monthNum === 1 ? 12 : monthNum - 1) +
+          "-" +
+          totalDaysPrevMonth,
+        selected: false,
       });
       totalDaysPrevMonth--;
     }
 
+    const lastDayMonth = yearNum + "-" + monthNum + "-" + totalDaysMonth;
+    const lastDayWeekNum = moment(lastDayMonth).format("d");
+    let calcNextDays = 6 - lastDayWeekNum;
+
+    let incrementedYear = false;
+
+    for (let i = 1; i <= calcNextDays; i++) {
+      daysArray.push({
+        year: monthNum === 12 ? yearNum + 1 : yearNum,
+        month: monthNum === 12 ? 1 : monthNum + 1,
+        day: i,
+        fill:
+          (monthNum === 12 ? yearNum + 1 : yearNum) +
+          "-" +
+          (monthNum === 12 ? 1 : monthNum + 1) +
+          "-" +
+          totalDaysPrevMonth,
+        selected: false,
+      });
+    }
+
     setDaysArray(daysArray);
-    console.log(daysArray);
     setLoading(false);
   }, [monthNum]);
 
@@ -61,36 +99,100 @@ const Calendar = ({ monthNum, yearNum }) => {
           <CircularLoading />
         </div>
       ) : (
-        <>
-          <div className="bg-zinc-900 mb-2 rounded-sm p-4">
-            <span className="text-xl text-teal-500 uppercase">{monthName}</span>
+        <div className="mb-20">
+          <div className="flex justify-between items-center mb-1 bg-zinc-950 p-4 rounded-sm text-teal-">
+            <div className="flex items-center justify-center">
+              <div className="flex gap-2 uppercase font-light">
+                <span>{yearNum}</span>
+                <span>{monthName}</span>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <span
+                onClick={prevMonth}
+                className="bg-teal-700 text-white p-2 w-14 flex items-center justify-center rounded-md cursor-pointer"
+              >
+                <BsChevronLeft />
+              </span>
+              <span
+                onClick={nextMonth}
+                className="bg-teal-700 text-white p-2 w-14 flex items-center justify-center rounded-md cursor-pointer"
+              >
+                <BsChevronRight />
+              </span>
+            </div>
           </div>
-          <div className="grid grid-cols-7 gap-2 text-center mb-2">
-            <div className="bg-zinc-900 rounded-sm">Sunday</div>
-            <div className="bg-zinc-900 rounded-sm">Monday</div>
-            <div className="bg-zinc-900 rounded-sm">Tuesday</div>
-            <div className="bg-zinc-900 rounded-sm">Wednesday</div>
-            <div className="bg-zinc-900 rounded-sm">Thursday</div>
-            <div className="bg-zinc-900 rounded-sm">Friday</div>
-            <div className="bg-zinc-900 rounded-sm">Saturday</div>
+          <div className="grid grid-cols-7 gap-1 text-center text-[10px] uppercase text-zinc-400 font-light">
+            <div className="bg-zinc-950 rounded-sm py-1">Sun</div>
+            <div className="bg-zinc-950 rounded-sm py-1">Mon</div>
+            <div className="bg-zinc-950 rounded-sm py-1">Tue</div>
+            <div className="bg-zinc-950 rounded-sm py-1">Wed</div>
+            <div className="bg-zinc-950 rounded-sm py-1">Thu</div>
+            <div className="bg-zinc-950 rounded-sm py-1">Fri</div>
+            <div className="bg-zinc-950 rounded-sm py-1">Sat</div>
           </div>
-          <div className="grid grid-cols-7 gap-2">
+          <div className="grid grid-cols-7 gap-1 mt-1">
             {daysArray && daysArray.length > 0 ? (
               daysArray.map((day, index) => {
-                return (
-                  <div
-                    key={index}
-                    className="border border-teal-600/40 rounded-sm h-36"
-                  >
-                    {day.day}
-                  </div>
-                );
+                if (day.selected === false) {
+                  return (
+                    <div
+                      key={index}
+                      className="rounded-md h-40 bg-zinc-950/50 border border-zinc-900 transition ease-in-out duration-200 relative"
+                    >
+                      <p className="absolute text-xs text-zinc-600 top-2 left-2">
+                        {day.day}
+                      </p>
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div
+                      key={index}
+                      className={`rounded-md h-40 border-zinc-900 hover:bg-black transition ease-in-out duration-200 relative p-1 ${
+                        today == day.fill
+                          ? "bg-teal-700 hover:bg-teal-600"
+                          : "bg-zinc-950"
+                      }`}
+                    >
+                      <p
+                        className={`absolute text-xs top-2 left-2 right-2 justify-between flex ${
+                          today == day.fill
+                            ? "text-white uppercase"
+                            : "text-teal-600"
+                        }`}
+                      >
+                        {day.day}
+                        <span className="text-[8px]">
+                          {today == day.fill && " Today"}
+                        </span>
+                      </p>
+                      <ModalUI
+                        btn="+"
+                        classes={`top-7 left-1 right-1 absolute rounded-md bg-zinc-900 text-md cursor-pointer font-light text-center hover:bg-teal-600 transition ease-in-out duration-300 ${
+                          today == day.fill
+                            ? "bg-zinc-900 hover:bg-zinc-950"
+                            : "bg-zinc-900"
+                        }`}
+                        form={
+                          <AddEvent
+                            teamID={teamID}
+                            day={day.fill}
+                            teamId={teamID}
+                            teamName={teamName}
+                          />
+                        }
+                        title="Add new event"
+                      />
+                    </div>
+                  );
+                }
               })
             ) : (
               <p>invalid</p>
             )}
           </div>
-        </>
+        </div>
       )}
     </>
   );

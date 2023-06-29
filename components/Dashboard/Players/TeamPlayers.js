@@ -13,7 +13,7 @@ const TeamPlayers = () => {
     <>
       <ModalUI
         btn="Create Player"
-        classes="bg-teal-700 px-3 py-3 leading-none text-[12px] uppercase rounded-sm hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/20 transition ease-in-out duration-300"
+        classes="bg-teal-700 px-3 py-3 leading-none text-[12px] uppercase rounded-sm hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/20 transition ease-in-out duration-300 cursor-pointer"
         form={<AddPlayer teamName={teamName} teamID={teamID} />}
         title="Create New Player"
       />

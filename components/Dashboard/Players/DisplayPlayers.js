@@ -57,7 +57,7 @@ const DisplayTeams = ({ teamID, teamName }) => {
                   <div className="pt-7 flex gap-2">
                     <ModalUI
                       btn="Edit"
-                      classes="bg-teal-700 px-4 py-2 leading-none text-[11px] uppercase rounded-sm hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/20 transition ease-in-out duration-300"
+                      classes="bg-teal-700 px-4 py-2 leading-none text-[11px] uppercase rounded-sm hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/20 transition ease-in-out duration-300 cursor-pointer"
                       form={
                         <EditPlayer
                           playerID={player.id}
@@ -72,7 +72,7 @@ const DisplayTeams = ({ teamID, teamName }) => {
                     />
                     <ModalUI
                       btn="Remove"
-                      classes="bg-teal-700 px-4 py-2 leading-none text-[11px] uppercase rounded-sm hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/20 transition ease-in-out duration-300"
+                      classes="bg-teal-700 px-4 py-2 leading-none text-[11px] uppercase rounded-sm hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/20 transition ease-in-out duration-300 cursor-pointer"
                       form={
                         <RemovePlayer
                           playerID={player.id}
