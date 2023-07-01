@@ -1,8 +1,5 @@
 import Signup from "../components/Auth/Signup";
 import Hero from "../components/Homepage/Hero";
-import Section2 from "../components/Homepage/Section2";
-import Footer from "../components/Homepage/Footer";
-import JoinLab from "../components/Homepage/JoinLab";
 
 const Home = () => {
   return (
@@ -21,16 +18,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* <section className="items-center justify-center h-screen flex bg-black py-20">
-        <div className="bg-stone-950 w-full h-full absolute opacity-100  bg-opacity-50 backdrop-filter backdrop-blur-lg"></div>
-        <Section2 />
-      </section>
-      <section className="items-center justify-center h-auto flex-col bg-neutral-200 py-10">
-        <JoinLab />
-      </section>
-      <section className="h-auto bg-teal-500 py-10 px-2">
-        <Footer />
-      </section> */}
     </>
   );
 };
