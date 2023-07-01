@@ -20,7 +20,7 @@ const TopNavBar = () => {
   useEffect(() => {
     setTeamName(params.teamName);
     setTeamID(params.teamId);
-  }, []);
+  }, [params.teamId, params.teamName]);
 
   const toggleDrawer = () => {
     setOpen(!open);

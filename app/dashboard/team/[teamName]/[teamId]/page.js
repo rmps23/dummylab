@@ -16,7 +16,7 @@ export default function Profile() {
     setTeamName(params.teamName);
     setTeamID(params.teamId);
     setIsLoading(false);
-  }, []);
+  }, [params.teamId, params.teamName]);
 
   return (
     <>
