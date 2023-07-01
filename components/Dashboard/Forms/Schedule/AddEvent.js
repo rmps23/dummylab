@@ -17,6 +17,7 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
   const moment = require("moment");
   const date = moment(day);
   const textDate = date.format("MMMM D, YYYY");
+  const textDateSupa = date.format("YYYY-M-D");
 
   useEffect(() => {
     FetchPlayers(teamID)
@@ -32,7 +33,7 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
     e.preventDefault();
 
     const name = eventName.current.value;
-    const date = textDate;
+    const date = textDateSupa;
 
     setLoading(true);
 
@@ -69,10 +70,10 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
     } finally {
       setComplete(true);
       setLoading(false);
-      // setTimeout(() => {
-      //   window.location.href =
-      //     `/dashboard/team/schedule/` + teamName + "/" + teamId;
-      // }, 1000);
+      setTimeout(() => {
+        window.location.href =
+          `/dashboard/team/schedule/` + teamName + "/" + teamId;
+      }, 1000);
     }
   };
 
@@ -127,7 +128,10 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
               <div className="grid grid-cols-4 gap-1 gap-y-2 bg-zinc-950 rounded-md p-2">
                 {eventPlayers.map((player) => {
                   return (
-                    <div className="bg-zinc-900 rounded-md items-center flex p-1 relative group">
+                    <div
+                      key={player.id}
+                      className="bg-zinc-900 rounded-md items-center flex p-1 relative group"
+                    >
                       <img src={player.role.image_link} width={18} />
                       <span className="text-sm text-teal-500 ml-1">
                         {player.name}
@@ -155,14 +159,20 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
                 <p className="text-xs uppercase text-teal-600 mb-1">
                   Assign player to the event
                 </p>
-                <select className="w-full bg-zinc-950 p-2 py-3 rounded-md relative text-sm text-zinc-300">
+                <select
+                  className="w-full bg-zinc-950 p-2 py-3 rounded-md relative text-sm text-zinc-300"
+                  onChange={(e) => {
+                    const selectedPlayer = players.find(
+                      (player) => player.id === e.target.value
+                    );
+                    addPlayer(selectedPlayer);
+                  }}
+                >
+                  <option value="">Select a player...</option>
                   {players.map((player) => {
                     return (
                       <>
-                        <option
-                          value={player.id}
-                          onClick={() => addPlayer(player)}
-                        >
+                        <option key={player.id} value={player.id}>
                           {player.name} ({player.role.name} -{" "}
                           {player.role_state.name})
                         </option>
@@ -174,36 +184,6 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
             ) : (
               <></>
             )}
-            {/* <select
-              className="bg-zinc-950 border-b-2 border-teal-500/20 outline-none h-10 px-2 text-sm focus:border-teal-500 transition ease-in-out duration-200 text-zinc-200 rounded-md cursor-pointer"
-              placeholder="Player role..."
-              ref={roleRef}
-              required
-            >
-              {roles.length > 0 &&
-                roles.map((role, index) => {
-                  return (
-                    <option key={index} value={`${role.id}`}>
-                      {role.name}
-                    </option>
-                  );
-                })}
-            </select>
-            <select
-              className="bg-zinc-950 border-b-2 border-teal-500/20 outline-none h-10 px-2 text-sm focus:border-teal-500 transition ease-in-out duration-200 text-zinc-200 rounded-md cursor-pointer"
-              placeholder="Main/Sub"
-              ref={stateRef}
-              required
-            >
-              {roleState.length > 0 &&
-                roleState.map((roleState) => {
-                  return (
-                    <option key={roleState.id} value={roleState.id}>
-                      {roleState.name}
-                    </option>
-                  );
-                })}
-            </select> */}
           </div>
           <br />
           <div className="w-full text-right items-center gap-2 flex flex-row-reverse">

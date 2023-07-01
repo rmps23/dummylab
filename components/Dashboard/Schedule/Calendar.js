@@ -6,6 +6,7 @@ import { BsChevronRight } from "react-icons/bs";
 import { BsChevronLeft } from "react-icons/bs";
 import ModalUI from "@components/UI/ModalUI";
 import AddEvent from "../Forms/Schedule/AddEvent";
+import { FetchEvents } from "./Functions/FetchEvents";
 
 const Calendar = ({
   monthNum,
@@ -18,6 +19,7 @@ const Calendar = ({
   const [monthName, setMonthName] = useState();
   const [daysArray, setDaysArray] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [events, setEvents] = useState([]);
   const today = moment().format("YYYY-M-D");
 
   useEffect(() => {
@@ -92,6 +94,17 @@ const Calendar = ({
     setLoading(false);
   }, [monthNum]);
 
+  useEffect(() => {
+    FetchEvents()
+      .then((value) => {
+        setEvents(value);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <>
       {loading ? (
@@ -149,7 +162,7 @@ const Calendar = ({
                   return (
                     <div
                       key={index}
-                      className={`rounded-md h-40 border-zinc-900 hover:bg-black transition ease-in-out duration-200 relative p-1 ${
+                      className={`rounded-md h-40 border-zinc-900 hover:bg-black transition ease-in-out duration-200 relative p-1 overflow-auto scroll-edit ${
                         today == day.fill
                           ? "bg-teal-700 hover:bg-teal-600"
                           : "bg-zinc-950"
@@ -184,6 +197,19 @@ const Calendar = ({
                         }
                         title="Add new event"
                       />
+                      <div className="mt-14">
+                        {events.map((event) => {
+                          return (
+                            <>
+                              {event.date == day.fill && (
+                                <p className="bg-sky-700 rounded-md text-zinc-300 py-1 px-2 cursor-pointer mb-2 text-sm text-center">
+                                  {event.name}
+                                </p>
+                              )}
+                            </>
+                          );
+                        })}
+                      </div>
                     </div>
                   );
                 }
