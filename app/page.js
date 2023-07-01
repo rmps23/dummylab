@@ -21,7 +21,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="items-center justify-center h-screen flex bg-black py-20">
+      {/* <section className="items-center justify-center h-screen flex bg-black py-20">
         <div className="bg-stone-950 w-full h-full absolute opacity-100  bg-opacity-50 backdrop-filter backdrop-blur-lg"></div>
         <Section2 />
       </section>
@@ -30,7 +30,7 @@ const Home = () => {
       </section>
       <section className="h-auto bg-teal-500 py-10 px-2">
         <Footer />
-      </section>
+      </section> */}
     </>
   );
 };
