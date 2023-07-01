@@ -73,3 +73,39 @@ body {
 .egClass:focus {
   outline: none !important;
 }
+
+/* WebKit-based browsers (Chrome, Safari) */
+.scroll-edit::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scroll-edit::-webkit-scrollbar-thumb {
+  background-color: #14b8a6;
+  border-radius: 4px;
+}
+
+.scroll-edit::-webkit-scrollbar-track {
+  background-color: #333;
+  border-radius: 4px;
+}
+
+/* Firefox */
+.scroll-edit {
+  scrollbar-width: thin;
+  scrollbar-color: #14b8a6 #333;
+}
+
+/* Edge and Opera GX */
+.scroll-edit::-ms-scrollbar {
+  width: 8px;
+}
+
+.scroll-edit::-ms-scrollbar-thumb {
+  background-color: #14b8a6;
+  border-radius: 4px;
+}
+
+.scroll-edit::-ms-scrollbar-track {
+  background-color: #333;
+  border-radius: 4px;
+}
