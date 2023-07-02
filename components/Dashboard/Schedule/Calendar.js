@@ -7,6 +7,7 @@ import { BsChevronLeft } from "react-icons/bs";
 import ModalUI from "@components/UI/ModalUI";
 import AddEvent from "../Forms/Schedule/AddEvent";
 import { FetchEvents } from "./Functions/FetchEvents";
+import OpenEvent from "./OpenEvent";
 
 const Calendar = ({
   monthNum,
@@ -85,7 +86,7 @@ const Calendar = ({
           "-" +
           (monthNum === 12 ? 1 : monthNum + 1) +
           "-" +
-          totalDaysPrevMonth,
+          i,
         selected: false,
       });
     }
@@ -145,27 +146,39 @@ const Calendar = ({
             <div className="bg-zinc-950 rounded-sm py-1">Sat</div>
           </div>
           <div className="grid grid-cols-7 gap-1 mt-1">
-            {daysArray && daysArray.length > 0 ? (
+            {daysArray &&
+              daysArray.length > 0 &&
               daysArray.map((day, index) => {
                 if (day.selected === false) {
                   return (
                     <div
                       key={index}
-                      className="rounded-md h-40 bg-zinc-950/50 border border-zinc-900 transition ease-in-out duration-200 relative"
+                      className="rounded-md h-40 bg-zinc-950/50 border border-zinc-900 transition ease-in-out duration-200 relative p-1 overflow-auto scroll-edit"
                     >
                       <p className="absolute text-xs text-zinc-600 top-2 left-2">
                         {day.day}
                       </p>
+                      <div className="mt-6">
+                        {events.map((event) => {
+                          return (
+                            <div key={event.id}>
+                              {event.date == day.fill && (
+                                <p className="bg-teal-700 rounded-md text-zinc-300 py-1 px-2 mb-2 text-xs text-center opacity-40">
+                                  {event.name}
+                                </p>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   );
                 } else {
                   return (
                     <div
                       key={index}
-                      className={`rounded-md h-40 border-zinc-900 hover:bg-black transition ease-in-out duration-200 relative p-1 overflow-auto scroll-edit ${
-                        today == day.fill
-                          ? "bg-teal-700 hover:bg-teal-600"
-                          : "bg-zinc-950"
+                      className={`rounded-md h-40 border-zinc-900 transition ease-in-out duration-200 relative p-1 overflow-auto scroll-edit ${
+                        today == day.fill ? "bg-teal-600" : "bg-zinc-950"
                       }`}
                     >
                       <p
@@ -200,23 +213,23 @@ const Calendar = ({
                       <div className="mt-14">
                         {events.map((event) => {
                           return (
-                            <>
+                            <div key={event.id}>
                               {event.date == day.fill && (
-                                <p className="bg-sky-700 rounded-md text-zinc-300 py-1 px-2 cursor-pointer mb-2 text-sm text-center">
-                                  {event.name}
-                                </p>
+                                <ModalUI
+                                  btn={event.name + " / " + event.time}
+                                  classes={`bg-teal-700 rounded-md text-zinc-300 py-1 px-2 cursor-pointer mb-2 text-sm text-center w-full flex hover:bg-teal-600 transition ease-in-out duration-200`}
+                                  form={<OpenEvent event={event} />}
+                                  title={event.name}
+                                />
                               )}
-                            </>
+                            </div>
                           );
                         })}
                       </div>
                     </div>
                   );
                 }
-              })
-            ) : (
-              <p>invalid</p>
-            )}
+              })}
           </div>
         </div>
       )}
