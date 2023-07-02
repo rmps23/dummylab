@@ -8,8 +8,10 @@ import CircularLoading from "@components/UI/CircularLoading";
 const AddEvent = ({ teamID, day, teamId, teamName }) => {
   const [players, setPlayers] = useState();
   const [eventPlayers, setEventPlayers] = useState([]);
+  const selectRef = useRef(null);
 
   const eventName = useRef(null);
+  const eventTime = useRef(null);
 
   const [complete, setComplete] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -34,6 +36,7 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
 
     const name = eventName.current.value;
     const date = textDateSupa;
+    const time = eventTime.current.value;
 
     setLoading(true);
 
@@ -43,6 +46,7 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
         .insert({
           name: name,
           date: date,
+          time: time,
         })
         .select();
 
@@ -81,6 +85,8 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
     setEventPlayers((prevEventPlayers) => [...prevEventPlayers, player]);
     const playersUpdate = players.filter((obj) => obj.id !== player.id);
     setPlayers(playersUpdate);
+    selectRef.current.options[0].selected = true;
+    selectRef.current.focus();
   };
 
   const removePlayer = (player) => {
@@ -124,6 +130,18 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
               required
             />
 
+            <div className="flex relative items-center gap-2">
+              <input
+                type="time"
+                className="bg-zinc-950 border-b-2 border-teal-500/20 outline-none h-10 px-4 text-sm focus:border-teal-500 transition ease-in-out duration-200 text-zinc-300 rounded-md"
+                ref={eventTime}
+                required
+              />
+              <span className="text-xs uppercase text-teal-600">
+                Event Time
+              </span>
+            </div>
+
             {eventPlayers && eventPlayers.length > 0 ? (
               <div className="grid grid-cols-4 gap-1 gap-y-2 bg-zinc-950 rounded-md p-2">
                 {eventPlayers.map((player) => {
@@ -160,6 +178,7 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
                   Assign player to the event
                 </p>
                 <select
+                  ref={selectRef}
                   className="w-full bg-zinc-950 p-2 py-3 rounded-md relative text-sm text-zinc-300"
                   onChange={(e) => {
                     const selectedPlayer = players.find(
@@ -169,10 +188,11 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
                   }}
                 >
                   <option value="">Select a player...</option>
-                  {players.map((player) => {
+
+                  {players.map((player, index) => {
                     return (
                       <>
-                        <option key={player.id} value={player.id}>
+                        <option key={index} value={player.id}>
                           {player.name} ({player.role.name} -{" "}
                           {player.role_state.name})
                         </option>

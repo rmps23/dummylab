@@ -7,7 +7,8 @@ export const FetchEvents = async (teamID) => {
     const { data: eventData, error: eventError } = await supabase
       .from("event")
       .select(" * ")
-      .eq("user_id", userID);
+      .eq("user_id", userID)
+      .select();
 
     if (eventError) {
       throw eventError;
