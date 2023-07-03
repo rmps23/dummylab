@@ -89,14 +89,18 @@ const OpenEvent = ({ event, teamName, teamId }) => {
               {players.map((player, index) => (
                 <p
                   key={player.player_id.id}
-                  className="bg-zinc-950 rounded-md p-2 flex items-center"
+                  className="bg-zinc-950 rounded-md p-2 flex items-center gap-2"
                 >
                   <img
                     src={player.player_id.role.image_link}
                     alt=""
-                    width={20}
+                    width={18}
                   />
-                  <span>{player.player_id.name}</span>
+                  <div>
+                    <span className="text-zinc-400 text-sm">
+                      {player.player_id.name}
+                    </span>
+                  </div>
                 </p>
               ))}
             </div>
