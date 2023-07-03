@@ -218,7 +218,13 @@ const Calendar = ({
                                 <ModalUI
                                   btn={event.name + " / " + event.time}
                                   classes={`bg-teal-700 rounded-md text-zinc-300 py-1 px-2 cursor-pointer mb-2 text-sm text-center w-full flex hover:bg-teal-600 transition ease-in-out duration-200`}
-                                  form={<OpenEvent event={event} />}
+                                  form={
+                                    <OpenEvent
+                                      event={event}
+                                      teamId={teamID}
+                                      teamName={teamName}
+                                    />
+                                  }
                                   title={event.name}
                                 />
                               )}
