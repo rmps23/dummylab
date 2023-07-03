@@ -67,7 +67,7 @@ const TopNavBar = () => {
                 link={`/dashboard/team/schedule/${teamName}/${teamID}`}
                 primary="Schedule"
               />
-              <ListItemLink link="#" primary="Analytics" />
+              {/* <ListItemLink link="#" primary="Analytics" /> */}
             </div>
           ) : (
             <div className="grid grid-cols-2 gap-4">

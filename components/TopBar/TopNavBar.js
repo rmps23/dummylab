@@ -49,7 +49,7 @@ const TopNavBar = () => {
                   text={"Schedule"}
                   link={`/dashboard/team/schedule/${teamName}/${teamID}`}
                 />
-                <TopNavBarLink text={"Analytics"} link="/#" disabled={true} />
+                {/* <TopNavBarLink text={"Analytics"} link="/#" disabled={true} /> */}
               </>
             ) : (
               <TopNavBarLink text={"Teams"} link="/dashboard/team" />
