@@ -8,7 +8,8 @@ import Image from "next/image";
 import { FaUpload } from "react-icons/fa";
 
 import Button from "@components/UI/Button";
-import CircularProgress from "@mui/material/CircularProgress";
+import CircularLoading from "@components/UI/CircularLoading";
+import Skeleton from "@mui/material/Skeleton";
 
 const NewTeamForm = ({ checkNew, setCheckNew, setCloseModal }) => {
   const [teamName, setTeamName] = useState("");
@@ -19,6 +20,8 @@ const NewTeamForm = ({ checkNew, setCheckNew, setCloseModal }) => {
   const fileInputRef = useRef(null);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [imgLoading, setImgLoading] = useState(false);
+
   const [complete, setComplete] = useState(false);
 
   useEffect(() => {
@@ -32,6 +35,7 @@ const NewTeamForm = ({ checkNew, setCheckNew, setCloseModal }) => {
   }, []);
 
   const handleUpload = (e) => {
+    setImgLoading(true);
     if (e.target.files) {
       const selectedFile = e.target.files[0];
       setSelectedFile(e.target.files[0]);
@@ -40,6 +44,7 @@ const NewTeamForm = ({ checkNew, setCheckNew, setCloseModal }) => {
 
       reader.onload = (event) => {
         setShowIMG(event.target.result);
+        setImgLoading(false);
       };
 
       reader.readAsDataURL(selectedFile);
@@ -65,6 +70,10 @@ const NewTeamForm = ({ checkNew, setCheckNew, setCloseModal }) => {
       setCheckNew(teamData);
       const team_id = teamData[0].id;
       const filePath = `${team_id}`;
+
+      if (!selectedFile) {
+        return;
+      }
 
       const { data, error } = await supabase.storage
         .from("team_logos")
@@ -94,11 +103,7 @@ const NewTeamForm = ({ checkNew, setCheckNew, setCloseModal }) => {
     <>
       {isLoading ? (
         <div className="w-full items-center text-center">
-          <CircularProgress
-            size={20}
-            className="text-teal-500"
-            color="inherit"
-          />
+          <CircularLoading />
         </div>
       ) : complete ? (
         <div className="text-center">
@@ -141,7 +146,15 @@ const NewTeamForm = ({ checkNew, setCheckNew, setCloseModal }) => {
                   htmlFor="img"
                   className="w-full py-[10px] rounded-md text-center text-md text-zinc-300 bg-teal-700 hover:bg-teal-600 transition ease-in-out duration-300 cursor-pointer flex items-center justify-center gap-4"
                 >
-                  Upload team logo... <FaUpload />
+                  {imgLoading ? (
+                    <>
+                      <CircularLoading white={true} />
+                    </>
+                  ) : (
+                    <>
+                      Upload team logo... <FaUpload />
+                    </>
+                  )}
                 </label>
                 <input
                   id="img"
