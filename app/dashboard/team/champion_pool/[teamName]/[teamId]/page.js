@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import CircularLoading from "@components/UI/CircularLoading";
-import TeamName from "@components/Dashboard/Team/TeamName";
 import PlayerPoolBar from "@components/Dashboard/ChampionPool/PlayerPoolBar";
 import { useParams } from "next/navigation";
 
@@ -19,7 +18,6 @@ export default function Players() {
             <CircularLoading />
           ) : (
             <>
-              <TeamName />
               <PlayerPoolBar teamID={teamID} />
             </>
           )}

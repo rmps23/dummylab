@@ -1,6 +1,7 @@
 import { FetchUserTeams } from "@components/Dashboard/Team/Functions/FetchUserTeams";
 import CircularLoading from "@components/UI/CircularLoading";
 import { useState, useEffect } from "react";
+import { FaChevronRight } from "react-icons/fa";
 
 const DisplayTeams = ({ checkNew }) => {
   const [userTeams, setUserTeams] = useState([]);
@@ -31,18 +32,25 @@ const DisplayTeams = ({ checkNew }) => {
                 team.id
               }`}
               key={team.id}
-              className="relative overflow-hidden rounded-md"
+              className="relative overflow-hidden rounded-md transition-all duration-300 ease-in-out hover:scale-105 group"
             >
-              <img
-                src={`https://fpwrnfdqzvztmakmrdnc.supabase.co/storage/v1/object/public/team_logos/${team.id}`}
-                width={150}
-                alt=""
-                className="absolute -right-6 -top-0"
-              />
-              <div className="bg-zinc-950 opacity-90 bg-opacity-90 backdrop-filter backdrop-blur-lg p-4 relative h-28 hover:bg-opacity-60 transition ease-in-out duration-300">
-                <p className="text-sm text-teal-500 uppercase font-normal flex">
+              <div className="bg-zinc-950 p-5 relative h-32 hover:bg-opacity-60">
+                <p className="text-md text-teal-500 flex uppercase">
                   {team.name}
                 </p>
+                <img
+                  src={`https://fpwrnfdqzvztmakmrdnc.supabase.co/storage/v1/object/public/team_logos/${team.id}`}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "/assets/dummylab-logo-w.png";
+                  }}
+                  width={100}
+                  alt=""
+                  className="absolute opacity-10 -right-5 top-3 group-hover:opacity-50 transition-all duration-300 group-hover:-right-40 delay-100"
+                />
+                <span className="absolute -right-40 top-8 group-hover:right-3 transition-all duration-500 ">
+                  <FaChevronRight className="text-6xl text-teal-600 animate-pulse" />
+                </span>
               </div>
             </a>
           ))}

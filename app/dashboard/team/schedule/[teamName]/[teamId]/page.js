@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import CircularLoading from "@components/UI/CircularLoading";
-import TeamName from "@components/Dashboard/Team/TeamName";
 import { useParams } from "next/navigation";
 import Schedule from "@components/Dashboard/Schedule/Schedule";
 
