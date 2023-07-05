@@ -1,25 +1,32 @@
 "use client";
 
-import TopBar from "components/TopBar/TopBar";
 import NewTeam from "components/Dashboard/Forms/Team/NewTeam";
 import ModalUI from "@components/UI/ModalUI";
 import DisplayTeams from "@components/Dashboard/Team/DisplayTeams";
+import Modal from "@components/UI/Modal";
+import { FaPlus } from "react-icons/fa";
+import { useState } from "react";
 
 const Team = () => {
+  const [checkNew, setCheckNew] = useState();
+  const [closeModal, setCloseModal] = useState(false);
+
   return (
     <>
-      <TopBar />
-      <div className="bg-zinc-900 h-auto pt-20">
-        <div className="max-w-7xl mx-auto p-4">
-          <ModalUI
-            btn="Create Team"
-            classes="bg-teal-700 px-3 py-3 leading-none text-[12px] uppercase rounded-sm hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/20 transition ease-in-out duration-300 cursor-pointer"
-            form={<NewTeam />}
-            title="Create New Team"
-          />
-          <div>
-            <DisplayTeams />
-          </div>
+      <div className="max-w-7xl mx-auto p-4">
+        <Modal
+          btn="Create Team"
+          icon={<FaPlus />}
+          classes="bg-teal-600 px-6 py-3 leading-none text-[14px] uppercase transition-all cursor-pointer inline-block rounded-sm hover:bg-teal-600 duration-500 group relative hover:rounded-r-none"
+          form={
+            <NewTeam setCheckNew={setCheckNew} setCloseModal={setCloseModal} />
+          }
+          title="Create New Team"
+          closeModal={closeModal}
+          setCloseModal={setCloseModal}
+        />
+        <div>
+          <DisplayTeams checkNew={checkNew} />
         </div>
       </div>
     </>

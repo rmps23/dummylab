@@ -5,8 +5,8 @@ const CircularLoading = ({ menu }) => {
   return (
     <div className="text-teal-600">
       <CircularProgress
-        size={menu ? 15 : 30}
-        className="text-teal-500"
+        size={menu ? 18 : 30}
+        className={menu ? "text-red-800" : "text-teal-500"}
         color="inherit"
       />
     </div>

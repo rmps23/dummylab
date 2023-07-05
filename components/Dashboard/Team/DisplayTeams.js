@@ -2,7 +2,7 @@ import { FetchUserTeams } from "@components/Dashboard/Team/Functions/FetchUserTe
 import CircularLoading from "@components/UI/CircularLoading";
 import { useState, useEffect } from "react";
 
-const DisplayTeams = () => {
+const DisplayTeams = ({ checkNew }) => {
   const [userTeams, setUserTeams] = useState([]);
   const [teamIMG, setTeamIMG] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +17,7 @@ const DisplayTeams = () => {
         console.error(error);
         setLoading(false);
       });
-  }, []);
+  }, [checkNew]);
 
   return (
     <div className="mt-5">
@@ -27,7 +27,7 @@ const DisplayTeams = () => {
         <div className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid gap-6">
           {userTeams.map((team) => (
             <a
-              href={`/dashboard/team/${team.name.replace(/\s/g, "_")}/${
+              href={`/dashboard/team/players/${team.name.replace(/\s/g, "_")}/${
                 team.id
               }`}
               key={team.id}
