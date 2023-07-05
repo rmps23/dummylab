@@ -5,11 +5,12 @@ import { useState, useEffect } from "react";
 import { FetchSession } from "components/Functions/FetchSession";
 import { useRef } from "react";
 import Image from "next/image";
+import { FaUpload } from "react-icons/fa";
 
 import Button from "@components/UI/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 
-const NewTeamForm = () => {
+const NewTeamForm = ({ checkNew, setCheckNew, setCloseModal }) => {
   const [teamName, setTeamName] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [session, setSession] = useState(null);
@@ -61,8 +62,8 @@ const NewTeamForm = () => {
         throw teamError;
       }
 
+      setCheckNew(teamData);
       const team_id = teamData[0].id;
-
       const filePath = `${team_id}`;
 
       const { data, error } = await supabase.storage
@@ -77,9 +78,7 @@ const NewTeamForm = () => {
     } finally {
       setComplete(true);
       setIsLoading(false);
-      setTimeout(() => {
-        window.location.href = "/dashboard/team";
-      }, 1000);
+      setCloseModal(true);
     }
   };
 
@@ -116,31 +115,33 @@ const NewTeamForm = () => {
               type="text"
               value={teamName}
               onChange={(e) => setTeamName(e.target.value)}
-              className="bg-zinc-950 border-b-2 mb-2 border-teal-500/20 outline-none h-10 px-2 text-sm focus:border-teal-500 transition ease-in-out duration-200 text-zinc-200 rounded-md"
+              className="bg-zinc-900 border-b-2 border-teal-500/20 outline-none p-4 text-md focus:border-teal-400 transition ease-in-out duration-200 text-zinc-200 rounded-md"
               placeholder="Insert team name..."
               required
             />
           </div>
-          <div className="flex-1 w-full flex items-center overflow-hidden rounded-md mt-2">
+          <div className="flex-1 w-full flex items-center rounded-md mt-10">
             {showIMG ? (
-              <div className="bg-zinc-950 rounded-md w-full relative flex items-center">
-                <div className="px-2">
-                  <Image src={showIMG} alt="" height={20} width={20} />
+              <>
+                <div className="bg-zinc-900 rounded-md relative items-center">
+                  <div className="p-4 relative">
+                    <Image src={showIMG} alt="" height={150} width={150} />
+                    <span
+                      className="cursor-pointer absolute text-zinc-200 bg-teal-600 z-50 h-10 w-10 -right-5 -top-5 rounded-full flex items-center justify-center hover:scale-110 transition-all"
+                      onClick={handleRemoveFile}
+                    >
+                      &#10006;
+                    </span>
+                  </div>
                 </div>
-                <span className="text-xs truncate py-3 pr-10">{fileName}</span>
-                <span className="text-red-600 right-3 text-md font-bold absolute bg-gradient-to-r from-transparent to-zinc-950 to-50% w-14 text-right">
-                  <span className="cursor-pointer" onClick={handleRemoveFile}>
-                    &#10006;
-                  </span>
-                </span>
-              </div>
+              </>
             ) : (
               <>
                 <label
                   htmlFor="img"
-                  className="w-full py-[10px] rounded-sm text-center text-sm text-zinc-300 bg-teal-700 hover:bg-teal-600 transition ease-in-out duration-300 cursor-pointer"
+                  className="w-full py-[10px] rounded-md text-center text-md text-zinc-300 bg-teal-700 hover:bg-teal-600 transition ease-in-out duration-300 cursor-pointer flex items-center justify-center gap-4"
                 >
-                  Upload team logo...
+                  Upload team logo... <FaUpload />
                 </label>
                 <input
                   id="img"
@@ -153,6 +154,7 @@ const NewTeamForm = () => {
               </>
             )}
           </div>
+
           <div className="w-full text-right mt-8">
             <Button text="Confirm"></Button>
           </div>
