@@ -18,7 +18,6 @@ export default function Players() {
             <CircularLoading />
           ) : (
             <>
-              <TeamName />
               <Schedule teamID={teamID} />
             </>
           )}
