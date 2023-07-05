@@ -52,7 +52,7 @@ const Signout = ({ hover }) => {
                 hover === true && "opacity-100 pl-2 group-hover:pl-3"
               }`}
             >
-              Logout
+              Logouts
             </span>
           </div>
         )}
