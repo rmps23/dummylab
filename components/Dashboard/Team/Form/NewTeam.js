@@ -1,38 +1,29 @@
 "use client";
 
 import { supabase } from "@supabase";
-import { useState, useEffect } from "react";
-import { FetchSession } from "components/Functions/FetchSession";
+import { useState } from "react";
 import { useRef } from "react";
-import Image from "next/image";
 import { FaUpload } from "react-icons/fa";
+import { useMutation } from "react-query";
 
+import Image from "next/image";
 import Button from "@components/UI/Button";
 import CircularLoading from "@components/UI/CircularLoading";
-import Skeleton from "@mui/material/Skeleton";
+import useTeamStore from "@components/Store/teamStore";
 
-const NewTeamForm = ({ checkNew, setCheckNew, setCloseModal }) => {
-  const [teamName, setTeamName] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [session, setSession] = useState(null);
-  const [showIMG, setShowIMG] = useState(null);
-  const [fileName, setFileName] = useState(null);
+const NewTeamForm = ({ setCloseModal }) => {
+  const addTeam = useTeamStore((state) => state.addTeam);
+
+  const teamName = useRef(null);
   const fileInputRef = useRef(null);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [showIMG, setShowIMG] = useState(null);
+  const [fileName, setFileName] = useState(null);
   const [imgLoading, setImgLoading] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [complete, setComplete] = useState(false);
-
-  useEffect(() => {
-    FetchSession()
-      .then((value) => {
-        setSession(value);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
 
   const handleUpload = (e) => {
     setImgLoading(true);
@@ -51,46 +42,6 @@ const NewTeamForm = ({ checkNew, setCheckNew, setCloseModal }) => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      setIsLoading(true);
-      const { data: teamData, error: teamError } = await supabase
-        .from("team")
-        .insert({
-          name: teamName,
-        })
-        .select();
-
-      if (teamError) {
-        throw teamError;
-      }
-
-      setCheckNew(teamData);
-      const team_id = teamData[0].id;
-      const filePath = `${team_id}`;
-
-      if (!selectedFile) {
-        return;
-      }
-
-      const { data, error } = await supabase.storage
-        .from("team_logos")
-        .upload(filePath, selectedFile);
-
-      if (error) {
-        console.log("Error uploading image:", error.message);
-      }
-    } catch (error) {
-      console.error("Error uploading image:", error);
-    } finally {
-      setComplete(true);
-      setIsLoading(false);
-      setCloseModal(true);
-    }
-  };
-
   const handleRemoveFile = () => {
     if (fileInputRef.current) {
       fileInputRef.current.value = null;
@@ -98,6 +49,38 @@ const NewTeamForm = ({ checkNew, setCheckNew, setCloseModal }) => {
     setShowIMG(null);
     setSelectedFile(null);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { data: team } = await mutationTeam.mutateAsync({
+      name: teamName.current.value,
+    });
+
+    addTeam(team[0]);
+
+    const team_id = team[0].id;
+    const filePath = `${team_id}`;
+
+    if (!selectedFile) {
+      setComplete(true);
+      setCloseModal(true);
+      return;
+    }
+
+    const { data: teamIMG } = await mutationIMG.mutateAsync(filePath);
+
+    setComplete(true);
+    setCloseModal(true);
+  };
+
+  const mutationTeam = useMutation((values) => {
+    return supabase.from("team").insert(values).select();
+  });
+
+  const mutationIMG = useMutation((filePath) => {
+    return supabase.storage.from("team_logos").upload(filePath, selectedFile);
+  });
 
   return (
     <>
@@ -118,8 +101,7 @@ const NewTeamForm = ({ checkNew, setCheckNew, setCloseModal }) => {
           <div className="flex-col flex">
             <input
               type="text"
-              value={teamName}
-              onChange={(e) => setTeamName(e.target.value)}
+              ref={teamName}
               className="bg-zinc-900 border-b-2 border-teal-500/20 outline-none p-4 text-md focus:border-teal-400 transition ease-in-out duration-200 text-zinc-200 rounded-md"
               placeholder="Insert team name..."
               required

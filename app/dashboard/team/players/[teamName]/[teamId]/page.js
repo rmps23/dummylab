@@ -16,7 +16,7 @@ export default function Players() {
         ) : (
           <>
             <ChooseTeam />
-            <TeamPlayers />
+            {/* <TeamPlayers /> */}
           </>
         )}
       </div>

@@ -92,7 +92,9 @@ const DisplayTeams = ({ teamID, teamName }) => {
           })}
         </div>
       ) : (
-        <p>There are no teams created.</p>
+        <div className="bg-zinc-950 p-5 rounded-md">
+          <p className="text-md text-zinc-400">No players have been created.</p>
+        </div>
       )}
     </div>
   );
