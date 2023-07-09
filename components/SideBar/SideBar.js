@@ -81,25 +81,37 @@ const SideBar = () => {
               <SideBarLink
                 icon={<FaShieldAlt />}
                 hover={hover}
-                link={`/dashboard/team/${teamName}/${teamID}`}
+                link={`/dashboard/team/${teamName.replace(
+                  /\s/g,
+                  "+"
+                )}/${teamID}`}
                 text={"Profile"}
               />
               <SideBarLink
                 icon={<FaUsers />}
                 hover={hover}
-                link={`/dashboard/team/players/${teamName}/${teamID}`}
+                link={`/dashboard/team/players/${teamName.replace(
+                  /\s/g,
+                  "+"
+                )}/${teamID}`}
                 text={"Players"}
               />
               <SideBarLink
                 icon={<FaStar />}
                 hover={hover}
-                link={`/dashboard/team/champion_pool/${teamName}/${teamID}`}
+                link={`/dashboard/team/champion_pool/${teamName.replace(
+                  /\s/g,
+                  "+"
+                )}/${teamID}`}
                 text={"Pool"}
               />
               <SideBarLink
                 icon={<FaRegCalendarAlt />}
                 hover={hover}
-                link={`/dashboard/team/schedule/${teamName}/${teamID}`}
+                link={`/dashboard/team/schedule/${teamName.replace(
+                  /\s/g,
+                  "+"
+                )}/${teamID}`}
                 text={"Schedule"}
               />
             </div>

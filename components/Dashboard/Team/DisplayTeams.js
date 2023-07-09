@@ -1,62 +1,65 @@
-import { FetchUserTeams } from "@components/Dashboard/Team/Functions/FetchUserTeams";
-import CircularLoading from "@components/UI/CircularLoading";
-import { useState, useEffect } from "react";
+import { FetchUserTeams } from "./Function/FetchUserTeams";
 import { FaChevronRight } from "react-icons/fa";
 
-const DisplayTeams = ({ checkNew }) => {
-  const [userTeams, setUserTeams] = useState([]);
-  const [teamIMG, setTeamIMG] = useState([]);
-  const [loading, setLoading] = useState(true);
+import CircularLoading from "@components/UI/CircularLoading";
+import useTeamStore from "@components/Store/teamStore";
+import { useEffect } from "react";
+
+const DisplayTeams = () => {
+  const { userTeams, userTeamsLoading, userTeamsError } = FetchUserTeams();
+  const setData = useTeamStore((state) => state.setData);
+  const teams = useTeamStore((state) => state.data);
 
   useEffect(() => {
-    FetchUserTeams()
-      .then((value) => {
-        setUserTeams(value);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setLoading(false);
-      });
-  }, [checkNew]);
+    if (userTeams) {
+      setData(userTeams);
+    }
+  }, [userTeams, setData]);
+
+  if (userTeamsError) return <h1>{JSON.stringify(error)}</h1>;
+
+  if (userTeamsLoading)
+    return (
+      <div className="flex pt-4 pb-3 items-center justify-center bg-zinc-950 rounded-md">
+        <CircularLoading />
+      </div>
+    );
 
   return (
-    <div className="mt-5">
-      {loading ? (
-        <CircularLoading />
-      ) : userTeams && userTeams.length > 0 ? (
-        <div className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid gap-6">
-          {userTeams.map((team) => (
-            <a
-              href={`/dashboard/team/players/${team.name.replace(/\s/g, "_")}/${
-                team.id
-              }`}
-              key={team.id}
-              className="relative overflow-hidden rounded-md transition-all duration-300 ease-in-out hover:scale-105 group"
-            >
-              <div className="bg-zinc-950 p-5 relative h-32 hover:bg-opacity-60">
-                <p className="text-md text-teal-500 flex uppercase">
-                  {team.name}
-                </p>
-                <img
-                  src={`https://fpwrnfdqzvztmakmrdnc.supabase.co/storage/v1/object/public/team_logos/${team.id}`}
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = "/assets/dummylab-logo-w.png";
-                  }}
-                  width={100}
-                  alt=""
-                  className="absolute opacity-10 -right-5 top-3 group-hover:opacity-50 transition-all duration-300 group-hover:-right-40 delay-100"
-                />
-                <span className="absolute -right-40 top-8 group-hover:right-3 transition-all duration-500 ">
-                  <FaChevronRight className="text-6xl text-teal-600 animate-pulse" />
-                </span>
-              </div>
-            </a>
-          ))}
+    <div className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid gap-6">
+      {!teams.length > 0 ? (
+        <div className="flex py-5 px-4 col-span-4 bg-zinc-950 rounded-md">
+          <span className="text-zinc-400">No teams have been created.</span>
         </div>
       ) : (
-        <p>There are no teams created.</p>
+        teams.map((team) => (
+          <a
+            href={`/dashboard/team/players/${team.name.replace(/\s/g, "+")}/${
+              team.id
+            }`}
+            key={team.id}
+            className="relative overflow-hidden rounded-md transition-all duration-300 ease-in-out hover:scale-105 group"
+          >
+            <div className="bg-zinc-950 p-5 relative h-32 hover:bg-opacity-60">
+              <p className="text-md text-teal-500 flex uppercase">
+                {team.name}
+              </p>
+              <img
+                src={`https://fpwrnfdqzvztmakmrdnc.supabase.co/storage/v1/object/public/team_logos/${team.id}`}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "/assets/dummylab-logo-w.png";
+                }}
+                width={100}
+                alt=""
+                className="absolute opacity-50 -right-5 top-3 transition-all duration-300 group-hover:-right-40 delay-100"
+              />
+              <span className="absolute -right-40 top-8 group-hover:right-3 transition-all duration-500 ">
+                <FaChevronRight className="text-6xl text-teal-600 animate-pulse" />
+              </span>
+            </div>
+          </a>
+        ))
       )}
     </div>
   );
