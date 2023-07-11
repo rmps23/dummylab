@@ -1,48 +1,47 @@
-import { FetchPlayers } from "@components/Dashboard/Players/Functions/FetchPlayers";
-import CircularLoading from "@components/UI/CircularLoading";
-import { useState, useEffect } from "react";
-import ModalUI from "@components/UI/ModalUI";
+import { useEffect } from "react";
+import { FetchPlayers } from "./Functions/FetchPlayers";
+
 import EditPlayer from "../Forms/Player/EditPlayer";
 import RemovePlayer from "../Forms/Player/RemovePlayer";
+import usePlayerStore from "@components/Store/playerStore";
+import Modal from "@components/UI/Modal";
+import CircularLoading from "@components/UI/CircularLoading";
 
-const DisplayTeams = ({ teamID, teamName }) => {
-  const [players, setPlayers] = useState([]);
-  const [loading, setLoading] = useState(true);
+const DisplayTeams = ({ teamID, teamName, closeModal, setCloseModal }) => {
+  const { players, playersLoading, playersError } = FetchPlayers(teamID);
+  const setData = usePlayerStore((state) => state.setData);
+  const playersStore = usePlayerStore((state) => state.data);
 
   useEffect(() => {
-    FetchPlayers(teamID)
-      .then((value) => {
-        setPlayers(value);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setLoading(false);
-      });
-  }, []);
+    if (players) {
+      setData(players);
+    }
+  }, [players, setData]);
+
+  if (playersError) return <h1>{JSON.stringify(playersError)}</h1>;
+
+  if (playersLoading)
+    return (
+      <div className="mt-5">
+        <div className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid gap-6">
+          <div className="bg-zinc-950/50 opacity-80 bg-opacity-90 backdrop-filter backdrop-blur-lg p-4 relative h-32 rounded-md flex items-center justify-center">
+            <CircularLoading size={40} color={"text-zinc-800"} />
+          </div>
+        </div>
+      </div>
+    );
 
   return (
     <div className="mt-5">
-      {loading ? (
-        <CircularLoading />
-      ) : players && players.length > 0 ? (
-        <div className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid gap-6">
-          {players.map((player) => {
+      {playersStore.length > 0 ? (
+        <div className="grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid gap-4 w-full">
+          {playersStore.map((player) => {
             return (
               <div
                 className="relative overflow-hidden rounded-md"
                 key={player.id}
               >
-                <img
-                  src={player.role.image_link}
-                  alt=""
-                  width={60}
-                  height={60}
-                  className={`absolute right-2 bottom-3 ${
-                    player.role_state.id === 2 && "filter grayscale"
-                  }`}
-                />
-                <div className="bg-zinc-950 opacity-80 bg-opacity-90 backdrop-filter backdrop-blur-lg p-4 relative h-28 ">
+                <div className="bg-zinc-950 p-4 relative h-32">
                   <div className="flex flex-row justify-between">
                     <p className="text-sm text-zinc-300 uppercase">
                       {player.name}
@@ -54,10 +53,11 @@ const DisplayTeams = ({ teamID, teamName }) => {
                       {player.role.name}
                     </p>
                   </div>
-                  <div className="pt-7 flex gap-2">
-                    <ModalUI
+                  <div className="pt-11 flex gap-2">
+                    <Modal
                       btn="Edit"
-                      classes="bg-teal-700 px-4 py-2 leading-none text-[11px] uppercase rounded-sm hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/20 transition ease-in-out duration-300 cursor-pointer"
+                      icon={""}
+                      classes="bg-teal-700 px-4 py-2 leading-none text-[12px] rounded-sm hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/20 transition ease-in-out duration-300 cursor-pointer"
                       form={
                         <EditPlayer
                           playerID={player.id}
@@ -66,13 +66,19 @@ const DisplayTeams = ({ teamID, teamName }) => {
                           playerRoleState={player.role_state.id}
                           teamID={teamID}
                           teamName={teamName}
+                          closeModal={closeModal}
+                          setCloseModal={setCloseModal}
                         />
                       }
                       title={`Edit ${player.name}`}
+                      closeModal={closeModal}
+                      setCloseModal={setCloseModal}
                     />
-                    <ModalUI
+
+                    <Modal
                       btn="Remove"
-                      classes="bg-teal-700 px-4 py-2 leading-none text-[11px] uppercase rounded-sm hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/20 transition ease-in-out duration-300 cursor-pointer"
+                      icon={""}
+                      classes="bg-teal-700 px-4 py-2 leading-none text-[12px] rounded-sm hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/20 transition ease-in-out duration-300 cursor-pointer"
                       form={
                         <RemovePlayer
                           playerID={player.id}
@@ -81,9 +87,23 @@ const DisplayTeams = ({ teamID, teamName }) => {
                           playerRoleState={player.role_state.id}
                           teamID={teamID}
                           teamName={player.team.name}
+                          closeModal={closeModal}
+                          setCloseModal={setCloseModal}
                         />
                       }
                       title={`Remove ${player.name}`}
+                      closeModal={closeModal}
+                      setCloseModal={setCloseModal}
+                    />
+
+                    <img
+                      src={player.role.image_link}
+                      alt=""
+                      width={40}
+                      height={40}
+                      className={`absolute right-2 bottom-3 ${
+                        player.role_state.id === 2 && "filter grayscale"
+                      }`}
                     />
                   </div>
                 </div>
@@ -93,7 +113,9 @@ const DisplayTeams = ({ teamID, teamName }) => {
         </div>
       ) : (
         <div className="bg-zinc-950 p-5 rounded-md">
-          <p className="text-md text-zinc-400">No players have been created.</p>
+          <p className="text-md text-zinc-400">
+            No players have been created yet.
+          </p>
         </div>
       )}
     </div>

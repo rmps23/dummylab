@@ -1,28 +1,33 @@
 import { supabase } from "@supabase";
+import { useQuery } from "react-query";
 
-export const FetchPlayers = async (teamID) => {
-  try {
-    const { data: teamData, error: teamError } = await supabase
-      .from("player")
-      .select(
-        " * , role (id, name, image_link) , role_state(id, name) , team(name)"
-      )
-      .eq("team_id", teamID);
+export const FetchPlayers = (teamID) => {
+  const queryKey = ["fetchPlayers", teamID];
+  const {
+    data: players,
+    isLoading: playersLoading,
+    error: playersError,
+  } = useQuery(queryKey, {
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("player")
+        .select(
+          " * , role (id, name, image_link) , role_state(id, name) , team(name)"
+        )
+        .eq("team_id", teamID);
 
-    if (teamError) {
-      throw teamError;
-    }
+      data.sort(function (a, b) {
+        return a.role.id - b.role.id;
+      });
 
-    teamData.sort(function (a, b) {
-      return a.role.id - b.role.id;
-    });
+      data.sort(function (a, b) {
+        return a.role_state.id - b.role_state.id;
+      });
 
-    teamData.sort(function (a, b) {
-      return a.role_state.id - b.role_state.id;
-    });
+      return data;
+    },
+    refetchOnWindowFocus: false,
+  });
 
-    return teamData;
-  } catch (error) {
-    console.error("Error fetching data:", error.message);
-  }
+  return { players, playersLoading, playersError };
 };

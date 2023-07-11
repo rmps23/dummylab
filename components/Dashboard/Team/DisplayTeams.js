@@ -20,8 +20,10 @@ const DisplayTeams = () => {
 
   if (userTeamsLoading)
     return (
-      <div className="flex pt-4 pb-3 items-center justify-center bg-zinc-950 rounded-md">
-        <CircularLoading />
+      <div className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid gap-6">
+        <div className="bg-zinc-950/50 p-5 relative h-32 hover:bg-opacity-60 rounded-md flex items-center justify-center">
+          <CircularLoading size={40} color={"text-zinc-800"} />
+        </div>
       </div>
     );
 

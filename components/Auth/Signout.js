@@ -39,7 +39,7 @@ const Signout = ({ hover }) => {
         {loading ? (
           <div className="bg-zinc-900 rounded-md flex h-10 items-center justify-center transition-all">
             <span className="text-2xl transition-all">
-              <CircularLoading menu={true} />
+              <CircularLoading size={18} color={"text-red-500"} />
             </span>
           </div>
         ) : (
