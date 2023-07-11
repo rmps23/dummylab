@@ -1,17 +1,19 @@
 import { supabase } from "@supabase";
+import { useQuery } from "react-query";
 
-export const FetchRoleState = async () => {
-  try {
-    const { data: roleData, error: roleError } = await supabase
-      .from("role_state")
-      .select("*");
+export const FetchRoleState = () => {
+  const queryKey = ["fetchRoleState"];
+  const {
+    data: roleState,
+    isLoading: roleStateLoading,
+    error: roleStateError,
+  } = useQuery(queryKey, {
+    queryFn: async () => {
+      const { data, error } = await supabase.from("role_state").select("*");
+      return data;
+    },
+    refetchOnWindowFocus: false,
+  });
 
-    if (roleError) {
-      throw roleError;
-    }
-
-    return roleData;
-  } catch (error) {
-    console.error("Error fetching data:", error.message);
-  }
+  return { roleState, roleStateLoading, roleStateError };
 };

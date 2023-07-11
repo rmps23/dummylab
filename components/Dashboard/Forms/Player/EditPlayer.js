@@ -1,45 +1,54 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { supabase } from "../../../../supabase";
 import { FetchRoles } from "@components/Functions/FetchRoles";
 import { FetchRoleState } from "@components/Functions/FetchRoleState";
 import Button from "@components/UI/Button";
 import CircularLoading from "@components/UI/CircularLoading";
+import { useMutation } from "react-query";
+import usePlayerStore from "@components/Store/playerStore";
 
 const EditPlayer = ({
   playerID,
   playerName,
   playerRole,
   playerRoleState,
-  teamID,
-  teamName,
+  setCloseModal,
+  closeModal,
 }) => {
-  const [roles, setRoles] = useState([]);
-  const [roleState, setRoleState] = useState([]);
+  let editPlayerStore = usePlayerStore((state) => state.editPlayer);
+
   const nameRef = useRef(null);
   const roleRef = useRef(null);
   const stateRef = useRef(null);
 
   const [complete, setComplete] = useState(false);
-  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    FetchRoles()
-      .then((value) => {
-        setRoles(value);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  const { roles, rolesLoading, rolesError } = FetchRoles();
+  const { roleState, roleStateLoading, roleStateError } = FetchRoleState();
 
-    FetchRoleState()
-      .then((value) => {
-        setRoleState(value);
+  const editPlayer = useMutation((values) => {
+    const { name, role, role_state, playerID } = values;
+    return supabase
+      .from("player")
+      .update({
+        name: name,
+        role: role,
+        role_state: role_state,
       })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+      .eq("id", playerID)
+      .select(
+        " * , role (id, name, image_link) , role_state(id, name) , team(name)"
+      );
+  });
+
+  if (rolesLoading || roleStateLoading)
+    return (
+      <h1>{JSON.stringify(rolesError) + JSON.stringify(roleStateError)}</h1>
+    );
+
+  if (rolesLoading || roleStateLoading)
+    return <CircularLoading size={10} color={"text-zinc-600"} />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,40 +56,22 @@ const EditPlayer = ({
     const role = roleRef.current.value;
     const roleState = stateRef.current.value;
 
-    setLoading(true);
+    const { data: updatedPlayer } = await editPlayer.mutateAsync({
+      name: name,
+      role: role,
+      role_state: roleState,
+      playerID: playerID,
+    });
 
-    try {
-      const { error } = await supabase
-        .from("player")
-        .update({
-          name: name,
-          role: role,
-          role_state: roleState,
-        })
-        .eq("id", playerID);
+    editPlayerStore(playerID, updatedPlayer[0]);
 
-      if (error) {
-        throw error;
-      }
-    } catch (error) {
-      console.error("Error: " + error);
-    } finally {
-      setComplete(true);
-      setLoading(false);
-      setTimeout(() => {
-        window.location.href =
-          `/dashboard/team/players/` + teamName + "/" + teamID;
-      }, 1000);
-    }
+    setComplete(true);
+    setCloseModal(true);
   };
 
   return (
     <>
-      {loading ? (
-        <div className="w-full text-center">
-          <CircularLoading />
-        </div>
-      ) : complete ? (
+      {complete ? (
         <div className="text-center">
           <p className="text-teal-500">Player edited with success!</p>
           <p className="my-4 text-zinc-200">Redirecting...</p>
@@ -133,7 +124,7 @@ const EditPlayer = ({
                 required
               >
                 {roleState.length > 0 &&
-                  roleState.map((roleState) => {
+                  roleState.map((roleState, index) => {
                     return (
                       <option
                         key={roleState.id}

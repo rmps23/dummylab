@@ -3,11 +3,12 @@ import { FetchSession } from "@components/Functions/FetchSession";
 import { useQuery } from "react-query";
 
 export const FetchUserTeams = () => {
+  const queryKey = ["fetchUserTeams"];
   const {
     data: userTeams,
     isLoading: userTeamsLoading,
     error: userTeamsError,
-  } = useQuery({
+  } = useQuery(queryKey, {
     queryFn: async () => {
       const userID = await FetchSession();
       const { data, error } = await supabase

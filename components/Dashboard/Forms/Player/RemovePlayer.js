@@ -2,43 +2,37 @@ import React, { useState } from "react";
 import { supabase } from "../../../../supabase";
 import Button from "@components/UI/Button";
 import CircularLoading from "@components/UI/CircularLoading";
+import { useMutation } from "react-query";
+import usePlayerStore from "@components/Store/playerStore";
 
-const RemovePlayer = ({ playerName, playerID, teamName, teamID }) => {
+const RemovePlayer = ({
+  playerName,
+  playerID,
+  teamName,
+  teamID,
+  setCloseModal,
+}) => {
+  let removePlayerStore = usePlayerStore((state) => state.removePlayer);
+
   const [complete, setComplete] = useState(false);
-  const [loading, setLoading] = useState(false);
+
+  const removePlayer = useMutation((playerID) => {
+    return supabase.from("player").delete().eq("id", playerID);
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
 
-    try {
-      const { error } = await supabase
-        .from("player")
-        .delete()
-        .eq("id", playerID);
+    const { data } = await removePlayer.mutateAsync(playerID);
 
-      if (error) {
-        throw error;
-      }
-    } catch (error) {
-      console.error("Error: " + error);
-    } finally {
-      setComplete(true);
-      setLoading(false);
-      setTimeout(() => {
-        window.location.href =
-          `/dashboard/team/players/` + teamName + "/" + teamID;
-      }, 1000);
-    }
+    removePlayerStore(playerID);
+    setComplete(true);
+    setCloseModal(true);
   };
 
   return (
     <>
-      {loading ? (
-        <div className="w-full text-center">
-          <CircularLoading />
-        </div>
-      ) : complete ? (
+      {complete ? (
         <div className="text-center">
           <p className="text-teal-500">Player removed with success!</p>
           <p className="my-4 text-zinc-200">Redirecting...</p>
@@ -48,7 +42,7 @@ const RemovePlayer = ({ playerName, playerID, teamName, teamID }) => {
         </div>
       ) : (
         <div>
-          <p className="text-zinc-200">
+          <p className="text-zinc-200 p-4 rounded-md bg-zinc-900">
             Do you confirm to remove{" "}
             <span className="text-teal-500">{playerName} </span> from{" "}
             <span className="text-teal-500">{teamName} </span>?
