@@ -12,8 +12,8 @@ export default function Players() {
 
   return (
     <>
-      <div className="bg-zinc-900 h-auto pt-16">
-        <div className="max-w-7xl mx-auto p-3">
+      <div className="bg-zinc-900 h-auto">
+        <div className="max-w-7xl mx-auto">
           {isLoading ? (
             <CircularLoading />
           ) : (

@@ -88,7 +88,7 @@ const EditPlayer = ({
                 type="text"
                 defaultValue={playerName}
                 ref={nameRef}
-                className="bg-zinc-950 border-b-2 border-teal-500/20 outline-none h-10 px-2 text-sm focus:border-teal-500 transition ease-in-out duration-200 text-zinc-200 rounded-md"
+                className="bg-zinc-900 border-b-2 border-teal-500/20 outline-none p-4 text-md focus:border-teal-400 transition ease-in-out duration-200 text-zinc-200 rounded-md"
                 placeholder="Insert team name..."
                 required
               />
@@ -96,7 +96,7 @@ const EditPlayer = ({
             <div className="flex-col flex">
               <label className="text-zinc-500 text-sm mb-1">Role</label>
               <select
-                className="bg-zinc-950 border-b-2 border-teal-500/20 outline-none h-10 px-2 text-sm focus:border-teal-500 transition ease-in-out duration-200 text-zinc-200 rounded-md cursor-pointer"
+                className="bg-zinc-900 border-b-2 border-teal-500/20 outline-none p-4 text-md focus:border-teal-400 transition ease-in-out duration-200 text-zinc-200 rounded-md"
                 placeholder="Player role..."
                 ref={roleRef}
                 required
@@ -118,7 +118,7 @@ const EditPlayer = ({
             <div className="flex-col flex">
               <label className="text-zinc-500 text-sm mb-1">Main/Sub</label>
               <select
-                className="bg-zinc-950 border-b-2 border-teal-500/20 outline-none h-10 px-2 text-sm focus:border-teal-500 transition ease-in-out duration-200 text-zinc-200 rounded-md cursor-pointer"
+                className="bg-zinc-900 border-b-2 border-teal-500/20 outline-none p-4 text-md focus:border-teal-400 transition ease-in-out duration-200 text-zinc-200 rounded-md"
                 placeholder="Main/Sub"
                 ref={stateRef}
                 required

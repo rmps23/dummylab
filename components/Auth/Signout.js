@@ -48,7 +48,7 @@ const Signout = ({ hover }) => {
               <BiLogOut />
             </span>
             <span
-              className={`opacity-0 transition-all ml-2 text-md group-hover:text-zinc-300 ${
+              className={`opacity-0 transition-all pt-[1px] ml-2 text-md group-hover:text-zinc-300 ${
                 hover === true && "opacity-100 pl-2 group-hover:pl-3"
               }`}
             >

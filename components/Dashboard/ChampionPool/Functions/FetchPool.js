@@ -1,18 +1,23 @@
 import { supabase } from "@supabase";
+import { useQuery } from "react-query";
 
-export const FetchPool = async (playerID) => {
-  try {
-    const { data: poolData, error: poolError } = await supabase
-      .from("pool")
-      .select("*, champion(id, name, image)")
-      .eq("player_id", playerID);
+export const FetchPool = (playerID) => {
+  const queryKey = ["fetchPool", playerID];
+  const {
+    data: pool,
+    isLoading: poolLoading,
+    error: poolError,
+  } = useQuery(queryKey, {
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("pool")
+        .select("*, champion(id, name, image)")
+        .eq("player_id", playerID);
 
-    if (poolError) {
-      throw poolError;
-    }
+      return data;
+    },
+    refetchOnWindowFocus: false,
+  });
 
-    return poolData;
-  } catch (error) {
-    console.error("Error fetching data:", error.message);
-  }
+  return { pool, poolLoading, poolError };
 };
