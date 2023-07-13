@@ -18,6 +18,7 @@ const style = {
   backdropFilter: "blur(10px)",
   padding: "4px",
   paddingTop: "10px",
+  overflowY: "scroll",
 };
 
 export default function ModalUI({
@@ -66,7 +67,7 @@ export default function ModalUI({
       >
         <Fade in={open}>
           <Box sx={style} className="egClass">
-            <div className="max-w-[1000px] mx-auto pt-48 px-5 relative">
+            <div className="max-w-[1000px] mx-auto pt-36 px-5 relative">
               <p className="text-2xl text-teal-500 text-center absolute left-5 top-14 uppercase">
                 {title}
               </p>

@@ -1,18 +1,23 @@
 import { supabase } from "@supabase";
+import { useQuery } from "react-query";
 
-export const FetchProfilePlayers = async (teamID) => {
-  try {
-    const { data, error } = await supabase
-      .from("player")
-      .select("*")
-      .eq("team_id", teamID);
+export const FetchProfilePlayers = (teamID) => {
+  const queryKey = ["fetchPlayersLength", teamID];
+  const {
+    data: playersLength,
+    isLoading: playersLoadingLength,
+    error: playersErrorLength,
+  } = useQuery(queryKey, {
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("player")
+        .select("count")
+        .eq("team_id", teamID);
 
-    if (error) {
-      throw error;
-    }
+      return data[0].count;
+    },
+    refetchOnWindowFocus: false,
+  });
 
-    return data.length;
-  } catch (error) {
-    console.error("Error fetching data:", error.message);
-  }
+  return { playersLength, playersLoadingLength, playersErrorLength };
 };

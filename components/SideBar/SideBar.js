@@ -37,7 +37,7 @@ const SideBar = () => {
   return (
     <>
       <div
-        className={`fixed z-50 top-0 left-0 bottom-0 w-20 transition-all ease-in-out duration-200 bg-zinc-950 p-2 pb-5 pt-10 flex flex-col justify-between ${
+        className={`fixed z-50 top-0 left-0 bottom-0 w-20 transition-all ease-in-out duration-200 bg-zinc-950 p-2 pb-5 pt-12 flex flex-col justify-between ${
           hover === true && "w-64"
         }`}
         onMouseEnter={openHover}
@@ -51,6 +51,7 @@ const SideBar = () => {
                 alt=""
                 width={25}
                 height={25}
+                priority="true"
               />
             </Link>
             <span
@@ -65,6 +66,7 @@ const SideBar = () => {
                   width={70}
                   height={0}
                   className="mt-[2px]"
+                  priority="true"
                 />
               </Link>
             </span>
