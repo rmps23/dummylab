@@ -1,12 +1,14 @@
 import { supabase } from "@supabase";
 import { useQuery } from "react-query";
+import { useEffect } from "react";
 
-export const FetchPool = (playerID) => {
+export const FetchPool = (playerID, updatePool) => {
   const queryKey = ["fetchPool", playerID];
   const {
     data: pool,
     isLoading: poolLoading,
     error: poolError,
+    refetch: refetchPool,
   } = useQuery(queryKey, {
     queryFn: async () => {
       const { data, error } = await supabase
@@ -18,6 +20,12 @@ export const FetchPool = (playerID) => {
     },
     refetchOnWindowFocus: false,
   });
+
+  useEffect(() => {
+    if (updatePool) {
+      refetchPool();
+    }
+  }, [updatePool, refetchPool]);
 
   return { pool, poolLoading, poolError };
 };

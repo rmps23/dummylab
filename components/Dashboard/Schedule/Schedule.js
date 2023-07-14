@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useParams } from "next/navigation";
 
 const Schedule = () => {
+  const [closeModal, setCloseModal] = useState(false);
   const [monthNum, setMonthNum] = useState(moment().month() + 1);
   const [yearNum, setYearNum] = useState(moment().year());
 
@@ -37,6 +38,8 @@ const Schedule = () => {
         prevMonth={prevMonth}
         teamID={teamID}
         teamName={teamName}
+        closeModal={closeModal}
+        setCloseModal={setCloseModal}
       />
     </div>
   );

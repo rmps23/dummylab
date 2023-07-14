@@ -5,6 +5,7 @@ import CircularLoading from "@components/UI/CircularLoading";
 import { BsChevronRight } from "react-icons/bs";
 import { BsChevronLeft } from "react-icons/bs";
 import ModalUI from "@components/UI/ModalUI";
+import Modal from "@components/UI/Modal";
 import AddEvent from "../Forms/Schedule/AddEvent";
 import { FetchEvents } from "./Functions/FetchEvents";
 import OpenEvent from "./OpenEvent";
@@ -16,6 +17,8 @@ const Calendar = ({
   nextMonth,
   teamID,
   teamName,
+  closeModal,
+  setCloseModal,
 }) => {
   const [monthName, setMonthName] = useState();
   const [daysArray, setDaysArray] = useState([]);
@@ -193,7 +196,7 @@ const Calendar = ({
                           {today == day.fill && " Today"}
                         </span>
                       </p>
-                      <ModalUI
+                      {/* <ModalUI
                         btn="+"
                         classes={`top-7 left-1 right-1 absolute rounded-md bg-zinc-900 text-md cursor-pointer font-light text-center hover:bg-teal-600 transition ease-in-out duration-300 ${
                           today == day.fill
@@ -209,6 +212,29 @@ const Calendar = ({
                           />
                         }
                         title="Add new event"
+                      /> */}
+
+                      <Modal
+                        btn="+"
+                        icon={""}
+                        classes={`top-7 left-1 right-1 absolute rounded-md bg-zinc-900 text-md cursor-pointer font-light text-center hover:bg-teal-600 transition ease-in-out duration-300 flex items-center justify-center ${
+                          today == day.fill
+                            ? "bg-zinc-900 hover:bg-zinc-950"
+                            : "bg-zinc-900"
+                        }`}
+                        form={
+                          <AddEvent
+                            teamID={teamID}
+                            day={day.fill}
+                            teamId={teamID}
+                            teamName={teamName}
+                            closeModal={closeModal}
+                            setCloseModal={setCloseModal}
+                          />
+                        }
+                        title={`Add new event`}
+                        closeModal={closeModal}
+                        setCloseModal={setCloseModal}
                       />
                       <div className="mt-14">
                         {events.map((event) => {
