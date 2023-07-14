@@ -7,7 +7,7 @@ import DisplayPool from "./DisplayPool";
 const CheckPool = ({ playerID, updatePool }) => {
   const [champions, setChampions] = useState();
 
-  const { pool, poolLoading, poolError } = FetchPool(playerID);
+  const { pool, poolLoading, poolError } = FetchPool(playerID, updatePool);
 
   useEffect(() => {
     if (pool) {

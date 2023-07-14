@@ -5,8 +5,15 @@ import { FetchPlayers } from "@components/Dashboard/Players/Functions/FetchPlaye
 import Button from "@components/UI/Button";
 import CircularLoading from "@components/UI/CircularLoading";
 
-const AddEvent = ({ teamID, day, teamId, teamName }) => {
-  const [players, setPlayers] = useState();
+const AddEvent = ({
+  teamID,
+  day,
+  teamId,
+  teamName,
+  closeModal,
+  setCloseModal,
+}) => {
+  const [playersA, setPlayers] = useState();
   const [eventPlayers, setEventPlayers] = useState([]);
   const selectRef = useRef(null);
 
@@ -14,22 +21,19 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
   const eventTime = useRef(null);
 
   const [complete, setComplete] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const moment = require("moment");
   const date = moment(day);
   const textDate = date.format("MMMM D, YYYY");
   const textDateSupa = date.format("YYYY-M-D");
 
+  const { players, playersLoading, playersError } = FetchPlayers(teamID);
+
   useEffect(() => {
-    FetchPlayers(teamID)
-      .then((value) => {
-        setPlayers(value);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+    if (players) {
+      setPlayers(players);
+    }
+  }, [players]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +42,7 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
     const date = textDateSupa;
     const time = eventTime.current.value;
 
-    setLoading(true);
+    // setLoading(true);
 
     try {
       const { data: dataEvent, error: errorEvent } = await supabase
@@ -73,7 +77,6 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
       console.error("Error: " + error);
     } finally {
       setComplete(true);
-      setLoading(false);
       setTimeout(() => {
         window.location.href =
           `/dashboard/team/schedule/` + teamName + "/" + teamId;
@@ -83,7 +86,7 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
 
   const addPlayer = (player) => {
     setEventPlayers((prevEventPlayers) => [...prevEventPlayers, player]);
-    const playersUpdate = players.filter((obj) => obj.id !== player.id);
+    const playersUpdate = playersA.filter((obj) => obj.id !== player.id);
     setPlayers(playersUpdate);
     selectRef.current.options[0].selected = true;
     selectRef.current.focus();
@@ -93,7 +96,7 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
     const eventPlayersUpdate = eventPlayers.filter(
       (obj) => obj.id !== player.id
     );
-    const playersUpdate = [...players, player];
+    const playersUpdate = [...playersA, player];
     playersUpdate.sort(function (a, b) {
       return a.role.id - b.role.id;
     });
@@ -107,7 +110,7 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
 
   return (
     <>
-      {loading ? (
+      {playersLoading ? (
         <div className="w-full text-center">
           <CircularLoading />
         </div>
@@ -172,7 +175,7 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
               </div>
             )}
 
-            {players && players.length > 0 ? (
+            {playersA && playersA.length > 0 ? (
               <div>
                 <p className="text-xs uppercase text-teal-600 mb-1">
                   Assign player to the event
@@ -181,7 +184,7 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
                   ref={selectRef}
                   className="w-full bg-zinc-950 p-2 py-3 rounded-md relative text-sm text-zinc-300"
                   onChange={(e) => {
-                    const selectedPlayer = players.find(
+                    const selectedPlayer = playersA.find(
                       (player) => player.id === e.target.value
                     );
                     addPlayer(selectedPlayer);
@@ -189,7 +192,7 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
                 >
                   <option value="">Select a player...</option>
 
-                  {players.map((player, index) => {
+                  {playersA.map((player, index) => {
                     return (
                       <>
                         <option key={index} value={player.id}>
