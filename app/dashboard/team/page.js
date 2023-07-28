@@ -11,7 +11,7 @@ const Team = () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto">
+      <div className="sm:px-4">
         <Modal
           btn="Create Team"
           icon={<FaPlus />}

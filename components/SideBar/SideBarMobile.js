@@ -62,12 +62,12 @@ const SideBarMobile = () => {
           </div>
           {teamID ? (
             <div className="flex-col flex gap-1">
-              <SideBarLink
+              {/* <SideBarLink
                 icon={<FaHome />}
                 hover={hover}
                 link="/dashboard/team"
                 text={"Home"}
-              />
+              /> */}
               <SideBarLink
                 icon={<FaShieldAlt />}
                 hover={hover}

@@ -43,7 +43,7 @@ const Signout = ({ hover }) => {
             </span>
           </div>
         ) : (
-          <div className="bg-teal-900/80 hover:bg-teal-900/50 rounded-md flex py-2 h-10 transition-all group">
+          <div className="bg-teal-700 hover:bg-teal-700/80 rounded-md flex py-2 h-10 transition-all group">
             <span className="pl-4 text-2xl group-hover:text-zinc-300 transition-all">
               <BiLogOut />
             </span>

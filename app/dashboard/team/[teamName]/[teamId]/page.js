@@ -2,7 +2,10 @@
 
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+
+import ProfileBanner from "@components/Dashboard/Profile/ProfileBanner";
 import ProfilePlayers from "@components/Dashboard/Profile/ProfilePlayers";
+import ShareLink from "@components/Dashboard/Profile/ShareLink";
 
 export default function Profile() {
   const params = useParams();
@@ -16,12 +19,10 @@ export default function Profile() {
 
   return (
     <>
-      <div className="bg-zinc-900 h-auto">
-        <div className="max-w-7xl mx-auto">
-          <div className="rounded-md grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid">
-            <ProfilePlayers />
-          </div>
-        </div>
+      <div>
+        <ProfileBanner />
+        {/* <ProfilePlayers /> */}
+        {/* <ShareLink /> */}
       </div>
     </>
   );

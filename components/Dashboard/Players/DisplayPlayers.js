@@ -6,6 +6,7 @@ import RemovePlayer from "../Forms/Player/RemovePlayer";
 import usePlayerStore from "@components/Store/playerStore";
 import Modal from "@components/UI/Modal";
 import CircularLoading from "@components/UI/CircularLoading";
+import copy from "copy-to-clipboard";
 
 const DisplayTeams = ({ teamID, teamName, closeModal, setCloseModal }) => {
   const { players, playersLoading, playersError } = FetchPlayers(teamID);
@@ -17,6 +18,11 @@ const DisplayTeams = ({ teamID, teamName, closeModal, setCloseModal }) => {
       setData(players);
     }
   }, [players, setData]);
+
+  const handleCopyToClipboard = (key, name) => {
+    copy(key);
+    alert(name + " key copied to clipboard!");
+  };
 
   if (playersError) return <h1>{JSON.stringify(playersError)}</h1>;
 
@@ -95,6 +101,20 @@ const DisplayTeams = ({ teamID, teamName, closeModal, setCloseModal }) => {
                       closeModal={closeModal}
                       setCloseModal={setCloseModal}
                     />
+
+                    <div
+                      className="bg-teal-700 px-4 py-2 leading-none text-[12px] rounded-sm hover:bg-teal-600 hover:shadow-lg hover:shadow-teal-500/20 transition ease-in-out duration-300 cursor-pointer group"
+                      onClick={() =>
+                        handleCopyToClipboard(player.share_pw, player.name)
+                      }
+                    >
+                      <span className="group-hover:opacity-0 group-hover:hidden">
+                        Share Key
+                      </span>
+                      <span className="group-hover:opacity-100 opacity-0 hidden group-hover:flex">
+                        {player.share_pw}
+                      </span>
+                    </div>
 
                     <img
                       src={player.role.image_link}
