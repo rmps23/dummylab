@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
         <div className="flex sm:hidden pt-4">
           <SideBarMobile />
         </div>
-        <div className="sm:pl-24 sm:pr-4 p-4 sm:p-10">{children}</div>
+        <div className="sm:pl-[75px]">{children}</div>
       </QueryClientProvider>
     </>
   );

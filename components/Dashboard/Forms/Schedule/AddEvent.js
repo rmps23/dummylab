@@ -42,12 +42,11 @@ const AddEvent = ({
     const date = textDateSupa;
     const time = eventTime.current.value;
 
-    // setLoading(true);
-
     try {
       const { data: dataEvent, error: errorEvent } = await supabase
         .from("event")
         .insert({
+          team_id: teamID,
           name: name,
           date: date,
           time: time,
@@ -127,7 +126,7 @@ const AddEvent = ({
           <div className="flex flex-col gap-5">
             <input
               type="text"
-              className="bg-zinc-950 border-b-2 border-teal-500/20 outline-none h-10 px-2 text-sm focus:border-teal-500 transition ease-in-out duration-200 text-zinc-200 rounded-md"
+              className="bg-zinc-900 border-b-2 border-teal-500/20 outline-none p-4 text-md focus:border-teal-400 transition ease-in-out duration-200 text-zinc-200 rounded-md"
               placeholder="Insert event name..."
               ref={eventName}
               required
@@ -136,7 +135,7 @@ const AddEvent = ({
             <div className="flex relative items-center gap-2">
               <input
                 type="time"
-                className="bg-zinc-950 border-b-2 border-teal-500/20 outline-none h-10 px-4 text-sm focus:border-teal-500 transition ease-in-out duration-200 text-zinc-300 rounded-md"
+                className="bg-zinc-900 border-b-2 border-teal-500/20 outline-none p-4 text-md focus:border-teal-400 transition ease-in-out duration-200 text-zinc-200 rounded-md tracking-widest"
                 ref={eventTime}
                 required
               />
@@ -146,19 +145,19 @@ const AddEvent = ({
             </div>
 
             {eventPlayers && eventPlayers.length > 0 ? (
-              <div className="grid grid-cols-4 gap-1 gap-y-2 bg-zinc-950 rounded-md p-2">
+              <div className="grid grid-cols-4 gap-1 gap-y-2 bg-zinc-900 rounded-md px-4 py-[18px]">
                 {eventPlayers.map((player) => {
                   return (
                     <div
                       key={player.id}
-                      className="bg-zinc-900 rounded-md items-center flex p-1 relative group"
+                      className="bg-zinc-950 rounded-md items-center flex p-4 relative group"
                     >
                       <img src={player.role.image_link} width={18} />
-                      <span className="text-sm text-teal-500 ml-1">
+                      <span className="text-sm text-teal-500 ml-1 pt-[2px]">
                         {player.name}
                       </span>
                       <span
-                        className="absolute top-0 left-0 right-0 bottom-0 bg-teal-700 rounded-md text-center text-xs items-center flex opacity-0 group-hover:opacity-100 transition-opacity ease-in-out duration-300 cursor-pointer"
+                        className="absolute top-0 left-0 right-0 bottom-0 bg-teal-500 backdrop-blur-sm bg-opacity-40 rounded-md text-center text-xs items-center flex opacity-0 group-hover:opacity-100 transition-opacity ease-in-out duration-300 cursor-pointer"
                         onClick={() => removePlayer(player)}
                       >
                         <div className="mx-auto uppercase">&#10006;</div>
@@ -168,8 +167,8 @@ const AddEvent = ({
                 })}
               </div>
             ) : (
-              <div className="bg-zinc-950 h-11 rounded-md px-2 items-center flex">
-                <span className="text-zinc-600 text-sm">
+              <div className="bg-zinc-900 h-16 rounded-md px-4 items-center flex">
+                <span className="text-zinc-500 text-sm">
                   No players have been assigned...
                 </span>
               </div>
@@ -182,7 +181,7 @@ const AddEvent = ({
                 </p>
                 <select
                   ref={selectRef}
-                  className="w-full bg-zinc-950 p-2 py-3 rounded-md relative text-sm text-zinc-300"
+                  className="bg-zinc-900 border-b-2 border-teal-500/20 outline-none p-4 text-md focus:border-teal-400 transition ease-in-out duration-200 text-zinc-200 rounded-md w-full"
                   onChange={(e) => {
                     const selectedPlayer = playersA.find(
                       (player) => player.id === e.target.value

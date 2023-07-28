@@ -45,11 +45,16 @@ const AddPlayer = ({ teamID, setCloseModal }) => {
     const role = roleRef.current.value;
     const roleState = stateRef.current.value;
 
+    const min = 10000;
+    const max = 99999;
+    let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+
     const { data } = await insertPlayer.mutateAsync({
       name: name,
       role: role,
       role_state: roleState,
       team_id: teamID,
+      share_pw: randomNum,
     });
 
     addPlayer(data[0]);

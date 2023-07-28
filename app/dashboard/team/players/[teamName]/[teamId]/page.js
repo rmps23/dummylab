@@ -10,7 +10,7 @@ export default function Players() {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto relative">
+      <div className="sm:px-4 relative">
         {isLoading ? (
           <CircularLoading />
         ) : (

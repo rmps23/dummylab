@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ModalUI from "@components/UI/ModalUI";
 import Modal from "@components/UI/Modal";
 import { FaPlus } from "react-icons/fa";
 

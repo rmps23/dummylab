@@ -66,7 +66,7 @@ const OpenEvent = ({ event, teamName, teamId }) => {
       ) : (
         <>
           <div className="border-b border-zinc-800 mb-4">
-            <p className="bg-zinc-950 p-2 rounded-md mb-2">
+            <p className="bg-zinc-900 p-4  rounded-md mb-2">
               <span className="text-sm pr-2 font-light border-r border-zinc-700 text-teal-500">
                 Date
               </span>
@@ -74,7 +74,7 @@ const OpenEvent = ({ event, teamName, teamId }) => {
                 {event.date}
               </span>
             </p>
-            <p className="bg-zinc-950 p-2 rounded-md mb-4">
+            <p className="bg-zinc-900 p-4 rounded-md mb-4">
               <span className="text-sm pr-2 font-light border-r border-zinc-700 text-teal-500">
                 Time
               </span>
@@ -89,7 +89,7 @@ const OpenEvent = ({ event, teamName, teamId }) => {
               {players.map((player, index) => (
                 <p
                   key={player.player_id.id}
-                  className="bg-zinc-950 rounded-md p-2 flex items-center gap-2"
+                  className="bg-zinc-900 rounded-md p-4 flex items-center gap-2"
                 >
                   <img
                     src={player.player_id.role.image_link}
@@ -115,7 +115,7 @@ const OpenEvent = ({ event, teamName, teamId }) => {
           <div className="mt-4 text-right flex border-t border-zinc-800 pt-4">
             <input
               type="text"
-              className="bg-zinc-950 border-b-2 border-teal-500/20 outline-none h-10 px-2 text-sm focus:border-teal-500 transition ease-in-out duration-200 text-zinc-200 rounded-md"
+              className="bg-zinc-900 border-b-2 border-teal-500/20 outline-none p-4 text-md focus:border-teal-400 transition ease-in-out duration-200 text-zinc-200 rounded-md tracking-widest w-full"
               placeholder="Write 'delete' to enable it"
               onChange={handleDeleteInputChange}
             />

@@ -4,20 +4,22 @@ import { useQuery } from "react-query";
 export const FetchProfilePlayers = (teamID) => {
   const queryKey = ["fetchPlayersLength", teamID];
   const {
-    data: playersLength,
-    isLoading: playersLoadingLength,
-    error: playersErrorLength,
+    data: players,
+    isLoading: playersLoading,
+    error: playersError,
   } = useQuery(queryKey, {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("player")
-        .select("count")
+        .select(
+          " * , role (id, name, image_link) , role_state(id, name) , team(name)"
+        )
         .eq("team_id", teamID);
 
-      return data[0].count;
+      return data;
     },
     refetchOnWindowFocus: false,
   });
 
-  return { playersLength, playersLoadingLength, playersErrorLength };
+  return { players, playersLoading, playersError };
 };

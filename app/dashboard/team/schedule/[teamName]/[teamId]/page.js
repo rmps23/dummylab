@@ -12,16 +12,14 @@ export default function Players() {
 
   return (
     <>
-      <div className="bg-zinc-900 h-auto">
-        <div className="max-w-7xl mx-auto">
-          {isLoading ? (
-            <CircularLoading />
-          ) : (
-            <>
-              <Schedule teamID={teamID} />
-            </>
-          )}
-        </div>
+      <div className="sm:px-4 mx-auto">
+        {isLoading ? (
+          <CircularLoading />
+        ) : (
+          <>
+            <Schedule teamID={teamID} />
+          </>
+        )}
       </div>
     </>
   );

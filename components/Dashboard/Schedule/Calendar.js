@@ -4,7 +4,6 @@ import moment from "moment";
 import CircularLoading from "@components/UI/CircularLoading";
 import { BsChevronRight } from "react-icons/bs";
 import { BsChevronLeft } from "react-icons/bs";
-import ModalUI from "@components/UI/ModalUI";
 import Modal from "@components/UI/Modal";
 import AddEvent from "../Forms/Schedule/AddEvent";
 import { FetchEvents } from "./Functions/FetchEvents";
@@ -48,16 +47,29 @@ const Calendar = ({
     const daysArray = [];
 
     for (let index = 1; index <= totalDaysMonth; index++) {
+      const weekDayMaker = moment(
+        yearNum + "-" + monthNum + "-" + index,
+        "YYYY-MM-DD"
+      );
       daysArray.push({
         year: yearNum,
         month: monthNum,
         day: index,
         fill: yearNum + "-" + monthNum + "-" + index,
+        weekDay: weekDayMaker.format("dddd"),
         selected: true,
       });
     }
 
     for (let i = 0; i < firstDayWeekNum; i++) {
+      const weekDayMaker = moment(
+        (monthNum === 1 ? yearNum - 1 : yearNum) +
+          "-" +
+          (monthNum === 1 ? 12 : monthNum - 1) +
+          "-" +
+          totalDaysPrevMonth,
+        "YYYY-MM-DD"
+      );
       daysArray.unshift({
         year: monthNum === 1 ? yearNum - 1 : yearNum,
         month: monthNum === 1 ? 12 : monthNum - 1,
@@ -68,6 +80,7 @@ const Calendar = ({
           (monthNum === 1 ? 12 : monthNum - 1) +
           "-" +
           totalDaysPrevMonth,
+        weekDay: weekDayMaker.format("dddd"),
         selected: false,
       });
       totalDaysPrevMonth--;
@@ -80,6 +93,14 @@ const Calendar = ({
     let incrementedYear = false;
 
     for (let i = 1; i <= calcNextDays; i++) {
+      const weekDayMaker = moment(
+        (monthNum === 12 ? yearNum + 1 : yearNum) +
+          "-" +
+          (monthNum === 12 ? 1 : monthNum + 1) +
+          "-" +
+          i,
+        "YYYY-MM-DD"
+      );
       daysArray.push({
         year: monthNum === 12 ? yearNum + 1 : yearNum,
         month: monthNum === 12 ? 1 : monthNum + 1,
@@ -91,6 +112,7 @@ const Calendar = ({
           "-" +
           i,
         selected: false,
+        weekDay: weekDayMaker.format("dddd"),
       });
     }
 
@@ -108,6 +130,8 @@ const Calendar = ({
         console.error(error);
       });
   }, []);
+
+  console.log(daysArray);
 
   return (
     <>
@@ -139,7 +163,7 @@ const Calendar = ({
               </span>
             </div>
           </div>
-          <div className="grid grid-cols-7 gap-1 text-center text-[10px] uppercase text-zinc-400 font-light">
+          <div className="hidden lg:grid lg:grid-cols-7 gap-1 text-center text-[10px] uppercase text-zinc-400 font-light">
             <div className="bg-zinc-950 rounded-sm py-1">Sun</div>
             <div className="bg-zinc-950 rounded-sm py-1">Mon</div>
             <div className="bg-zinc-950 rounded-sm py-1">Tue</div>
@@ -148,7 +172,7 @@ const Calendar = ({
             <div className="bg-zinc-950 rounded-sm py-1">Fri</div>
             <div className="bg-zinc-950 rounded-sm py-1">Sat</div>
           </div>
-          <div className="grid grid-cols-7 gap-1 mt-1">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-1 mt-1">
             {daysArray &&
               daysArray.length > 0 &&
               daysArray.map((day, index) => {
@@ -161,6 +185,9 @@ const Calendar = ({
                       <p className="absolute text-xs text-zinc-600 top-2 left-2">
                         {day.day}
                       </p>
+                      <span className="lg:hidden text-[10px] absolute text-zinc-600 right-2 top-2">
+                        {day.weekDay}
+                      </span>
                       <div className="mt-6">
                         {events.map((event) => {
                           return (
@@ -192,28 +219,13 @@ const Calendar = ({
                         }`}
                       >
                         {day.day}
-                        <span className="text-[8px]">
+                        <span className="text-[10px]">
                           {today == day.fill && " Today"}
                         </span>
+                        <span className="lg:hidden text-[10px]">
+                          {day.weekDay}
+                        </span>
                       </p>
-                      {/* <ModalUI
-                        btn="+"
-                        classes={`top-7 left-1 right-1 absolute rounded-md bg-zinc-900 text-md cursor-pointer font-light text-center hover:bg-teal-600 transition ease-in-out duration-300 ${
-                          today == day.fill
-                            ? "bg-zinc-900 hover:bg-zinc-950"
-                            : "bg-zinc-900"
-                        }`}
-                        form={
-                          <AddEvent
-                            teamID={teamID}
-                            day={day.fill}
-                            teamId={teamID}
-                            teamName={teamName}
-                          />
-                        }
-                        title="Add new event"
-                      /> */}
-
                       <Modal
                         btn="+"
                         icon={""}
@@ -241,18 +253,25 @@ const Calendar = ({
                           return (
                             <div key={event.id}>
                               {event.date == day.fill && (
-                                <ModalUI
-                                  btn={event.name + " / " + event.time}
-                                  classes={`bg-teal-700 rounded-md text-zinc-300 py-1 px-2 cursor-pointer mb-2 text-sm text-center w-full flex hover:bg-teal-600 transition ease-in-out duration-200`}
-                                  form={
-                                    <OpenEvent
-                                      event={event}
-                                      teamId={teamID}
-                                      teamName={teamName}
-                                    />
-                                  }
-                                  title={event.name}
-                                />
+                                <>
+                                  <Modal
+                                    btn={event.name + " / " + event.time}
+                                    icon={""}
+                                    classes={`bg-teal-700 rounded-md text-zinc-300 py-2 px-2 cursor-pointer mb-2 text-sm text-center w-full flex hover:bg-teal-600 transition ease-in-out duration-200`}
+                                    form={
+                                      <OpenEvent
+                                        event={event}
+                                        teamId={teamID}
+                                        teamName={teamName}
+                                        closeModal={closeModal}
+                                        setCloseModal={setCloseModal}
+                                      />
+                                    }
+                                    title={event.name}
+                                    closeModal={closeModal}
+                                    setCloseModal={setCloseModal}
+                                  />
+                                </>
                               )}
                             </div>
                           );
