@@ -19,9 +19,11 @@ export default function Profile() {
 
   return (
     <>
-      <div>
+      <div className="p-8">
         <ProfileBanner />
-        {/* <ProfilePlayers /> */}
+        <div className="grid grid-cols-4 gap-6 mt-6">
+          <ProfilePlayers />
+        </div>
         {/* <ShareLink /> */}
       </div>
     </>

@@ -46,7 +46,7 @@ export default function ModalUI({
     <div>
       <div onClick={handleOpen} className={`${classes}`}>
         <div className="flex items-center">
-          <span className="bg-teal-500 py-[12px] px-2 rounded-r-sm opacity-0 group-hover:opacity-100 transition-all duration-300 absolute right-0 group-hover:-right-[30px] text-[14px] -z-10">
+          <span className="bg-teal-500 py-[12px] px-2 rounded-r-sm opacity-0 group-hover:opacity-100 transition-all duration-200 absolute right-0 group-hover:-right-[30px] text-[14px] -z-10">
             {icon}
           </span>
           <span>{btn}</span>

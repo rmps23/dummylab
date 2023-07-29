@@ -37,7 +37,7 @@ const SideBar = () => {
   return (
     <>
       <div
-        className={`fixed z-50 top-0 left-0 bottom-0 w-20 transition-all ease-in-out duration-200 bg-zinc-950 p-2 pb-5 pt-10 flex flex-col justify-between ${
+        className={`fixed z-50 top-0 left-0 bottom-0 w-20 transition-all ease-in-out duration-200 bg-zinc-950 p-2 pb-5 pt-10 flex flex-col justify-between border-r border-zinc-900 ${
           hover === true && "w-64"
         }`}
         onMouseEnter={openHover}

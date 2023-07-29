@@ -38,9 +38,9 @@ const DisplayTeams = () => {
           <a
             href={`/dashboard/team/${team.name.replace(/\s/g, "+")}/${team.id}`}
             key={team.id}
-            className="relative overflow-hidden rounded-md transition-all duration-300 ease-in-out hover:scale-105 group"
+            className="relative overflow-hidden rounded-md transition-all duration-200 ease-in-out group border border-zinc-950 hover:border-teal-600"
           >
-            <div className="bg-zinc-950 p-5 relative h-32 hover:bg-opacity-60">
+            <div className="bg-zinc-950 p-5 relative h-32 rounded-md items-center flex border border-zinc-800 ease-in-out">
               <p className="text-md text-teal-500 flex uppercase">
                 {team.name}
               </p>
@@ -52,10 +52,10 @@ const DisplayTeams = () => {
                 }}
                 width={100}
                 alt=""
-                className="absolute opacity-50 -right-5 top-3 transition-all duration-300 group-hover:-right-40 delay-100"
+                className="absolute opacity-50 -right-5 top-3 transition-all duration-200 group-hover:-right-40 delay-100"
               />
-              <span className="absolute -right-40 top-8 group-hover:right-3 transition-all duration-500 ">
-                <FaChevronRight className="text-6xl text-teal-600 animate-pulse" />
+              <span className="absolute -right-40 top-8 group-hover:right-3 transition-all duration-200 ">
+                <FaChevronRight className="text-6xl text-teal-600" />
               </span>
             </div>
           </a>

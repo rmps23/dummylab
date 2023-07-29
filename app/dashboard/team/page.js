@@ -11,11 +11,11 @@ const Team = () => {
 
   return (
     <>
-      <div className="sm:px-4">
+      <div className="p-8">
         <Modal
           btn="Create Team"
           icon={<FaPlus />}
-          classes="bg-teal-600 px-6 py-3 mb-6 leading-none text-[14px] uppercase transition-all cursor-pointer inline-block rounded-sm hover:bg-teal-600 duration-500 group relative hover:rounded-r-none"
+          classes="bg-teal-600 px-6 py-3 mb-6 leading-none text-[14px] uppercase transition-all cursor-pointer inline-block rounded-sm hover:bg-teal-600 group relative hover:rounded-r-none"
           form={<NewTeam setCloseModal={setCloseModal} />}
           title="Create New Team"
           closeModal={closeModal}
