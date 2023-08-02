@@ -7,7 +7,6 @@ import Modal from "@components/UI/Modal";
 
 const PlayerPoolBar = ({ teamID }) => {
   const [updatePool, setUpdatePool] = useState();
-  const [closeModal, setCloseModal] = useState(true);
 
   const { players, playersLoading, playersError } = FetchPlayers(teamID);
 
@@ -57,8 +56,6 @@ const PlayerPoolBar = ({ teamID }) => {
                         />
                       }
                       title={`Edit ${player.name} Champion Pool`}
-                      closeModal={closeModal}
-                      setCloseModal={setCloseModal}
                     />
                   </div>
                 </div>

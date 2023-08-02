@@ -13,8 +13,7 @@ const EditPlayer = ({
   playerName,
   playerRole,
   playerRoleState,
-  setCloseModal,
-  closeModal,
+  setOpen,
 }) => {
   let editPlayerStore = usePlayerStore((state) => state.editPlayer);
 
@@ -66,7 +65,7 @@ const EditPlayer = ({
     editPlayerStore(playerID, updatedPlayer[0]);
 
     setComplete(true);
-    setCloseModal(true);
+    setOpen(false);
   };
 
   return (

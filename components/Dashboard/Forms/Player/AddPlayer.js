@@ -9,7 +9,7 @@ import Button from "@components/UI/Button";
 import CircularLoading from "@components/UI/CircularLoading";
 import usePlayerStore from "@components/Store/playerStore";
 
-const AddPlayer = ({ teamID, setCloseModal }) => {
+const AddPlayer = ({ teamID, setOpen }) => {
   let addPlayer = usePlayerStore((state) => state.addPlayer);
 
   const nameRef = useRef(null);
@@ -59,7 +59,7 @@ const AddPlayer = ({ teamID, setCloseModal }) => {
 
     addPlayer(data[0]);
     setComplete(true);
-    setCloseModal(true);
+    setOpen(false);
   };
 
   return (
