@@ -37,7 +37,7 @@ const SideBar = () => {
   return (
     <>
       <div
-        className={`fixed z-50 top-0 left-0 bottom-0 w-20 transition-all ease-in-out duration-200 bg-zinc-950 p-2 pb-5 pt-10 flex flex-col justify-between border-r border-zinc-900 ${
+        className={`fixed z-50 top-0 left-0 bottom-0 w-20 transition-all ease-in-out duration-200 bg-zinc-950/80 backdrop-blur-xl p-2 pb-5 pt-10 flex flex-col justify-between border-r border-zinc-900 ${
           hover === true && "w-64"
         }`}
         onMouseEnter={openHover}
@@ -72,8 +72,14 @@ const SideBar = () => {
             </span>
           </div>
 
-          {teamID ? (
+          {teamID && (
             <div className="flex-col flex gap-1">
+              <SideBarLink
+                icon={<FaHome />}
+                hover={hover}
+                link="/dashboard/team"
+                text={"Home"}
+              />
               <SideBarLink
                 icon={<FaShieldAlt />}
                 hover={hover}
@@ -109,15 +115,6 @@ const SideBar = () => {
                   "+"
                 )}/${teamID}`}
                 text={"Schedule"}
-              />
-            </div>
-          ) : (
-            <div>
-              <SideBarLink
-                icon={<FaHome />}
-                hover={hover}
-                link="/dashboard/team"
-                text={"Home"}
               />
             </div>
           )}

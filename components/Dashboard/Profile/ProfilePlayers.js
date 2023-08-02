@@ -12,13 +12,26 @@ const ProfilePlayers = () => {
 
   if (playersLoading) {
     return (
-      <div className="bg-zinc-950 text-zinc-300 p-4 px-10 relative h-32 rounded-md items-center flex gap-2 justify-between">
-        <span className="text-3xl uppercase text-teal-500 font-light">
-          Players
-        </span>
-        <span className="text-4xl bg-teal-700 w-20 h-20 items-center justify-center flex rounded-full pt-2">
-          <CircularLoading color={"text-zinc-800"} />
-        </span>
+      <div className="h-full relative group">
+        <div className="relative rounded-md items-center flex gap-2 justify-between mb-2 bg-zinc-950 p-4 shadow-md shadow-zinc-950/30">
+          <span className="text-xl uppercase text-zinc-200 font-light">
+            Total Players
+          </span>
+          <span className="text-2xl bg-zinc-900 text-teal-500 w-12 h-12 items-center justify-center flex rounded-md">
+            <CircularLoading color={"text-teal-400"} size={18} />
+          </span>
+        </div>
+
+        <div>
+          <div className="rounded-md bg-zinc-950 p-4">
+            <span className="text-md uppercase text-zinc-200 font-light flex w-full">
+              Main Players
+            </span>
+            <div className="flex items-center justify-center pt-10">
+              <CircularLoading color={"text-zinc-500"} size={25} />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -27,10 +40,8 @@ const ProfilePlayers = () => {
 
   return (
     <div className="h-full relative group">
-      <div className="relative rounded-md items-center flex gap-2 justify-between mb-2 bg-zinc-950 p-4 shadow-md shadow-zinc-950/30">
-        <span className="text-xl uppercase text-teal-500 font-light">
-          Total Players
-        </span>
+      <div className="relative rounded-md items-center flex gap-2 justify-between mb-4 bg-zinc-950 p-4 shadow-md shadow-zinc-950/30">
+        <span className="text-xl text-zinc-300">Total Players</span>
         <span className="text-2xl bg-zinc-900 text-teal-500 w-12 h-12 items-center justify-center flex rounded-md">
           {players.length}
         </span>
@@ -38,34 +49,40 @@ const ProfilePlayers = () => {
 
       <div>
         <div className="rounded-md bg-zinc-950 p-4">
-          <span className="text-md uppercase text-teal-500 font-light flex">
+          <span className="text-md  text-zinc-300 font-light flex">
             Main Players
           </span>
-          {players.map(
-            (player) =>
-              player.role_state.id === 1 && (
-                <div
-                  className="uppercase text-teal-400 p-2 mt-2 text-sm flex items-center bg-zinc-900 rounded-md hover:bg-zinc-800 transition-all duration-200 justify-between"
-                  key={player.id}
-                >
-                  <div className="flex gap-2 items-center">
-                    <Image
-                      src={player.role.image_link}
-                      width={20}
-                      height={20}
-                      alt=""
-                    />
-                    <span className="pt-[2px] text-teal-500 text-[12px]">
-                      {player.name}
-                    </span>
-                  </div>
-                  <div>
-                    <span className="pt-[2px] text-zinc-400 float-right text-[12px]">
-                      {player.role.name}
-                    </span>
-                  </div>
-                </div>
-              )
+          {players.length > 0 ? (
+            <>
+              {players.map(
+                (player) =>
+                  player.role_state.id === 1 && (
+                    <div
+                      className="uppercase text-teal-400 p-2 mt-2 text-sm flex items-center bg-zinc-900 rounded-md hover:bg-zinc-800 transition-all duration-200 justify-between"
+                      key={player.id}
+                    >
+                      <div className="flex gap-2 items-center">
+                        <Image
+                          src={player.role.image_link}
+                          width={20}
+                          height={20}
+                          alt=""
+                        />
+                        <span className="pt-[2px] text-zinc-400 text-[12px]">
+                          {player.name}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="pt-[2px] text-zinc-400 float-right text-[12px]">
+                          {player.role.name}
+                        </span>
+                      </div>
+                    </div>
+                  )
+              )}
+            </>
+          ) : (
+            <>Nop</>
           )}
         </div>
       </div>

@@ -5,14 +5,7 @@ import { FetchPlayers } from "@components/Dashboard/Players/Functions/FetchPlaye
 import Button from "@components/UI/Button";
 import CircularLoading from "@components/UI/CircularLoading";
 
-const AddEvent = ({
-  teamID,
-  day,
-  teamId,
-  teamName,
-  closeModal,
-  setCloseModal,
-}) => {
+const AddEvent = ({ teamID, day, teamId, teamName }) => {
   const [playersA, setPlayers] = useState();
   const [eventPlayers, setEventPlayers] = useState([]);
   const selectRef = useRef(null);

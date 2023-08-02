@@ -2,8 +2,12 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const SideBarLink = ({ hover, icon, link, text }) => {
+const SideBarLink = ({ hover, icon, link, text, setHover }) => {
   const pathname = usePathname();
+
+  const toggleHover = () => {
+    setHover(!hover);
+  };
 
   return (
     <Link
@@ -11,6 +15,7 @@ const SideBarLink = ({ hover, icon, link, text }) => {
       className={`flex items-center py-2 group ${
         link === pathname ? "text-zinc-300" : "text-zinc-300/50"
       }`}
+      onClick={toggleHover}
     >
       <span className="pl-[22px] text-xl group-hover:text-zinc-300 transition-all">
         {icon}

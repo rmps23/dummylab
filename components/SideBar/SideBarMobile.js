@@ -34,7 +34,7 @@ const SideBarMobile = () => {
     <>
       <span
         onClick={toggleHover}
-        className="ml-4 text-3xl text-zinc-400 cursor-pointer"
+        className="text-3xl text-teal-500 cursor-pointer"
       >
         &#9776;
       </span>
@@ -51,7 +51,7 @@ const SideBarMobile = () => {
         </span>
         <div>
           <div className="pl-5 mb-8">
-            <Link href="/dashboard/team" prefetch={false}>
+            <Link href="/dashboard/team" prefetch={false} onClick={toggleHover}>
               <Image
                 src="/assets/dummylab-logo-wt-w.png"
                 alt=""
@@ -60,14 +60,15 @@ const SideBarMobile = () => {
               />
             </Link>
           </div>
-          {teamID ? (
+          {teamID && (
             <div className="flex-col flex gap-1">
-              {/* <SideBarLink
+              <SideBarLink
                 icon={<FaHome />}
                 hover={hover}
                 link="/dashboard/team"
                 text={"Home"}
-              /> */}
+                setHover={setHover}
+              />
               <SideBarLink
                 icon={<FaShieldAlt />}
                 hover={hover}
@@ -76,6 +77,7 @@ const SideBarMobile = () => {
                   "+"
                 )}/${teamID}`}
                 text={"Profile"}
+                setHover={setHover}
               />
               <SideBarLink
                 icon={<FaUsers />}
@@ -85,6 +87,7 @@ const SideBarMobile = () => {
                   "+"
                 )}/${teamID}`}
                 text={"Players"}
+                setHover={setHover}
               />
               <SideBarLink
                 icon={<FaStar />}
@@ -94,6 +97,7 @@ const SideBarMobile = () => {
                   "+"
                 )}/${teamID}`}
                 text={"Pool"}
+                setHover={setHover}
               />
               <SideBarLink
                 icon={<FaRegCalendarAlt />}
@@ -103,15 +107,7 @@ const SideBarMobile = () => {
                   "+"
                 )}/${teamID}`}
                 text={"Schedule"}
-              />
-            </div>
-          ) : (
-            <div>
-              <SideBarLink
-                icon={<FaHome />}
-                hover={hover}
-                link="/dashboard/team"
-                text={"Home"}
+                setHover={setHover}
               />
             </div>
           )}

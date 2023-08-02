@@ -1,9 +1,10 @@
 import { FetchUserTeams } from "./Function/FetchUserTeams";
-import { FaChevronRight } from "react-icons/fa";
+import { RxCaretRight } from "react-icons/rx";
 
 import CircularLoading from "@components/UI/CircularLoading";
 import useTeamStore from "@components/Store/teamStore";
 import { useEffect } from "react";
+import { FaShieldAlt } from "react-icons/fa";
 
 const DisplayTeams = () => {
   const { userTeams, userTeamsLoading, userTeamsError } = FetchUserTeams();
@@ -38,24 +39,29 @@ const DisplayTeams = () => {
           <a
             href={`/dashboard/team/${team.name.replace(/\s/g, "+")}/${team.id}`}
             key={team.id}
-            className="relative overflow-hidden rounded-md transition-all duration-200 ease-in-out group border border-zinc-950 hover:border-teal-600"
+            className={`relative overflow-hidden rounded-md transition-all duration-200 ease-in-out group border border-zinc-800/50`}
           >
-            <div className="bg-zinc-950 p-5 relative h-32 rounded-md items-center flex border border-zinc-800 ease-in-out">
-              <p className="text-md text-teal-500 flex uppercase">
-                {team.name}
-              </p>
-              <img
-                src={`https://fpwrnfdqzvztmakmrdnc.supabase.co/storage/v1/object/public/team_logos/${team.id}`}
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = "/assets/dummylab-logo-w.png";
-                }}
-                width={100}
-                alt=""
-                className="absolute opacity-50 -right-5 top-3 transition-all duration-200 group-hover:-right-40 delay-100"
-              />
-              <span className="absolute -right-40 top-8 group-hover:right-3 transition-all duration-200 ">
-                <FaChevronRight className="text-6xl text-teal-600" />
+            <span
+              className="absolute -right-10 bottom-0 h-24 w-40 blur-2xl group-hover:-right-400 transition-all duration-300 rounded-full opacity-50 group-hover:opacity-100"
+              style={{ backgroundColor: team.color }}
+            ></span>
+            <div
+              className={`bg-zinc-950/90 group-hover:bg-zinc-950/70 transition-all duration-500 backdrop-blur-md p-6 relative h-32 flex items-center ease-in-out text-left `}
+            >
+              <div className="flex flex-col">
+                <p
+                  className="text-md uppercase mb-1 truncate block opacity-50 group-hover:opacity-80 transition-all duration-300"
+                  style={{ color: team.color }}
+                >
+                  {team.name}
+                </p>
+                <p className="text-xs text-zinc-400 group-hover:text-zinc-300 uppercase block transition-all duration-500">
+                  {team.league ? team.league : "N/A"}
+                </p>
+              </div>
+
+              <span className="absolute -right-40 top-13 group-hover:right-0 transition-all duration-300">
+                <RxCaretRight className="text-8xl text-zinc-300" />
               </span>
             </div>
           </a>

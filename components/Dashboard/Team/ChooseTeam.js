@@ -38,7 +38,7 @@ const ChooseTeam = () => {
           <span className="uppercase text-sm text-zinc-400 group-hover:text-zinc-300 transition-all duration-200">
             {teamName}
           </span>
-          <img
+          {/* <img
             src={`https://fpwrnfdqzvztmakmrdnc.supabase.co/storage/v1/object/public/team_logos/${params.teamId}`}
             onError={(e) => {
               e.target.onerror = null;
@@ -47,7 +47,7 @@ const ChooseTeam = () => {
             width={50}
             alt=""
             className="absolute right-0 top-0 scale-125 opacity-30 group-hover:opacity-60 transition-all duration-200"
-          />
+          /> */}
         </div>
       ) : (
         <div className="relative flex flex-row-reverse w-full sm:w-72 float-right">
@@ -71,7 +71,7 @@ const ChooseTeam = () => {
             <span className="uppercase text-sm text-zinc-400 group-hover:text-zinc-300 transition-all duration-200">
               {teamName}
             </span>
-            <img
+            {/* <img
               src={`https://fpwrnfdqzvztmakmrdnc.supabase.co/storage/v1/object/public/team_logos/${params.teamId}`}
               onError={(e) => {
                 e.target.onerror = null;
@@ -80,7 +80,7 @@ const ChooseTeam = () => {
               width={50}
               alt=""
               className="absolute right-0 top-0 scale-125 opacity-30 group-hover:opacity-60 transition-all duration-200"
-            />
+            /> */}
           </div>
           <div
             className={`absolute left-0 right-0 top-12 z-10 transition-all duration-200 overflow-auto scroll-edit rounded-b-md ${

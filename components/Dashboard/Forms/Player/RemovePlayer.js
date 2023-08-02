@@ -5,13 +5,7 @@ import CircularLoading from "@components/UI/CircularLoading";
 import { useMutation } from "react-query";
 import usePlayerStore from "@components/Store/playerStore";
 
-const RemovePlayer = ({
-  playerName,
-  playerID,
-  teamName,
-  teamID,
-  setCloseModal,
-}) => {
+const RemovePlayer = ({ playerName, playerID, teamName, teamID, setOpen }) => {
   let removePlayerStore = usePlayerStore((state) => state.removePlayer);
 
   const [complete, setComplete] = useState(false);
@@ -27,7 +21,7 @@ const RemovePlayer = ({
 
     removePlayerStore(playerID);
     setComplete(true);
-    setCloseModal(true);
+    setOpen(false);
   };
 
   return (
