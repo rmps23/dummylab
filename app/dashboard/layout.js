@@ -14,14 +14,7 @@ export default function RootLayout({ children }) {
         <div className="hidden sm:flex">
           <SideBar />
         </div>
-        <div className="flex sm:hidden bg-zinc-950/80 p-4 justify-between">
-          {/* <Image
-            src="/assets/dummylab-logo-wt-w.png"
-            alt=""
-            height={30}
-            width={100}
-          />
-          <SideBarMobile /> */}
+        <div className="">
           <BottomBarMobile />
         </div>
         <div className="sm:pl-[112px] sm:p-8 p-4">{children}</div>

@@ -5,11 +5,13 @@ import { useRouter } from "next/navigation";
 import { supabase } from "../../supabase";
 import { BiLogOut } from "react-icons/bi";
 import { RiLogoutBoxRLine } from "react-icons/ri";
+import { useParams } from "next/navigation";
 
 import CircularLoading from "@components/UI/CircularLoading";
 
 const Signout = ({ hover }) => {
   const router = useRouter();
+  const params = useParams();
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -63,9 +65,15 @@ const Signout = ({ hover }) => {
                 Logout
               </span>
             </div>
-            <div className="sm:hidden text-2xl text-zinc-400">
-              <RiLogoutBoxRLine />
-            </div>
+            {params.teamId ? (
+              <div className="sm:hidden text-3xl bg-teal-600 rounded-md p-2">
+                <RiLogoutBoxRLine />
+              </div>
+            ) : (
+              <div className="sm:hidden text-2xl">
+                <RiLogoutBoxRLine />
+              </div>
+            )}
           </>
         )}
       </button>

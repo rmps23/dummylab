@@ -1,5 +1,4 @@
 import "./globals.css";
-import "react-toastify/dist/ReactToastify.css";
 import { Roboto } from "next/font/google";
 
 const roboto = Roboto({
