@@ -37,24 +37,35 @@ const Signout = ({ hover }) => {
     <>
       <button onClick={() => signOut()}>
         {loading ? (
-          <div className="bg-zinc-900 rounded-md flex h-10 mx-2 items-center justify-center transition-all">
-            <span className="text-2xl transition-all">
+          <>
+            <div className="bg-zinc-900 rounded-md h-10 mx-2 items-center justify-center transition-all hidden sm:flex">
+              <span className="text-2xl transition-all">
+                <CircularLoading size={18} color={"text-red-500"} />
+              </span>
+            </div>
+            <div>
+              {" "}
               <CircularLoading size={18} color={"text-red-500"} />
-            </span>
-          </div>
+            </div>
+          </>
         ) : (
-          <div className="bg-teal-700 hover:bg-teal-700/80 rounded-md flex py-2 mx-2 h-10 transition-all group">
-            <span className="pl-3 text-2xl group-hover:text-zinc-300 transition-all">
+          <>
+            <div className="bg-teal-700 hover:bg-teal-700/80 rounded-md py-2 mx-2 h-10 transition-all group hidden sm:flex">
+              <span className="pl-3 text-2xl group-hover:text-zinc-300 transition-all">
+                <BiLogOut />
+              </span>
+              <span
+                className={`opacity-0 transition-all pt-[1px] ml-0 text-md group-hover:text-zinc-300 ${
+                  hover === true && "opacity-100 pl-2 group-hover:pl-3"
+                }`}
+              >
+                Logout
+              </span>
+            </div>
+            <div className="sm:hidden text-2xl">
               <BiLogOut />
-            </span>
-            <span
-              className={`opacity-0 transition-all pt-[1px] ml-0 text-md group-hover:text-zinc-300 ${
-                hover === true && "opacity-100 pl-2 group-hover:pl-3"
-              }`}
-            >
-              Logout
-            </span>
-          </div>
+            </div>
+          </>
         )}
       </button>
     </>

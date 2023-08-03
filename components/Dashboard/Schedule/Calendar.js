@@ -131,8 +131,6 @@ const Calendar = ({
       });
   }, []);
 
-  console.log(daysArray);
-
   return (
     <>
       {loading ? (
