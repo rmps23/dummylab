@@ -44,7 +44,6 @@ const Signout = ({ hover }) => {
               </span>
             </div>
             <div>
-              {" "}
               <CircularLoading size={18} color={"text-red-500"} />
             </div>
           </>
@@ -62,7 +61,7 @@ const Signout = ({ hover }) => {
                 Logout
               </span>
             </div>
-            <div className="sm:hidden text-2xl">
+            <div className="sm:hidden text-2xl text-zinc-400">
               <BiLogOut />
             </div>
           </>
