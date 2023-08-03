@@ -25,19 +25,9 @@ const BottomBarMobile = () => {
     setTeamName(params.teamName);
   }, [params]);
 
-  const handleSquare = (value) => {
-    const xPos = event.clientX;
-    console.log(xPos);
-    setSquare(xPos);
-  };
-
   return (
     <>
-      <div className="fixed bottom-0 left-0 right-0 h-14 bg-zinc-950/70 backdrop-blur-lg z-50 border-zinc-950/20 border-t-2 grid grid-cols-6 items-center px-4">
-        {/* <div
-          className={`h-12 w-12 absolute bg-teal-600 rounded-md -top-4 transition-all duration-300`}
-          style={{ left: square }}
-        ></div> */}
+      <div className="fixed bottom-0 left-0 right-0 h-14 bg-zinc-950/70 backdrop-blur-lg z-50 border-zinc-950/20 border-t-2 grid grid-cols-5 items-center px-4">
         <div className="flex justify-center text-2xl text-zinc-400 relative">
           <Link
             href={`/dashboard/team/${teamName}/${teamID}`}
@@ -64,7 +54,6 @@ const BottomBarMobile = () => {
                   ? `text-zinc-100 absolute -top-9 transition-all duration-300 ease-in-out bg-teal-600 h-12 w-12 p-2 rounded-md`
                   : `absolute -top-3`
               }`}
-              onClick={(e) => handleSquare("81px")}
             />
           </Link>
         </div>
@@ -80,7 +69,6 @@ const BottomBarMobile = () => {
                   ? `text-zinc-100 absolute -top-9 transition-all duration-300 ease-in-out bg-teal-600 h-12 w-12 p-2 rounded-md`
                   : `absolute -top-3`
               }`}
-              onClick={(e) => handleSquare("141px")}
             />
           </Link>
         </div>
@@ -95,24 +83,19 @@ const BottomBarMobile = () => {
                   ? `text-zinc-100 absolute -top-9 transition-all duration-300 ease-in-out bg-teal-600 h-12 w-12 p-2 rounded-md`
                   : `absolute -top-3`
               }`}
-              onClick={(e) => handleSquare("201px")}
             />
           </Link>
         </div>
-        <div className="flex justify-center text-2xl text-zinc-400 relative">
+        {/* <div className="flex justify-center text-2xl text-zinc-500 relative">
           <div className="flex w-full justify-center">
-            <RiDashboard3Fill
-              className={`${
-                pathname === ``
-                  ? `text-zinc-100 absolute -top-9 transition-all duration-300 ease-in-out bg-teal-600 h-12 w-12 p-2 rounded-md`
-                  : `absolute -top-3`
-              }`}
-              onClick={(e) => handleSquare("261px")}
-            />
+            <RiDashboard3Fill className="absolute -top-4" />
+            <span className="bg-teal-800 rounded-md uppercase text-[10px] text-zinc-200 absolute text-center leading-none p-1 top-0">
+              Soon
+            </span>
           </div>
-        </div>
+        </div> */}
         <div className="flex justify-center text-2xl">
-          <Signout onClick={(e) => handleSquare("321px")} />
+          <Signout />
         </div>
       </div>
     </>
