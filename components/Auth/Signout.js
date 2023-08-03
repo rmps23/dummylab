@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "../../supabase";
 import { BiLogOut } from "react-icons/bi";
+import { RiLogoutBoxRLine } from "react-icons/ri";
+
 import CircularLoading from "@components/UI/CircularLoading";
 
 const Signout = ({ hover }) => {
@@ -62,7 +64,7 @@ const Signout = ({ hover }) => {
               </span>
             </div>
             <div className="sm:hidden text-2xl text-zinc-400">
-              <BiLogOut />
+              <RiLogoutBoxRLine />
             </div>
           </>
         )}
