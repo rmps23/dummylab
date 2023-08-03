@@ -26,16 +26,18 @@ const BottomBarMobile = () => {
   }, [params]);
 
   const handleSquare = (value) => {
-    setSquare(value);
+    const xPos = event.clientX;
+    console.log(xPos);
+    setSquare(xPos);
   };
 
   return (
     <>
       <div className="fixed bottom-0 left-0 right-0 h-14 bg-zinc-950/70 backdrop-blur-lg z-50 border-zinc-950/20 border-t-2 grid grid-cols-6 items-center px-4">
-        <div
+        {/* <div
           className={`h-12 w-12 absolute bg-teal-600 rounded-md -top-4 transition-all duration-300`}
           style={{ left: square }}
-        ></div>
+        ></div> */}
         <div className="flex justify-center text-2xl text-zinc-400 relative">
           <Link
             href={`/dashboard/team/${teamName}/${teamID}`}
@@ -44,7 +46,7 @@ const BottomBarMobile = () => {
             <FaShieldAlt
               className={`${
                 pathname === `/dashboard/team/${teamName}/${teamID}`
-                  ? `text-zinc-100 absolute -top-8 transition-all duration-300 ease-in-out`
+                  ? `text-zinc-100 absolute -top-9 transition-all duration-300 ease-in-out bg-teal-600 h-12 w-12 p-2 rounded-md`
                   : `absolute -top-3`
               }`}
               onClick={(e) => handleSquare("21px")}
@@ -59,7 +61,7 @@ const BottomBarMobile = () => {
             <FaUsers
               className={`${
                 pathname === `/dashboard/team/players/${teamName}/${teamID}`
-                  ? `text-zinc-100 absolute -top-8 transition-all duration-200`
+                  ? `text-zinc-100 absolute -top-9 transition-all duration-300 ease-in-out bg-teal-600 h-12 w-12 p-2 rounded-md`
                   : `absolute -top-3`
               }`}
               onClick={(e) => handleSquare("81px")}
@@ -75,7 +77,7 @@ const BottomBarMobile = () => {
               className={`${
                 pathname ===
                 `/dashboard/team/champion_pool/${teamName}/${teamID}`
-                  ? `text-zinc-100 absolute -top-8 transition-all duration-200`
+                  ? `text-zinc-100 absolute -top-9 transition-all duration-300 ease-in-out bg-teal-600 h-12 w-12 p-2 rounded-md`
                   : `absolute -top-3`
               }`}
               onClick={(e) => handleSquare("141px")}
@@ -90,7 +92,7 @@ const BottomBarMobile = () => {
             <FaRegCalendarAlt
               className={`${
                 pathname === `/dashboard/team/schedule/${teamName}/${teamID}`
-                  ? `text-zinc-100 absolute -top-8 transition-all duration-200`
+                  ? `text-zinc-100 absolute -top-9 transition-all duration-300 ease-in-out bg-teal-600 h-12 w-12 p-2 rounded-md`
                   : `absolute -top-3`
               }`}
               onClick={(e) => handleSquare("201px")}
@@ -101,7 +103,9 @@ const BottomBarMobile = () => {
           <div className="flex w-full justify-center">
             <RiDashboard3Fill
               className={`${
-                pathname === `` && `text-zinc-100 absolute -top-2`
+                pathname === ``
+                  ? `text-zinc-100 absolute -top-9 transition-all duration-300 ease-in-out bg-teal-600 h-12 w-12 p-2 rounded-md`
+                  : `absolute -top-3`
               }`}
               onClick={(e) => handleSquare("261px")}
             />
