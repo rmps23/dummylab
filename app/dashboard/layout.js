@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
         <div className="hidden sm:flex">
           <SideBar />
         </div>
-        <div className="">
+        <div className="sm:hidden">
           <BottomBarMobile />
         </div>
         <div className="sm:pl-[112px] sm:p-8 p-4">{children}</div>

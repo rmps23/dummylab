@@ -66,7 +66,7 @@ const Signout = ({ hover }) => {
               </span>
             </div>
             {params.teamId ? (
-              <div className="sm:hidden text-3xl bg-teal-600 rounded-md p-2">
+              <div className="sm:hidden text-3xl text-red-800 rounded-md p-2">
                 <RiLogoutBoxRLine />
               </div>
             ) : (
