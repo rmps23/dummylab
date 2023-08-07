@@ -14,6 +14,7 @@ import { FaStar } from "react-icons/fa";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { GoGear } from "react-icons/go";
 import { FaHome } from "react-icons/fa";
+import { VscChromeClose } from "react-icons/vsc";
 
 const BottomBarMobile = () => {
   const pathname = usePathname();
@@ -34,20 +35,36 @@ const BottomBarMobile = () => {
   return (
     <>
       {teamID && (
-        <div className="fixed bottom-0 left-0 right-0 h-14 bg-zinc-950/70 backdrop-blur-lg z-40 border-zinc-950/20 border-t-2 grid grid-cols-5 items-center px-4">
+        <div
+          className={`fixed left-0 bottom-0 right-0 h-14 grid grid-cols-5 items-center px-4 transition-all duration-200 z-50 bg-zinc-950/70 backdrop-blur-lg border-zinc-950/20 border-t-2 ${
+            menu ? `bottom-0` : `-bottom-40`
+          }`}
+        >
           <div
-            className={`absolute rounded-md right-5 transition-all duration-200  ease-in-out flex flex-col gap-2 bg-zinc-950/70 backdrop-blur-lg p-2 ${
-              menu === true ? `bottom-[64px]` : `-bottom-16`
+            className={`absolute w-full h-14 transition-all duration-200 ease-in-out flex justify-between px-8   ${
+              menu === true ? `bottom-0` : `-bottom-40`
             }`}
           >
-            <Link href={`/dashboard/team/`}>
-              <FaHome className="text-5xl bg-teal-600 rounded-md p-2" />
-            </Link>
-            <Signout />
+            <div className="flex gap-10">
+              <Link href={`/dashboard/team/`}>
+                <FaHome className="text-5xl rounded-md p-2 mt-[3px]" />
+              </Link>
+              <Signout />
+            </div>
+            <div className="flex">
+              <VscChromeClose
+                className="text-zinc-300 text-5xl rounded-md p-2 mt-[3px]"
+                onClick={handleMenu}
+              />
+            </div>
           </div>
         </div>
       )}
-      <div className="fixed bottom-0 left-0 right-0 h-14 bg-zinc-950/70 backdrop-blur-lg z-50 border-zinc-950/20 border-t-2 grid grid-cols-5 items-center px-4">
+      <div
+        className={`fixed left-0 right-0 h-14 bg-zinc-950/70 backdrop-blur-lg z-50 border-zinc-950/20 border-t-2 grid grid-cols-5 items-center px-4 transition-all duration-200 ${
+          menu ? `-bottom-20` : `bottom-0`
+        }`}
+      >
         {teamID ? (
           <>
             <div className="flex justify-center text-2xl text-zinc-400 relative">
