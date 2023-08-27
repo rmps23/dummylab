@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "../../supabase";
 import { BiLogOut } from "react-icons/bi";
-import { RiLogoutBoxRLine } from "react-icons/ri";
+import { AiOutlinePoweroff } from "react-icons/ai";
 import { useParams } from "next/navigation";
 
 import CircularLoading from "@components/UI/CircularLoading";
@@ -66,12 +66,12 @@ const Signout = ({ hover }) => {
               </span>
             </div>
             {params.teamId ? (
-              <div className="sm:hidden text-3xl text-red-800 rounded-md p-2">
-                <RiLogoutBoxRLine />
+              <div className="sm:hidden text-2xl rounded-md p-2">
+                <AiOutlinePoweroff />
               </div>
             ) : (
               <div className="sm:hidden text-2xl">
-                <RiLogoutBoxRLine />
+                <AiOutlinePoweroff />
               </div>
             )}
           </>
