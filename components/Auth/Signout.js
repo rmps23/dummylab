@@ -53,12 +53,12 @@ const Signout = ({ hover }) => {
           </>
         ) : (
           <>
-            <div className="bg-teal-700 hover:bg-teal-700/80 rounded-md py-2 mx-2 h-10 transition-all group hidden sm:flex">
-              <span className="pl-3 text-2xl group-hover:text-zinc-300 transition-all">
-                <BiLogOut />
+            <div className="rounded-md py-2 mx-2 h-10 transition-all group hidden sm:flex">
+              <span className="pl-3 text-2xl text-zinc-400 group-hover:text-zinc-300 transition-all">
+                <AiOutlinePoweroff />
               </span>
               <span
-                className={`opacity-0 transition-all pt-[1px] ml-0 text-md group-hover:text-zinc-300 ${
+                className={`opacity-0 transition-all pt-[1px] ml-0 text-md text-zinc-400 group-hover:text-zinc-300 ${
                   hover === true && "opacity-100 pl-2 group-hover:pl-3"
                 }`}
               >

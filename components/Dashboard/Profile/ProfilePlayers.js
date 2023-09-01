@@ -3,6 +3,7 @@ import { useParams } from "next/navigation";
 import { FetchProfilePlayers } from "./Functions/FetchProfilePlayers";
 import CircularLoading from "@components/UI/CircularLoading";
 import Image from "next/image";
+import ShareLink from "@components/Dashboard/Profile/ShareLink";
 
 const ProfilePlayers = () => {
   const params = useParams();
@@ -13,7 +14,7 @@ const ProfilePlayers = () => {
   if (playersLoading) {
     return (
       <div className="h-full relative group">
-        <div className="relative rounded-md items-center flex gap-2 justify-between mb-2 bg-zinc-950 p-4 shadow-md shadow-zinc-950/30">
+        <div className="relative rounded-b-md items-center flex gap-2 justify-between mb-2 bg-zinc-950 p-4 shadow-md shadow-zinc-950/30">
           <span className="text-xl uppercase text-zinc-200 font-light">
             Total Players
           </span>
@@ -40,11 +41,14 @@ const ProfilePlayers = () => {
 
   return (
     <div className="h-full relative group">
-      <div className="relative rounded-md items-center flex gap-2 justify-between mb-4 bg-zinc-950 p-4 shadow-md shadow-zinc-950/30">
-        <span className="text-xl text-zinc-300">Total Players</span>
-        <span className="text-2xl bg-zinc-900 text-teal-500 w-12 h-12 items-center justify-center flex rounded-md">
-          {players.length}
-        </span>
+      <div className="relative rounded-b-md items-center flex gap-2 justify-between mb-4 bg-zinc-950 py-4 px-6 shadow-md shadow-zinc-950/30">
+        <div className="flex items-center">
+          <span className="text-xl text-zinc-300 mr-4">Players</span>
+          <span className="text-2xl bg-zinc-900 text-teal-500 w-12 h-12 items-center justify-center flex rounded-md">
+            {players.length}
+          </span>
+        </div>
+        <ShareLink />
       </div>
 
       <div>

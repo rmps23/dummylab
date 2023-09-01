@@ -35,24 +35,26 @@ const ProfileBanner = () => {
   if (champImgError) return <h1>{JSON.stringify(playersErrorLength)}</h1>;
 
   return (
-    <div className="h-60 w-full overflow-hidden relative border border-zinc-800 group flex items-center px-24 rounded-md justify-between">
-      <img
-        src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${
-          storeIMG ? storeIMG : champImg
-        }_0.jpg`}
-        alt=""
-        className="w-full absolute -z-10 left-0 -top-36 opacity-70 blur-md grayscale-0 transition-all duration-300 saturate-150 group-hover:saturate-200 group-hover:blur-xl"
-      />
-
-      <div className="flex gap-12 items-center backdrop-blur-[1px] bg-zinc-950/50 px-10 py-5 rounded-md">
-        <p className="text-2xl uppercase text-zinc-300 font-medium ">
-          {teamName}
-        </p>
-      </div>
-      <div className="flex">
+    <>
+      <div className="flex flex-row-reverse mb-4">
         <ChooseTeam />
       </div>
-    </div>
+      <div className="h-48 md:h-60 w-full overflow-hidden relative border border-zinc-800 group flex items-center px-6 md:px-16 rounded-t-md justify-between">
+        <img
+          src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${
+            storeIMG ? storeIMG : champImg
+          }_0.jpg`}
+          alt=""
+          className="w-full absolute -z-10 left-0 -top-0 opacity-70 blur-md grayscale-0 transition-all duration-300 saturate-150 group-hover:saturate-200 group-hover:blur-xl md:-top-36"
+        />
+
+        <div className="flex gap-12 items-center backdrop-blur-[1px] bg-zinc-950/50 px-4 py-2 rounded-md">
+          <p className="text-2xl uppercase text-zinc-300 font-medium ">
+            {teamName}
+          </p>
+        </div>
+      </div>
+    </>
   );
 };
 
