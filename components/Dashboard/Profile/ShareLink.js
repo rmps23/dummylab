@@ -9,18 +9,14 @@ const ShareLink = () => {
   };
 
   return (
-    <div className="">
-      <div
-        className="cursor-pointer bg-zinc-950 text-zinc-300 p-4 px-10 relative rounded-md items-center flex gap-2 justify-between hover:shadow-lg hover:shadow-teal-400/10  transition-all duration-300"
-        onClick={handleCopyToClipboard}
-      >
-        <span className="text-3xl uppercase text-teal-500 font-light">
-          Share Link
-        </span>
-        <span className="text-4xl bg-teal-700 w-20 h-20 items-center justify-center flex rounded-full">
-          <FaLink />
-        </span>
-      </div>
+    <div
+      className="bg-teal-700 hover:bg-teal-600 text-zinc-300 px-4 py-2 rounded-md cursor-pointer transition-all duration-200"
+      onClick={handleCopyToClipboard}
+    >
+      <span className="text-sm uppercase font-light flex items-center gap-2">
+        Share Link
+        <FaLink />
+      </span>
     </div>
   );
 };

@@ -35,9 +35,7 @@ const ChooseTeam = () => {
     <>
       {userTeams.length < 1 ? (
         <div className="bg-zinc-950 p-3 h-12 w-72 flex items-center rounded-md relative overflow-hidden group float-right">
-          <span className="uppercase text-sm text-zinc-400 group-hover:text-zinc-300 transition-all duration-200">
-            {teamName}
-          </span>
+          <span className="uppercase text-sm text-zinc-300">{teamName}</span>
           {/* <img
             src={`https://fpwrnfdqzvztmakmrdnc.supabase.co/storage/v1/object/public/team_logos/${params.teamId}`}
             onError={(e) => {
@@ -52,8 +50,8 @@ const ChooseTeam = () => {
       ) : (
         <div className="relative flex flex-row-reverse w-full sm:w-72 float-right">
           <div
-            className={`bg-zinc-950 p-3 h-12 w-12 text-xl flex items-center justify-center z-20 transition-all cursor-pointer float-right hover:bg-zinc-950/50 ${
-              dropdown === true ? "rounded-tr-md" : "rounded-r-md"
+            className={`bg-zinc-950 p-3 h-12 w-12 text-xl flex items-center justify-center z-20 rounded-r-md cursor-pointer float-right hover:bg-zinc-950/50 ${
+              dropdown === true ? "" : ""
             }`}
             onClick={toggleDrop}
           >
@@ -64,11 +62,11 @@ const ChooseTeam = () => {
             )}
           </div>
           <div
-            className={`bg-zinc-950 p-3 h-12 w-full flex items-center relative overflow-hidden group mb-4 ${
-              dropdown === true ? "rounded-tl-md" : " rounded-l-md"
+            className={`bg-zinc-950 p-3 h-12 w-full flex items-center relative overflow-hidden group mb-4 rounded-l-md ${
+              dropdown === true ? "" : ""
             }`}
           >
-            <span className="uppercase text-sm text-zinc-400 group-hover:text-zinc-300 transition-all duration-200">
+            <span className="uppercase text-sm text-zinc-300 group-hover:text-zinc-300 ">
               {teamName}
             </span>
             {/* <img
@@ -83,23 +81,28 @@ const ChooseTeam = () => {
             /> */}
           </div>
           <div
-            className={`absolute left-0 right-0 top-12 z-10 transition-all duration-200 overflow-auto scroll-edit rounded-b-md ${
+            className={`absolute left-0 right-0 top-14 z-10 transition-all duration-200 overflow-auto scroll-edit rounded-b-md ${
               dropdown === true ? "h-40" : "h-0 border-none"
             }`}
           >
             {userTeams && userTeams.length > 0 ? (
               <>
-                {userTeams.map((team) => {
+                {userTeams.map((team, index) => {
+                  const isFirst = index === 0;
+                  const isLast = index === userTeams.length - 1;
+
                   return (
                     <Link
-                      className="w-full py-2 flex items-center px-3 h-12 overflow-hidden relative group cursor-pointer bg-zinc-950 hover:bg-teal-800"
+                      className={`w-full py-2 flex items-center px-3 h-12 overflow-hidden relative group cursor-pointer bg-zinc-950 hover:bg-teal-600 transition-all duration-200 
+                      ${isFirst ? "rounded-t-md" : ""}
+                      ${isLast ? "rounded-b-md" : ""}
+                      `}
                       key={team.id}
-                      href={`/dashboard/team/players/${team.name.replace(
-                        /\s/g,
-                        "+"
-                      )}/${team.id}`}
+                      href={`/dashboard/team/${team.name.replace(/\s/g, "+")}/${
+                        team.id
+                      }`}
                     >
-                      <img
+                      {/* <img
                         src={`https://fpwrnfdqzvztmakmrdnc.supabase.co/storage/v1/object/public/team_logos/${team.id}`}
                         onError={(e) => {
                           e.target.onerror = null;
@@ -107,8 +110,8 @@ const ChooseTeam = () => {
                         }}
                         width={50}
                         className="scale-110 absolute right-0 -top-1 transition-all duration-300 opacity-25 group-hover:opacity-100 group-hover:scale-125"
-                      />
-                      <span className="uppercase text-sm text-zinc-400 group-hover:text-zinc-300 transition-all duration-200">
+                      /> */}
+                      <span className="uppercase text-sm text-zinc-300">
                         {team.name}
                       </span>
                     </Link>
