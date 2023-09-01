@@ -37,11 +37,15 @@ export default function Players() {
 
   return (
     <div>
-      {data.activePlayer.summonerName}
-      <br />
-      {data.activePlayer.currentGold}
-      <br />
-      {data.gameData.gameTime}
+      {data && (
+        <>
+          {data.activePlayer.summonerName}
+          <br />
+          {data.activePlayer.currentGold}
+          <br />
+          {data.gameData.gameTime}
+        </>
+      )}
     </div>
   );
 }
