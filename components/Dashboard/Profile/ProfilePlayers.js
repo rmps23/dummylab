@@ -23,7 +23,7 @@ const ProfilePlayers = () => {
           </span>
         </div>
 
-        <div>
+        {/* <div>
           <div className="rounded-md bg-zinc-950 p-4">
             <span className="text-md uppercase text-zinc-200 font-light flex w-full">
               Main Players
@@ -32,7 +32,7 @@ const ProfilePlayers = () => {
               <CircularLoading color={"text-zinc-500"} size={25} />
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }
@@ -49,46 +49,6 @@ const ProfilePlayers = () => {
           </span>
         </div>
         <ShareLink />
-      </div>
-
-      <div>
-        <div className="rounded-md bg-zinc-950 p-4">
-          <span className="text-md  text-zinc-300 font-light flex">
-            Main Players
-          </span>
-          {players.length > 0 ? (
-            <>
-              {players.map(
-                (player) =>
-                  player.role_state.id === 1 && (
-                    <div
-                      className="uppercase text-teal-400 p-2 mt-2 text-sm flex items-center bg-zinc-900 rounded-md hover:bg-zinc-800 transition-all duration-200 justify-between"
-                      key={player.id}
-                    >
-                      <div className="flex gap-2 items-center">
-                        <Image
-                          src={player.role.image_link}
-                          width={20}
-                          height={20}
-                          alt=""
-                        />
-                        <span className="pt-[2px] text-zinc-400 text-[12px]">
-                          {player.name}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="pt-[2px] text-zinc-400 float-right text-[12px]">
-                          {player.role.name}
-                        </span>
-                      </div>
-                    </div>
-                  )
-              )}
-            </>
-          ) : (
-            <>Nop</>
-          )}
-        </div>
       </div>
     </div>
   );

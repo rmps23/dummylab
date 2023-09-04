@@ -9,41 +9,48 @@ export default function Players() {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "https://127.0.0.1:2999/liveclientdata/allgamedata"
+        "https://static.developer.riotgames.com/docs/lol/liveclientdata_sample.json"
       );
-      if (!response.ok) {
-        // Handle non-okay responses here
-        throw new Error("Failed to fetch data");
-      }
-      const jsonData = await response.json();
 
-      console.log(jsonData);
+      // https://static.developer.riotgames.com/docs/lol/liveclientdata_sample.json
+      // https://127.0.0.1:2999/liveclientdata/allgamedata
+
+      const jsonData = await response.json();
 
       setData(jsonData);
     } catch (error) {
-      //   console.error("Error fetching data:", error);
-      setStop(true); // Set stop to true on a failed response
+      setStop(true);
     }
   };
 
   useEffect(() => {
-    if (!stop) {
+    const intervalId = setInterval(() => {
       fetchData();
+    }, 1000);
 
-      const intervalId = setInterval(fetchData, 2000);
-      return () => clearInterval(intervalId);
-    }
-  }, [stop]); // Include 'stop' as a dependency for useEffect
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <div>
       {data && (
         <>
-          {data.activePlayer.summonerName}
+          Summoner Name: {data.activePlayer.summonerName}
           <br />
-          {data.activePlayer.currentGold}
+          Current Gold: {data.activePlayer.currentGold}
           <br />
-          {data.gameData.gameTime}
+          Time: {data.gameData.gameTime}
+          {Math.floor(data.gameData.gameTime) == 400 && (
+            <>
+              Summoner Name: {data.activePlayer.summonerName}
+              <br />
+              Current Gold: {data.activePlayer.currentGold}
+              <br />
+              Time: {Math.floor(data.gameData.gameTime)}
+            </>
+          )}
         </>
       )}
     </div>

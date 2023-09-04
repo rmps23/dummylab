@@ -16,6 +16,14 @@ export const FetchProfilePlayers = (teamID) => {
         )
         .eq("team_id", teamID);
 
+      data.sort(function (a, b) {
+        return a.role.id - b.role.id;
+      });
+
+      data.sort(function (a, b) {
+        return a.role_state.id - b.role_state.id;
+      });
+
       return data;
     },
     refetchOnWindowFocus: false,
