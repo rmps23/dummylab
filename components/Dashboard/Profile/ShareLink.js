@@ -1,10 +1,21 @@
 import React from "react";
 import { FaLink } from "react-icons/fa";
 import copy from "copy-to-clipboard";
+import { useParams } from "next/navigation";
 
 const ShareLink = () => {
+  const pathname = useParams();
+  const teamID = pathname.teamId;
+  const teamName = pathname.teamName;
+
+  console.log(pathname);
   const handleCopyToClipboard = () => {
-    copy("teste23");
+    copy(
+      `http://localhost:3000/dashboard/team/${teamName.replace(
+        /\s/g,
+        "+"
+      )}/${teamID}/player_schedule`
+    );
     alert("Copied to clipboard!");
   };
 

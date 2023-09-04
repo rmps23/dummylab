@@ -37,7 +37,7 @@ const DisplayTeams = () => {
       ) : (
         teams.map((team) => (
           <a
-            href={`/dashboard/team/${team.name}/${team.id}`}
+            href={`/dashboard/team/${team.name.replace(/\s/g, "+")}/${team.id}`}
             key={team.id}
             className={`relative overflow-hidden rounded-md transition-all duration-200 ease-in-out group border border-zinc-800/50`}
           >

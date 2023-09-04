@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "../../supabase";
-import { BiLogOut } from "react-icons/bi";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import { useParams } from "next/navigation";
 
@@ -46,9 +45,6 @@ const Signout = ({ hover }) => {
               <span className="text-2xl transition-all">
                 <CircularLoading size={18} color={"text-red-500"} />
               </span>
-            </div>
-            <div>
-              <CircularLoading size={18} color={"text-red-500"} />
             </div>
           </>
         ) : (
