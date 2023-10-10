@@ -24,13 +24,16 @@ export default function RootLayout({ children }) {
       <>
         <QueryClientProvider client={queryClient}>
           <div className="hidden sm:flex">
-            {/* <SideBar /> */}
             <TopBar />
           </div>
           <div className="sm:hidden">
             <BottomBarMobile />
           </div>
-          <div className="sm:pl-[112px] sm:p-8 p-4">{children}</div>
+          <div className="w-full px-40">
+            <div className="bg-zinc-800 rounded-md min-h-[500px] p-4">
+              {children}
+            </div>
+          </div>
         </QueryClientProvider>
       </>
     );
