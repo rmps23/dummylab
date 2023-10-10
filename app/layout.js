@@ -1,9 +1,9 @@
 import "./globals.css";
-import { Roboto } from "next/font/google";
+import { Inria_Sans } from "next/font/google";
 
-const roboto = Roboto({
+const inria_sans = Inria_Sans({
   subsets: ["latin"],
-  weight: ["100", "300", "400", "500", "700", "900"],
+  weight: ["300", "400", "700"],
 });
 
 export const metadata = {
@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className={roboto.className}>{children}</body>
+      <body className={inria_sans.className}>{children}</body>
     </html>
   );
 }

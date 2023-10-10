@@ -4,6 +4,7 @@ import SideBar from "@components/SideBar/SideBar";
 import BottomBarMobile from "@components/SideBar/BottomBarMobile";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { usePathname } from "next/navigation";
+import TopBar from "@components/SideBar/TopBar";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +24,8 @@ export default function RootLayout({ children }) {
       <>
         <QueryClientProvider client={queryClient}>
           <div className="hidden sm:flex">
-            <SideBar />
+            {/* <SideBar /> */}
+            <TopBar />
           </div>
           <div className="sm:hidden">
             <BottomBarMobile />
