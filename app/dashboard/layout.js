@@ -1,10 +1,10 @@
 "use client";
 
-import SideBar from "@components/SideBar/SideBar";
-import BottomBarMobile from "@components/SideBar/BottomBarMobile";
+import SideBar from "@components/Navbar/SideBar";
+import BottomBarMobile from "@components/Navbar/BottomBarMobile";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { usePathname } from "next/navigation";
-import TopBar from "@components/SideBar/TopBar";
+import TopBar from "@components/Navbar/TopBar";
 
 const queryClient = new QueryClient();
 
