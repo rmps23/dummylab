@@ -5,6 +5,7 @@ import Image from "next/image";
 import TopBarLink from "./TopBarLink";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
+import Signout from "@components/Auth/Signout";
 
 const TopBar = () => {
   const params = useParams();
@@ -35,6 +36,7 @@ const TopBar = () => {
             link={`/dashboard/team/${teamName}/${teamID}`}
             text="Teams"
           />
+          <Signout />
         </div>
       </div>
     </>
