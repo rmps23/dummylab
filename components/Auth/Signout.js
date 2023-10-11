@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { supabase } from "../../supabase";
 import { AiOutlinePoweroff } from "react-icons/ai";
 import { useParams } from "next/navigation";
-
 import CircularLoading from "@components/UI/CircularLoading";
 
 const Signout = ({ hover }) => {
@@ -41,38 +40,16 @@ const Signout = ({ hover }) => {
       <button onClick={() => signOut()}>
         {loading ? (
           <>
-            <div className="bg-zinc-900 rounded-md h-10 mx-2 items-center justify-center transition-all hidden sm:flex">
-              <span className="text-2xl transition-all">
-                <CircularLoading size={18} color={"text-red-500"} />
-              </span>
-            </div>
+            <span className="flex gap-2 items-center bg-zinc-800 justify-center px-2 pt-2 pb-0 rounded-md">
+              <CircularLoading size={16} color={"text-zinc-300"} />
+            </span>
           </>
         ) : (
-          <>
-            <div className="rounded-md py-2 mx-2 h-10 transition-all group hidden sm:flex">
-              <span className="pl-3 text-2xl text-zinc-400 group-hover:text-zinc-300 transition-all">
-                <AiOutlinePoweroff />
-              </span>
-              <span
-                className={`opacity-0 transition-all pt-[1px] ml-0 text-md text-zinc-400 group-hover:text-zinc-300 ${
-                  hover === true && "opacity-100 pl-2 group-hover:pl-3"
-                }`}
-              >
-                Logout
-              </span>
-            </div>
-            {params.teamId ? (
-              <div className="sm:hidden text-2xl rounded-md p-2">
-                <AiOutlinePoweroff />
-              </div>
-            ) : (
-              <div className="sm:hidden text-2xl">
-                <AiOutlinePoweroff />
-              </div>
-            )}
-          </>
+          <span className="flex gap-2 items-center hover:bg-zinc-800 px-2 py-1 rounded-md">
+            <AiOutlinePoweroff /> Logout
+          </span>
         )}
-      </button>
+      </button >
     </>
   );
 };
