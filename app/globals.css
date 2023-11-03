@@ -4,11 +4,20 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
 }
 
 body {
   color: #eee;
 }
+
+/* HOMEPAGE */
+
+.home section {
+  scroll-snap-align: start;
+}
+
+/* ----------------- */
 
 .supabase-auth-ui_ui-container {
   font-family: "Roboto", sans-serif !important;
