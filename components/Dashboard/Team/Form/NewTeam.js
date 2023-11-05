@@ -37,6 +37,7 @@ const NewTeamForm = ({ setOpen }) => {
     const { data: team } = await mutationTeam.mutateAsync({
       name: teamName.current.value,
       color: selectedColor,
+      description: teamDesc.current.value,
     });
 
     addTeam(team[0]);

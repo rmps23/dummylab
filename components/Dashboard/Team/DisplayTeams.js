@@ -56,7 +56,7 @@ const DisplayTeams = () => {
                   {team.name}
                 </p>
                 <p className="text-xs text-zinc-400 group-hover:text-zinc-300 uppercase block transition-all duration-500">
-                  {team.league ? team.league : "N/A"}
+                  {team.description ? team.description : "N/A"}
                 </p>
               </div>
 
