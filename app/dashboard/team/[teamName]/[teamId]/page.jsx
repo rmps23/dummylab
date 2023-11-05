@@ -7,6 +7,7 @@ import Modal from "@components/UI/Modal";
 import ProfileBanner from "@components/Dashboard/Profile/ProfileBanner";
 import ProfilePlayers from "@components/Dashboard/Profile/ProfilePlayers";
 import MainPlayers from "@components/Dashboard/Profile/MainPlayers";
+import Events from "@components/Dashboard/Profile/Events";
 
 export default function Profile() {
   const params = useParams();
@@ -25,6 +26,7 @@ export default function Profile() {
         <ProfilePlayers />
         <div className="grid grid-cols-4 gap-4">
           <MainPlayers />
+          <Events />
           {/* <Modal
             btn="Settings"
             icon={""}
