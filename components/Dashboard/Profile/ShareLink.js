@@ -8,15 +8,11 @@ const ShareLink = () => {
   const teamID = pathname.teamId;
   const teamName = pathname.teamName;
 
-  console.log(pathname);
   const handleCopyToClipboard = () => {
     copy(
-      `http://localhost:3000/dashboard/team/${teamName.replace(
-        /\s/g,
-        "+"
-      )}/${teamID}/player_schedule`
+      `http://localhost:3000/dashboard/team/${teamName}/${teamID}/player_view`
     );
-    alert("Copied to clipboard!");
+    // alert("Copied to clipboard!");
   };
 
   return (

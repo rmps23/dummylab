@@ -10,11 +10,11 @@ const queryClient = new QueryClient();
 export default function RootLayout({ children }) {
   const url = usePathname();
 
-  if (url.includes("player_schedule")) {
+  if (url.includes("player_view")) {
     return (
       <>
         <QueryClientProvider client={queryClient}>
-          <div className="flex justify-center mt-40">{children}</div>
+          <div className="">{children}</div>
         </QueryClientProvider>
       </>
     );
