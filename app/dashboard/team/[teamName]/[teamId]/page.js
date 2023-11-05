@@ -26,14 +26,9 @@ export default function Profile() {
         <ProfilePlayers />
         <div className="grid grid-cols-4 gap-4">
           <MainPlayers />
-          <Events />
-          {/* <Modal
-            btn="Settings"
-            icon={""}
-            classes="flex bg-zinc-950 h-28 justify-center rounded-md uppercase cursor-pointer shadow-md hover:shadow-teal-600/20 transition-all duration-300 text-zinc-400"
-            form={""}
-            title="Create New Team"
-          /> */}
+          <div className="col-span-3">
+            <Events />
+          </div>
         </div>
       </div>
     </>

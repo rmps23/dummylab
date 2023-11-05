@@ -12,6 +12,7 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
 
   const eventName = useRef(null);
   const eventTime = useRef(null);
+  const eventDesc = useRef(null);
 
   const [complete, setComplete] = useState(false);
 
@@ -34,6 +35,7 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
     const name = eventName.current.value;
     const date = textDateSupa;
     const time = eventTime.current.value;
+    const desc = eventDesc.current.value;
 
     try {
       const { data: dataEvent, error: errorEvent } = await supabase
@@ -43,6 +45,7 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
           name: name,
           date: date,
           time: time,
+          description: desc,
         })
         .select();
 
@@ -136,6 +139,14 @@ const AddEvent = ({ teamID, day, teamId, teamName }) => {
                 Event Time
               </span>
             </div>
+
+            <input
+              type="text"
+              className="bg-zinc-900 border-b-2 border-teal-500/20 outline-none p-4 text-md focus:border-teal-400 transition ease-in-out duration-200 text-zinc-200 rounded-md"
+              placeholder="Event description..."
+              ref={eventDesc}
+              required
+            />
 
             {eventPlayers && eventPlayers.length > 0 ? (
               <div className="grid grid-cols-4 gap-1 gap-y-2 bg-zinc-900 rounded-md px-4 py-[18px]">

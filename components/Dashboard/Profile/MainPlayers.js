@@ -68,7 +68,13 @@ const MainPlayers = () => {
               )}
             </>
           ) : (
-            <>Nop</>
+            <>
+              <div className="text-center">
+                <p className="font-light text-zinc-300">
+                  There are no registered players.
+                </p>
+              </div>
+            </>
           )}
         </div>
       </div>
