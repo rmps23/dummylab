@@ -32,8 +32,19 @@ const Events = () => {
 
   console.log(events);
   return (
-    <div>
-      <div>{events.length > 0 ? <>teste23</> : <>no events were found</>}</div>
+    <div className="w-full h-full grid items-center justify-left bg-zinc-950 p-2 rounded-md">
+      {events && events.length ? (
+        <>
+          {events.map((event, index) => (
+            <div className="bg-zinc-900 h-full w-full" key={index}>
+              {event.name}
+              {event.time}
+            </div>
+          ))}
+        </>
+      ) : (
+        <>There are no events in your schedule.</>
+      )}
     </div>
   );
 };

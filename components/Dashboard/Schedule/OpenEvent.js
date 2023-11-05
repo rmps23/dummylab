@@ -74,12 +74,20 @@ const OpenEvent = ({ event, teamName, teamId }) => {
                 {event.date}
               </span>
             </p>
-            <p className="bg-zinc-900 p-4 rounded-md mb-4">
+            <p className="bg-zinc-900 p-4 rounded-md mb-2">
               <span className="text-sm pr-2 font-light border-r border-zinc-700 text-teal-500">
                 Time
               </span>
               <span className="text-sm pl-2 font-light text-zinc-400">
                 {event.time}
+              </span>
+            </p>
+            <p className="bg-zinc-900 p-4 rounded-md mb-4">
+              <span className="text-sm pr-2 font-light border-r border-zinc-700 text-teal-500">
+                Description
+              </span>
+              <span className="text-sm pl-2 font-light text-zinc-400">
+                {event.description ? event.description : "-"}
               </span>
             </p>
           </div>
