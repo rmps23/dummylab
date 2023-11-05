@@ -5,7 +5,7 @@ export const FetchTeamData = (teamID) => {
   const queryKey = ["fetchTeamData", teamID];
   const { data, isLoading, error } = useQuery(queryKey, {
     queryFn: async () => {
-      const { data, error } = await await supabase
+      const { data, error } = await supabase
         .from("team")
         .select("*")
         .eq("id", teamID);
