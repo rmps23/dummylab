@@ -24,9 +24,11 @@ export default function Profile() {
       <div>
         <ProfileBanner />
         <ProfilePlayers />
-        <div className="grid grid-cols-4 gap-4">
-          <MainPlayers />
-          <div className="col-span-3">
+        <div className="grid grid-cols-1 gap-y-4">
+          <div className="">
+            <MainPlayers />
+          </div>
+          <div className="">
             <Events />
           </div>
         </div>
