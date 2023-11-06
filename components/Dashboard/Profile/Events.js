@@ -30,20 +30,38 @@ const Events = () => {
 
   if (eventsError) return <h1>{"Error"}</h1>;
 
-  console.log(events);
   return (
-    <div className="w-full h-full grid items-center justify-left bg-zinc-950 p-2 rounded-md">
+    <div className="w-full grid grid-cols-4 gap-y-2 bg-zinc-950 p-2 rounded-md">
       {events && events.length ? (
         <>
           {events.map((event, index) => (
-            <div className="bg-zinc-900 h-full w-full" key={index}>
-              {event.name}
-              {event.time}
+            <div
+              className="bg-zinc-900 h-32 w-full rounded-md p-2 relative grid col-span-4 pt-8"
+              key={index}
+            >
+              <span className="absolute top-2 right-2 text-teal-500 text-sm">
+                {event.time}
+              </span>
+              <span className="absolute top-2 left-2 text-zinc-300 text-sm">
+                {event.name}
+              </span>
+              <div className="bg-zinc-950/50 rounded-md p-2 shadow-md shadow-zinc-950/80">
+                <span className="text-sm text-zinc-400">
+                  {event.description}
+                </span>
+              </div>
             </div>
           ))}
+          {events.length < 4 && (
+            <div className="bg-zinc-900/30 h-full w-full rounded-md p-2 col-span-4 items-center justify-center grid">
+              <span className="opacity-60 text-teal-600">
+                There are no more upcoming events.
+              </span>
+            </div>
+          )}
         </>
       ) : (
-        <>There are no events in your schedule.</>
+        <div className="p-4">There are no events in your schedule.</div>
       )}
     </div>
   );
