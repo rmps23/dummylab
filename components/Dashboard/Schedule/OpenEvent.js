@@ -95,7 +95,7 @@ const OpenEvent = ({ event, teamName, teamId }) => {
           {players && players.length > 0 ? (
             <div className="grid grid-cols-2 gap-2">
               {players.map((player, index) => (
-                <p
+                <div
                   key={player.player_id.id}
                   className="bg-zinc-900 rounded-md p-4 flex items-center gap-2"
                 >
@@ -109,7 +109,7 @@ const OpenEvent = ({ event, teamName, teamId }) => {
                       {player.player_id.name}
                     </span>
                   </div>
-                </p>
+                </div>
               ))}
             </div>
           ) : (
@@ -128,11 +128,10 @@ const OpenEvent = ({ event, teamName, teamId }) => {
               onChange={handleDeleteInputChange}
             />
             <button
-              className={`ml-4  px-2 rounded-md text-xs uppercase  ${
-                !isButtonDisabled
-                  ? `bg-teal-600 text-zinc-200`
-                  : `bg-zinc-800 text-zinc-400`
-              }`}
+              className={`ml-4  px-2 rounded-md text-xs uppercase  ${!isButtonDisabled
+                ? `bg-teal-600 text-zinc-200`
+                : `bg-zinc-800 text-zinc-400`
+                }`}
               disabled={isButtonDisabled}
               onClick={deleteEvent}
             >
