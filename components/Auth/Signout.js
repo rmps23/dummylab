@@ -54,7 +54,7 @@ const Signout = ({ hover }) => {
                 <AiOutlinePoweroff />
               </span>
               <span
-                className={`opacity-0 transition-all pt-[1px] ml-0 text-md text-zinc-400 group-hover:text-zinc-300 ${
+                className={`transition-all pt-[1px] ml-0 text-md text-zinc-400 group-hover:text-zinc-300 ${
                   hover === true && "opacity-100 pl-2 group-hover:pl-3"
                 }`}
               >
