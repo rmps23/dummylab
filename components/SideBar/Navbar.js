@@ -1,30 +1,24 @@
 "use client";
 
+//NEXTJS
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-
 import Link from "next/link";
 import Image from "next/image";
+
+//DUMMYLAB
 import SideBarLink from "./SideBarLink";
 import Signout from "@components/Auth/Signout";
+import ChooseTeam from "@components/Dashboard/Team/ChooseTeam";
 
-import { FaHome } from "react-icons/fa";
-import { FaShieldAlt } from "react-icons/fa";
+//LIBS
+import { FaLayerGroup } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
+import { FaShieldAlt } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import { FaRegCalendarAlt } from "react-icons/fa";
 
 const SideBar = () => {
-  const [hover, setHover] = useState(false);
-
-  const openHover = () => {
-    setHover(true);
-  };
-
-  const closeHover = () => {
-    setHover(false);
-  };
-
   const params = useParams();
   const [teamID, setTeamID] = useState();
   const [teamName, setTeamName] = useState();
@@ -36,13 +30,49 @@ const SideBar = () => {
 
   return (
     <>
-      <div
-        className={`fixed z-50 top-0 left-0 bottom-0 w-20 transition-all ease-in-out duration-200 bg-zinc-950/80 backdrop-blur-xl p-2 pb-5 pt-10 flex flex-col justify-between border-r border-zinc-900 ${
-          hover === true && "w-64"
-        }`}
-        onMouseEnter={openHover}
-        onMouseLeave={closeHover}
-      >
+      <div className="bg-dark w-64 h-screen">
+        <div className="w-full flex flex-col py-8">
+          <div className="mb-10 px-6">
+            <Image
+              src={"/assets/dummylab-logo.svg"}
+              width={120}
+              height={0}
+              alt=""
+            ></Image>
+          </div>
+          <div className="flex-col gap-4 flex">
+            <SideBarLink
+              icon={<FaLayerGroup />}
+              link="/dashboard/team"
+              text="Teams"
+            />
+            {teamID && (
+              <>
+                <SideBarLink
+                  icon={<FaShieldAlt />}
+                  link={`/dashboard/team/${teamName}/${teamID}`}
+                  text="Profile"
+                />
+                <SideBarLink
+                  icon={<FaUsers />}
+                  link={`/dashboard/team/players/${teamName}/${teamID}`}
+                  text="Players"
+                />
+                <SideBarLink
+                  icon={<FaStar />}
+                  link={`/dashboard/team/champion_pool/${teamName}/${teamID}`}
+                  text="Pool"
+                />
+                <SideBarLink
+                  icon={<FaRegCalendarAlt />}
+                  link={`/dashboard/team/schedule/${teamName}/${teamID}`}
+                  text={"Schedule"}
+                />
+              </>
+            )}
+          </div>
+
+          {/* <div className="w-64 h-screen">
         <div className="overflow-hidden">
           <div className="pl-5 mb-8 flex" style={{ width: 200, height: 25 }}>
             <Link href="/dashboard/team">
@@ -55,9 +85,7 @@ const SideBar = () => {
               />
             </Link>
             <span
-              className={`opacity-0 transition-all text-md group-hover:text-zinc-300 ${
-                hover === true && "opacity-100"
-              }`}
+              className={`opacity-0 transition-all text-md group-hover:text-zinc-300`}
             >
               <Link href="/dashboard/team">
                 <Image
@@ -76,43 +104,35 @@ const SideBar = () => {
             <div className="flex-col flex gap-1">
               <SideBarLink
                 icon={<FaHome />}
-                hover={hover}
-                setHover={setHover}
                 link="/dashboard/team"
                 text={"Home"}
               />
               <SideBarLink
                 icon={<FaShieldAlt />}
-                hover={hover}
-                setHover={setHover}
                 link={`/dashboard/team/${teamName}/${teamID}`}
                 text={"Profile"}
               />
               <SideBarLink
                 icon={<FaUsers />}
-                hover={hover}
-                setHover={setHover}
                 link={`/dashboard/team/players/${teamName}/${teamID}`}
                 text={"Players"}
               />
               <SideBarLink
                 icon={<FaStar />}
-                hover={hover}
-                setHover={setHover}
                 link={`/dashboard/team/champion_pool/${teamName}/${teamID}`}
                 text={"Pool"}
               />
               <SideBarLink
                 icon={<FaRegCalendarAlt />}
-                hover={hover}
-                setHover={setHover}
                 link={`/dashboard/team/schedule/${teamName}/${teamID}`}
                 text={"Schedule"}
               />
             </div>
           )}
         </div>
-        <Signout hover={hover} />
+        <Signout />
+      </div> */}
+        </div>
       </div>
     </>
   );

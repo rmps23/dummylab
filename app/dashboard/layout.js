@@ -1,6 +1,6 @@
 "use client";
 
-import SideBar from "@components/SideBar/SideBar";
+import SideBar from "@components/SideBar/Navbar";
 import BottomBarMobile from "@components/SideBar/BottomBarMobile";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { usePathname } from "next/navigation";
@@ -20,17 +20,13 @@ export default function RootLayout({ children }) {
     );
   } else {
     return (
-      <>
+      <div className="flex">
         <QueryClientProvider client={queryClient}>
-          <div className="hidden sm:flex">
-            <SideBar />
-          </div>
-          <div className="sm:hidden">
-            <BottomBarMobile />
-          </div>
-          <div className="sm:pl-[112px] sm:p-8 p-4">{children}</div>
+          <SideBar />
+          {/* <BottomBarMobile /> */}
+          <div className="p-2">{children}</div>
         </QueryClientProvider>
-      </>
+      </div>
     );
   }
 }

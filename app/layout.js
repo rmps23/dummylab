@@ -1,9 +1,10 @@
 import "./globals.css";
 import { Roboto } from "next/font/google";
+import { Chakra_Petch } from "next/font/google";
 
-const roboto = Roboto({
+const roboto = Chakra_Petch({
   subsets: ["latin"],
-  weight: ["100", "300", "400", "500", "700", "900"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata = {
@@ -13,7 +14,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="bg-zinc-900 h-screen items-center">
+    <html lang="en" className="bg-black h-screen items-center">
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
