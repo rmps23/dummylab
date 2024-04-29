@@ -13,7 +13,7 @@ const Home = () => {
           <div className="flex items-center md:flex-1 md:mr-20 lg:mr-40 xl:mr-96">
             <Hero />
           </div>
-          <div className="flex md:flex">
+          <div className="flex md:flex"> 
             <Signup />
           </div>
         </div>
